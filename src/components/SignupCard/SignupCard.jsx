@@ -2,7 +2,7 @@ import React from "react";
 import Input from "../Input/Input";
 import Button from "../Button/Button";
 import styles from "./SignupCard.module.css";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { useState } from "react";
 import { auth } from "../../firebaseConfig";
 import { NavLink, useNavigate } from "react-router-dom";
@@ -50,6 +50,11 @@ const SignupCard = () => {
         password: "",
         confirmPassword: "",
       });
+
+      await updateProfile(user, {
+        displayName: formData.name,
+      });
+
       navigate("/");
     } catch (error) {
       setError(error);
