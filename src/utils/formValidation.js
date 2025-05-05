@@ -1,4 +1,4 @@
-const formValidation = (formData, setError) => {
+export const signupFormValidation = (formData, setError) => {
   let validForm = true;
   if (!formData.name) {
     setError((prev) => ({ ...prev, name: "Name is required" }));
@@ -35,7 +35,7 @@ const formValidation = (formData, setError) => {
     }));
     validForm = false;
   }
-  if (!/\S+@\S+\.\S+/.test(formData.email)) {
+  if (formData.email.length > 0 && !/\S+@\S+\.\S+/.test(formData.email)) {
     setError((prev) => ({ ...prev, email: "Invalid email address" }));
     validForm = false;
   }
@@ -43,4 +43,16 @@ const formValidation = (formData, setError) => {
   return validForm;
 };
 
-export default formValidation;
+export const forgotPasswordFormValidation = (email, setError) => {
+  let validForm = true;
+  setError(null);
+  if (email.email.length === 0) {
+    setError((prev) => ({ ...prev, email: "Email is required" }));
+    validForm = false;
+  }
+  if (email.email.length > 0 && !/\S+@\S+\.\S+/.test(email.email)) {
+    setError((prev) => ({ ...prev, email: "Invalid email address" }));
+    validForm = false;
+  }
+  return validForm;
+};

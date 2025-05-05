@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Input from "../Input/Input";
 import Button from "../Button/Button";
 import styles from "./SignupCard.module.css";
@@ -6,7 +6,7 @@ import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { useState } from "react";
 import { auth } from "../../firebaseConfig";
 import { NavLink, useNavigate } from "react-router-dom";
-import formValidation from "../../utils/formValidation";
+import { signupFormValidation } from "../../utils/formValidation";
 
 const SignupCard = () => {
   const navigate = useNavigate();
@@ -16,8 +16,17 @@ const SignupCard = () => {
     password: "",
     confirmPassword: "",
   });
-  const [isLoading, setIsloading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(false);
+
+  useEffect(() => {
+    let timer;
+    if (success) {
+      timer = setTimeout(() => navigate("/login"), 3000);
+    }
+    return () => clearTimeout(timer);
+  }, [success, navigate]);
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
@@ -31,19 +40,22 @@ const SignupCard = () => {
     e.preventDefault();
     setError(null);
 
-    if (!formValidation(formData, setError)) {
+    if (!signupFormValidation(formData, setError)) {
       return;
     }
 
-    setIsloading(true);
+    setIsLoading(true);
+
     try {
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         formData.email,
         formData.password
       );
+
       const user = userCredential.user;
-      console.log(`Success! ${user.email} has been created`);
+
+      setSuccess(true);
       setFormData({
         name: "",
         email: "",
@@ -55,11 +67,19 @@ const SignupCard = () => {
         displayName: formData.name,
       });
 
-      navigate("/");
     } catch (error) {
-      setError(error);
+      if (error.code === "auth/password-does-not-meet-requirements") {
+        setError((prev) => ({
+          ...prev,
+          confirmPassword: error.message
+            .replace("Firebase: ", "")
+            .replace("(auth/password-does-not-meet-requirements).", ""),
+        }));
+      } else {
+        setError(error);
+      }
     } finally {
-      setIsloading(false);
+      setIsLoading(false);
     }
   };
 
@@ -113,7 +133,7 @@ const SignupCard = () => {
         />
       </div>
 
-      <NavLink to="/login" className={styles.forgotPasswordLink}>
+      <NavLink to="/login" className={styles.link}>
         Already have an account? Sign in
       </NavLink>
 

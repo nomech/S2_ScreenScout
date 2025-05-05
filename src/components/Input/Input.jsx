@@ -12,8 +12,6 @@ const Input = ({
   id,
   name,
 }) => {
-  console.log(error);
-
   return (
     <div className={styles.inputGroup}>
       {label && (
