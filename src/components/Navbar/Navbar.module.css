@@ -1,0 +1,27 @@
+.navbar {
+  width: 100%;
+  height: 75px;
+  background: linear-gradient(90deg, #6200e9 0%, #9c27af 100%);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+}
+
+.title {
+  color: #ffffff;
+}
+
+.navList {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+
+.navItem * {
+  color: #d5d5d5;
+  font-family: Inter;
+  font-size: 20px;
+  font-weight: 700;
+  text-decoration: none;
+}
