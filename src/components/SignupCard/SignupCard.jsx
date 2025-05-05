@@ -67,6 +67,7 @@ const SignupCard = () => {
         displayName: formData.name,
       });
 
+      navigate("/");
     } catch (error) {
       if (error.code === "auth/password-does-not-meet-requirements") {
         setError((prev) => ({
