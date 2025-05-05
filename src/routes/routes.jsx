@@ -6,13 +6,23 @@ import {
 import Login from "../pages/Login";
 import Signup from "../pages/Signup";
 import App from "../App";
+import Home from "../pages/Home";
+import AuthenticatedUsers from "../components/AuthenticatedUsers/AuthenticatedUsers";
 import ForgotPasswordCard from "../components/ForgotPasswordCard/ForgotPasswordCard";
 
 export const routes = createBrowserRouter(
   createRoutesFromElements(
     <>
       <Route path="/" element={<App />}>
-        <Route index element={<App />} exact />
+        <Route
+          index
+          element={
+            <AuthenticatedUsers>
+              <Home />
+            </AuthenticatedUsers>
+          }
+          exact
+        />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/forgot-password" element={<ForgotPasswordCard />} />
