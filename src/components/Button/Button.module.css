@@ -1,4 +1,9 @@
-.login, .signup {
+.button {
+  cursor: pointer;
+}
+
+.login,
+.signup {
   width: 360px;
   height: 47px;
   border-radius: 8px;
@@ -8,11 +13,35 @@
   font-family: Inter;
   font-size: 16px;
   font-weight: 700;
-  cursor: pointer;
 }
 
-
-.signup:disabled{
+.signup:disabled {
   background: #8d8d8d;
-  cursor:default;
+  cursor: default;
+}
+
+.menuButton {
+  display: flex;
+  align-items: center;
+  padding-left: 1rem;
+  background-color: #6415c0;
+  height: 100%;
+  width: 100%;
+  color: #d5d5d5;
+  font-family: Inter;
+  font-size: 20px;
+  font-weight: 700;
+  text-decoration: none;
+  border: none;
+  transition: background-color 0.1s ease-in;
+  color: #d5d5d5;
+  font-family: Inter;
+  font-size: 20px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.menuButton:hover {
+  color: #ffffff;
+  background-color: #7928d1;
 }
