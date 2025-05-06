@@ -2,7 +2,7 @@ import styles from "./LoginCard.module.css";
 import React, { useState } from "react";
 import Input from "../Input/Input";
 import Button from "../Button/Button";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { auth } from "../../firebaseConfig";
 import { signInWithEmailAndPassword } from "firebase/auth";
 
@@ -20,18 +20,16 @@ const LoginCard = () => {
     }));
   };
 
+  const navigate = useNavigate();
+
   const onSubmit = async (e) => {
     e.preventDefault();
     const { email, password } = formData;
     try {
-      const userCredential = await signInWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-      const user = userCredential.user;
-      console.log("User signed in:", user);
+      await signInWithEmailAndPassword(auth, email, password);
+      navigate("/");
     } catch (error) {
+      
       console.error("Error signing in:", error);
     }
   };
