@@ -9,6 +9,7 @@ import App from "../App";
 import Home from "../pages/Home";
 import AuthenticatedUsers from "../components/AuthenticatedUsers/AuthenticatedUsers";
 import ForgotPasswordCard from "../components/ForgotPasswordCard/ForgotPasswordCard";
+import NotFound from "../components/NotFound/NotFound";
 
 export const routes = createBrowserRouter(
   createRoutesFromElements(
@@ -26,10 +27,7 @@ export const routes = createBrowserRouter(
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/forgot-password" element={<ForgotPasswordCard />} />
-        <Route
-          path="*"
-          element={<div> Yeah.... Thats not a thing here </div>}
-        />
+        <Route path="*" element={<NotFound />} />
       </Route>
     </>
   )
