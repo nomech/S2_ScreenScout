@@ -1,5 +1,11 @@
 .button {
   cursor: pointer;
+  transition: background-color 0.2s ease;
+  border: none;
+}
+
+.button:hover {
+  background: #9c27b0;
 }
 
 .login,

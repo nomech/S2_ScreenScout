@@ -11,6 +11,7 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
+        console.log("User is signed in:", user);
         setUser(user);
       } else {
         setUser(null);
@@ -21,7 +22,7 @@ export const AuthProvider = ({ children }) => {
     return unsubscribe;
   }, []);
 
-  const handleSignOut = async () => {
+  const signOut = async () => {
     try {
       await signOut(auth);
       setUser(null);
@@ -31,7 +32,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <authContext.Provider value={{ user, isLoading, handleSignOut }}>
+    <authContext.Provider value={{ user, isLoading, signOut }}>
       {children}
     </authContext.Provider>
   );

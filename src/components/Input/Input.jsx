@@ -15,7 +15,7 @@ const Input = ({
   return (
     <div className={styles.inputGroup}>
       {label && (
-        <label htmlFor={id} className={styles.label}>
+        <label htmlFor={id} className={`${styles.label} ${styles[id]} `}>
           {label}
         </label>
       )}

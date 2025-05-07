@@ -16,6 +16,8 @@ const SignupCard = () => {
     email: "",
     password: "",
     confirmPassword: "",
+    previewUrl:
+      "https://res.cloudinary.com/don3yyddm/image/upload/v1746637138/Screenshot_2025-05-07_185714_vnsk5g.png",
   });
 
   const [isLoading, setIsLoading] = useState(false);
@@ -56,6 +58,7 @@ const SignupCard = () => {
       );
 
       const user = userCredential.user;
+      const imageUrl = await handleFileUpload();
 
       setSuccess(true);
       setFormData({
@@ -64,11 +67,15 @@ const SignupCard = () => {
         email: "",
         password: "",
         confirmPassword: "",
+        previewUrl: "",
       });
 
       await updateProfile(user, {
         displayName: formData.name,
+        photoURL: imageUrl,
       });
+
+      console.log("User profile updated:", user);
 
       navigate("/");
     } catch (error) {
@@ -87,14 +94,74 @@ const SignupCard = () => {
     }
   };
 
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file && file.type.startsWith("image/")) {
+      const previewUrl = URL.createObjectURL(file);
+      setFormData((prevData) => ({
+        ...prevData,
+        image: file,
+        previewUrl: previewUrl,
+      }));
+    } else {
+      setFormData((prevData) => ({
+        ...prevData,
+        previewUrl:
+          "https://res.cloudinary.com/don3yyddm/image/upload/Screenshot_2025-05-07_185714_vnsk5g.png",
+      }));
+      setError("Please select a valid image file.");
+    }
+  };
+
+  const handleFileUpload = async () => {
+    try {
+      const form = new FormData();
+      form.append("file", formData.image);
+      form.append("upload_preset", "upload_preset_screenscout");
+      form.append("cloud_name", "don3yyddm");
+      const response = await fetch(
+        "https://api.cloudinary.com/v1_1/don3yyddm/upload",
+        {
+          method: "POST",
+          body: form,
+        }
+      );
+      const data = await response.json();
+      setFormData((prev) => ({
+        ...prev,
+        previewUrl: data.secure_url,
+      }));
+
+      return data.secure_url;
+    } catch (error) {
+      console.error("Error uploading image:", error);
+      setError("Failed to upload image. Please try again.");
+      return null;
+    }
+  };
+
   return (
     <form className={styles.signupCard} onSubmit={(e) => handleSignUp(e)}>
       <h1 className={styles.title}> ScreenScout</h1>
       <div className={styles.inputContainer}>
+        <div class={styles.profileContainer}>
+          <div className={styles.profilePicture}>
+            <img src={formData.previewUrl} alt="Preview of profile picture" />
+          </div>
+          <Input
+            label="Add profile picture +"
+            className="file-uploader"
+            type="file"
+            onChange={handleFileChange}
+            id="upload"
+            name="upload"
+            error={error}
+          />
+        </div>
         <Input
           label="First name"
           placeholder="Enter your first name"
-          className="name"
+          className="firstName"
           type="text"
           value={formData.name}
           onChange={handleOnChange}

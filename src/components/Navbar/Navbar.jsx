@@ -50,7 +50,7 @@ const Navbar = () => {
               </li>
             </ul>
           )}
-          {isOpen && <Menu />}
+          {isOpen && <Menu setIsOpen={setIsOpen} />}
         </div>
       </nav>
     </>

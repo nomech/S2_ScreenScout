@@ -4,9 +4,19 @@ import Button from "../Button/Button";
 import styles from "./Menu.module.css";
 import { useNavigate } from "react-router-dom";
 
-const Menu = () => {
-  const { handleSignOut } = useContext(authContext);
+const Menu = ({ setIsOpen }) => {
+  const { signOut } = useContext(authContext);
   const navigate = useNavigate();
+
+  const handleSignOut = async () => {
+    try {
+      setIsOpen(false);
+      await signOut();
+      navigate("/login");
+    } catch (error) {
+      console.error("Error signing out:", error);
+    }
+  };
 
   return (
     <div className={styles.menu}>

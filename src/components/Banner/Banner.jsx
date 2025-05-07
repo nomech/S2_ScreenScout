@@ -10,10 +10,6 @@ const Banner = () => {
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  if (data) {
-    console.log(data.results);
-  }
-
   useEffect(() => {
     if (!data?.results?.length) return;
     const interval = setInterval(() => {
@@ -33,7 +29,7 @@ const Banner = () => {
               index === currentIndex ? styles.activeSlide : ""
             }`}
           >
-            <div class={styles.backdrop}>
+            <div className={styles.backdrop}>
               <img
                 className={styles.backdrop}
                 src={`https://image.tmdb.org/t/p/original${media.backdrop_path}`}
