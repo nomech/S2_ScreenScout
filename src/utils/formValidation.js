@@ -1,7 +1,11 @@
 export const signupFormValidation = (formData, setError) => {
   let validForm = true;
-  if (!formData.name) {
-    setError((prev) => ({ ...prev, name: "Name is required" }));
+  if (!formData.firstName) {
+    setError((prev) => ({ ...prev, firstName: "First name is required" }));
+    validForm = false;
+  }
+  if (!formData.lastName) {
+    setError((prev) => ({ ...prev, lastName: "Last name is required" }));
     validForm = false;
   }
   if (!formData.email) {

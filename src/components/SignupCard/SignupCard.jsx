@@ -11,11 +11,13 @@ import { signupFormValidation } from "../../utils/formValidation";
 const SignupCard = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    name: "",
+    firstName: "",
+    lastName: "",
     email: "",
     password: "",
     confirmPassword: "",
   });
+
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
@@ -57,7 +59,8 @@ const SignupCard = () => {
 
       setSuccess(true);
       setFormData({
-        name: "",
+        firstName: "",
+        lastName: "",
         email: "",
         password: "",
         confirmPassword: "",
@@ -85,18 +88,29 @@ const SignupCard = () => {
   };
 
   return (
-    <div className={styles.signupCard}>
+    <form className={styles.signupCard} onSubmit={(e) => handleSignUp(e)}>
       <h1 className={styles.title}> ScreenScout</h1>
       <div className={styles.inputContainer}>
         <Input
-          label="Full name"
-          placeholder="Enter your name"
+          label="First name"
+          placeholder="Enter your first name"
           className="name"
           type="text"
           value={formData.name}
           onChange={handleOnChange}
-          id="name"
-          name="name"
+          id="firstName"
+          name="firstName"
+          error={error}
+        />
+        <Input
+          label="Last name"
+          placeholder="Enter your last name"
+          className="name"
+          type="text"
+          value={formData.name}
+          onChange={handleOnChange}
+          id="lastName"
+          name="lastName"
           error={error}
         />
         <Input
@@ -139,14 +153,14 @@ const SignupCard = () => {
       </NavLink>
 
       <Button
-        ariaLabel="Login button"
+        ariaLabel="Signup button"
         className="signup"
-        onClick={(e) => handleSignUp(e)}
         disabled={isLoading}
+        type="submit"
       >
         {isLoading ? "Creating..." : "Create Account"}
       </Button>
-    </div>
+    </form>
   );
 };
 

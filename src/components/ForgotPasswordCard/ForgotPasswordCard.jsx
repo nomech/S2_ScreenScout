@@ -5,7 +5,7 @@ import Button from "../Button/Button";
 import { forgotPasswordFormValidation } from "../../utils/formValidation";
 import { sendPasswordResetEmail } from "firebase/auth";
 import { auth } from "../../firebaseConfig";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const ForgotPasswordCard = () => {
   const navigate = useNavigate();
@@ -51,7 +51,7 @@ const ForgotPasswordCard = () => {
   };
 
   return (
-    <div className={styles.forgotPasswordCard}>
+    <form className={styles.forgotPasswordCard} onSubmit={(e) => onSubmit(e)}>
       <h1 className={styles.title}> ScreenScout</h1>
       {!success && (
         <>
@@ -69,11 +69,21 @@ const ForgotPasswordCard = () => {
             />
           </div>
 
+          <div className={styles.linkContainer}>
+            <NavLink to="/signup" className={styles.link}>
+              Create Account
+            </NavLink>
+
+            <NavLink to="/login" className={styles.link}>
+              Sign in
+            </NavLink>
+          </div>
+
           <Button
             ariaLabel="Reset button"
             className="login"
-            onClick={(e) => onSubmit(e)}
             disabled={isLoading}
+            type="submit"
           >
             {isLoading ? "Sending link..." : "Reeset Password"}
           </Button>
@@ -84,7 +94,7 @@ const ForgotPasswordCard = () => {
           <p>{success}</p>
         </div>
       )}
-    </div>
+    </form>
   );
 };
 

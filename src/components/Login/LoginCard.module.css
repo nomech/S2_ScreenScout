@@ -33,3 +33,9 @@
   font-size: 14px;
   font-weight: 400;
 }
+
+.linkContainer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}

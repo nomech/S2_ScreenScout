@@ -29,13 +29,12 @@ const LoginCard = () => {
       await signInWithEmailAndPassword(auth, email, password);
       navigate("/");
     } catch (error) {
-      
       console.error("Error signing in:", error);
     }
   };
 
   return (
-    <div className={styles.loginCard}>
+    <form className={styles.loginCard} onSubmit={(e) => onSubmit(e)}>
       <h1 className={styles.title}> ScreenScout</h1>
       <div className={styles.inputContainer}>
         <Input
@@ -58,18 +57,19 @@ const LoginCard = () => {
         />
       </div>
 
-      <NavLink to="/forgot-password" className={styles.link}>
-        Forgot password?
-      </NavLink>
+      <div className={styles.linkContainer}>
+        <NavLink to="/signup" className={styles.link}>
+          Create Account
+        </NavLink>
 
-      <Button
-        ariaLabel="Login button"
-        className="login"
-        onClick={(e) => onSubmit(e)}
-      >
+        <NavLink to="/forgot-password" className={styles.link}>
+          Forgot password?
+        </NavLink>
+      </div>
+      <Button ariaLabel="Login button" className="login" type="submit">
         Sign in
       </Button>
-    </div>
+    </form>
   );
 };
 
