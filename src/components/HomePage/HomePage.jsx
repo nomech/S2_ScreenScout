@@ -22,7 +22,7 @@ const Home = () => {
         title="Trending TV shows"
         limit={10}
         section="trending"
-        subsection="tv-show"
+        subsection="tv"
         period="week"
         language="?language=en-US"
       />
