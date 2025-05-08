@@ -22,7 +22,7 @@ export const AuthProvider = ({ children }) => {
     return unsubscribe;
   }, []);
 
-  const signOut = async () => {
+  const signOutUser = async () => {
     try {
       await signOut(auth);
       setUser(null);
@@ -32,7 +32,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <authContext.Provider value={{ user, isLoading, signOut }}>
+    <authContext.Provider value={{ user, isLoading, signOutUser }}>
       {children}
     </authContext.Provider>
   );

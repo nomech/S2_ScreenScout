@@ -5,13 +5,13 @@ import styles from "./Menu.module.css";
 import { useNavigate } from "react-router-dom";
 
 const Menu = ({ setIsOpen }) => {
-  const { signOut } = useContext(authContext);
+  const { signOutUser } = useContext(authContext);
   const navigate = useNavigate();
 
   const handleSignOut = async () => {
     try {
       setIsOpen(false);
-      await signOut();
+      await signOutUser();
       navigate("/login");
     } catch (error) {
       console.error("Error signing out:", error);
