@@ -11,7 +11,10 @@ const Banner = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
-    if (!data?.results?.length) return;
+    if (!data?.results?.length) {
+      return;
+    }
+    
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % data.results.length);
     }, 5000);
