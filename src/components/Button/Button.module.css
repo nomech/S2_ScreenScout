@@ -2,6 +2,11 @@
   cursor: pointer;
   transition: background-color 0.2s ease;
   border: none;
+  background: #7e22ce;
+  font-weight: 700;
+  width: 360px;
+  height: 47px;
+  border-radius: 8px;
 }
 
 .button:hover {
@@ -15,10 +20,8 @@
   border-radius: 8px;
   background: #7e22ce;
   color: #ffffff;
-  color: #fff;
   font-family: Inter;
   font-size: 16px;
-  font-weight: 700;
 }
 
 .signup:disabled {
@@ -36,18 +39,31 @@
   color: #d5d5d5;
   font-family: Inter;
   font-size: 20px;
-  font-weight: 700;
   text-decoration: none;
   border: none;
   transition: background-color 0.1s ease-in;
   color: #d5d5d5;
   font-family: Inter;
-  font-size: 20px;
-  font-weight: 700;
   text-decoration: none;
 }
 
 .menuButton:hover {
   color: #ffffff;
   background-color: #7928d1;
+}
+
+.search {
+  width: 190px;
+  height: 38px;
+  position: absolute;
+  right: 15px;
+  top: 10px;
+}
+
+.searchMediatype {
+  height: 34px;
+  width: fit-content;
+  padding: 0 1rem;
+  background-color: #232339;
+  border: 1px solid #39394d;
 }

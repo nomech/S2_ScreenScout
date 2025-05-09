@@ -11,15 +11,31 @@ const MediaGrid = ({
   page = 1,
   limit,
   title,
+  searchQuery,
+  setMatches,
 }) => {
   const path =
     section === "trending"
       ? `trending/${subsection}/${period}`
       : `${section}/${subsection}`;
 
-  const url = `https://api.themoviedb.org/3/${path}?language=${language}&page=${page}`;
+  let baseUrl = `https://api.themoviedb.org/3/`;
+  let url = baseUrl;
+  if (searchQuery) {
+    url = baseUrl + `search/${searchQuery}`;
+  } else {
+    url = baseUrl + `${path}?language=${language}&page=${page}`;
+  }
 
   const { data, isLoading } = useFetch(url);
+
+  const items = (data?.results || []).filter(
+    (media) => media.media_type !== "person"
+  );
+
+  if (setMatches && data) {
+    setMatches(data.total_results);
+  }
 
   return (
     <>
@@ -31,7 +47,8 @@ const MediaGrid = ({
         </div>
         <div className={styles.mediaGrid}>
           {data &&
-            data.results.slice(0, limit).map((media) => (
+            items?.media_type != "person" &&
+            items.slice(0, limit).map((media) => (
               <div key={media.id} className={styles.card}>
                 <img
                   className="poster"
