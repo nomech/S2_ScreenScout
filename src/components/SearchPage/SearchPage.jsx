@@ -2,22 +2,24 @@ import Banner from "../Banner/Banner";
 import SearchBar from "../Searchbar/SearchBar";
 import styles from "./SearchPage.module.css";
 import MediaGrid from "../MediaGrid/MediaGrid";
-import { useLocation } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import Paginator from "../Paginator/Paginator";
 
 const SearchPage = () => {
-  const [matces, setMatches] = useState("0");
+  const [matches, setMatches] = useState(null);
   const [searchString, setSearchString] = useState("");
+  const [searchParams] = useSearchParams();
+  const [pages, setPages] = useState(1);
 
-  const { search } = useLocation();
-  const searchQuery = search.replace("?searchQuery=", "");
+  const url = `https://api.themoviedb.org/3/search/${searchParams.get(
+    "media_type"
+  )}?${searchParams.toString()}`;
 
   useEffect(() => {
-    const queryParams = new URLSearchParams(searchQuery.split("?")[1]);
-    const query = queryParams.get("query");
-    console.log(searchQuery.split("?"))
+    const query = searchParams.get("query");
     setSearchString(decodeURIComponent(query));
-  }, [setSearchString, searchQuery]);
+  }, [setSearchString, searchParams]);
 
   return (
     <div className={styles.wrapper}>
@@ -25,11 +27,16 @@ const SearchPage = () => {
       <SearchBar />
       {
         <div className={styles.textContainer}>
-          <h2 className={styles.results}>Results for:"{searchString}"</h2>
-          <p className={styles.matching}>Found: {matces} matching results</p>
+          {searchString && (
+            <h2 className={styles.results}>Results for:"{searchString}"</h2>
+          )}
+          {matches && (
+            <p className={styles.matching}>Found: {matches} matching results</p>
+          )}
         </div>
       }
-      <MediaGrid searchQuery={searchQuery} setMatches={setMatches} />
+      <MediaGrid url={url} setMatches={setMatches} getTotalPages={setPages} />
+      <Paginator items={matches} pages={pages} />
     </div>
   );
 };

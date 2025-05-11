@@ -17,11 +17,15 @@ const SearchBar = ({ handleSearchString }) => {
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    const searchQuery = encodeURI(
-      `${mediaType}?query=${searchTerm}&include_adult=${adult}&language=en-US&page=1`
-    );
 
-    navigate(`/search?searchQuery=${searchQuery}`);
+    const params = new URLSearchParams({
+      query: searchTerm,
+      include_adult: adult,
+      language: "en-US",
+      page: "1",
+    });
+
+    navigate(`/search?media_type=${mediaType}&${params.toString()}`);
   };
 
   /*   const handleAdultChange = () => {

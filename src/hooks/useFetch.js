@@ -23,7 +23,7 @@ export const useFetch = (url) => {
           throw new Error("Network response was not ok");
         }
         const data = await response.json();
-        console.log(data);
+
         setData(data);
         setError(null);
       } catch (error) {

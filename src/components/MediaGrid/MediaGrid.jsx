@@ -1,41 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./MediaGrid.module.css";
 import { useFetch } from "../../hooks/useFetch";
 import Loading from "../Loading/Loading";
 
-const MediaGrid = ({
-  section = "trending",
-  subsection = "all",
-  period = "day",
-  language = "en-US",
-  page = 1,
-  limit,
-  title,
-  searchQuery,
-  setMatches,
-}) => {
-  const path =
-    section === "trending"
-      ? `trending/${subsection}/${period}`
-      : `${section}/${subsection}`;
-
-  let baseUrl = `https://api.themoviedb.org/3/`;
-  let url = baseUrl;
-  if (searchQuery) {
-    url = baseUrl + `search/${searchQuery}`;
-  } else {
-    url = baseUrl + `${path}?language=${language}&page=${page}`;
-  }
-
+const MediaGrid = ({ limit, title, setMatches, getTotalPages, url }) => {
   const { data, isLoading } = useFetch(url);
-
   const items = (data?.results || []).filter(
     (media) => media.media_type !== "person"
   );
-
-  if (setMatches && data) {
-    setMatches(data.total_results);
-  }
+  useEffect(() => {
+    if (setMatches && data && !isLoading) {
+      setMatches(data.total_results);
+      getTotalPages(data.total_pages);
+    }
+  }, [setMatches, getTotalPages, data, isLoading]);
 
   return (
     <>
