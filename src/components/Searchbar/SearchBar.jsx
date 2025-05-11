@@ -4,9 +4,9 @@ import Button from "../Button/Button";
 import Input from "../Input/Input";
 import { useNavigate } from "react-router-dom";
 
-const SearchBar = () => {
+const SearchBar = ({ setSearchString }) => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [medaType, setMediaType] = useState("multi");
+  const [mediaType, setMediaType] = useState("multi");
   const [adult, setAdult] = useState(false);
 
   const navigate = useNavigate();
@@ -18,7 +18,9 @@ const SearchBar = () => {
   const handleOnSubmit = (e) => {
     e.preventDefault();
     const formattedSearchTerm = searchTerm.replaceAll(" ", "%20");
-    const searchQuery = `${medaType}?query=${formattedSearchTerm}&include_adult=${adult}&language=en-US&page=1`;
+    const searchQuery = `${mediaType}?query=${formattedSearchTerm}&include_adult=${adult}&language=en-US&page=1`;
+
+    setSearchString(searchTerm);
     navigate(`/search?searchQuery=${searchQuery}`);
   };
 
@@ -49,13 +51,22 @@ const SearchBar = () => {
         </Button>
       </form>
       <div className={styles.buttonContainer}>
-        <Button className="searchMediatype" onClick={handleOnClickMediaType}>
+        <Button
+          className={mediaType == "multi" ? "active" : "inactive"}
+          onClick={handleOnClickMediaType}
+        >
           All
         </Button>
-        <Button className="searchMediatype" onClick={handleOnClickMediaType}>
+        <Button
+          className={mediaType == "movie" ? "active" : "inactive"}
+          onClick={handleOnClickMediaType}
+        >
           Movie
         </Button>
-        <Button className="searchMediatype" onClick={handleOnClickMediaType}>
+        <Button
+          className={mediaType == "tv" ? "active" : "inactive"}
+          onClick={handleOnClickMediaType}
+        >
           TV
         </Button>
         {/*        <Input

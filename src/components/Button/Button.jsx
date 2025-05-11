@@ -7,6 +7,7 @@ const Button = ({
   disabled = false,
   ariaLabel,
   type,
+  ref,
 }) => {
   return (
     <button
@@ -15,6 +16,7 @@ const Button = ({
       onClick={onClick}
       aria-label={ariaLabel}
       type={type}
+      ref={ref}
     >
       {children}
     </button>

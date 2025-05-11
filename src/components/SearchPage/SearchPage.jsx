@@ -7,6 +7,7 @@ import { useState } from "react";
 
 const SearchPage = () => {
   const [matces, setMatches] = useState("0");
+  const [searchString, setSearchString] = useState("");
 
   const { search } = useLocation();
   const searchQuery = search.replace("?searchQuery=", "");
@@ -14,10 +15,10 @@ const SearchPage = () => {
   return (
     <div className={styles.wrapper}>
       <Banner />
-      <SearchBar />
+      <SearchBar setSearchString={setSearchString} />
       {
         <div>
-          <h2>Results:""</h2>
+          <h2>Results for:"{searchString}"</h2>
           <h3>Found: {matces} matching results</h3>
         </div>
       }
