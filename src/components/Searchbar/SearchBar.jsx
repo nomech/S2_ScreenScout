@@ -4,7 +4,7 @@ import Button from "../Button/Button";
 import Input from "../Input/Input";
 import { useNavigate } from "react-router-dom";
 
-const SearchBar = ({ setSearchString }) => {
+const SearchBar = ({ handleSearchString }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [mediaType, setMediaType] = useState("multi");
   const [adult, setAdult] = useState(false);
@@ -17,10 +17,10 @@ const SearchBar = ({ setSearchString }) => {
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    const formattedSearchTerm = searchTerm.replaceAll(" ", "%20");
-    const searchQuery = `${mediaType}?query=${formattedSearchTerm}&include_adult=${adult}&language=en-US&page=1`;
+    const searchQuery = encodeURI(
+      `${mediaType}?query=${searchTerm}&include_adult=${adult}&language=en-US&page=1`
+    );
 
-    setSearchString(searchTerm);
     navigate(`/search?searchQuery=${searchQuery}`);
   };
 

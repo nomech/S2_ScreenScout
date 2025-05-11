@@ -3,7 +3,7 @@ import SearchBar from "../Searchbar/SearchBar";
 import styles from "./SearchPage.module.css";
 import MediaGrid from "../MediaGrid/MediaGrid";
 import { useLocation } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const SearchPage = () => {
   const [matces, setMatches] = useState("0");
@@ -12,10 +12,17 @@ const SearchPage = () => {
   const { search } = useLocation();
   const searchQuery = search.replace("?searchQuery=", "");
 
+  useEffect(() => {
+    const queryParams = new URLSearchParams(searchQuery.split("?")[1]);
+    const query = queryParams.get("query");
+    console.log(searchQuery.split("?"))
+    setSearchString(decodeURIComponent(query));
+  }, [setSearchString, searchQuery]);
+
   return (
     <div className={styles.wrapper}>
       <Banner />
-      <SearchBar setSearchString={setSearchString} />
+      <SearchBar />
       {
         <div>
           <h2>Results for:"{searchString}"</h2>
