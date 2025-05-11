@@ -24,9 +24,9 @@ const SearchPage = () => {
       <Banner />
       <SearchBar />
       {
-        <div>
-          <h2>Results for:"{searchString}"</h2>
-          <h3>Found: {matces} matching results</h3>
+        <div className={styles.textContainer}>
+          <h2 className={styles.results}>Results for:"{searchString}"</h2>
+          <p className={styles.matching}>Found: {matces} matching results</p>
         </div>
       }
       <MediaGrid searchQuery={searchQuery} setMatches={setMatches} />
