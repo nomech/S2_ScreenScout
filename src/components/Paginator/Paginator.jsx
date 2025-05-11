@@ -4,7 +4,6 @@ import { useSearchParams } from "react-router-dom";
 import Button from "../Button/Button";
 
 const Paginator = ({ pages }) => {
-  // const [page, setPage] = useState(1);
   const [searchParams, setSearchParams] = useSearchParams();
   const page = parseInt(searchParams.get("page")) || 1;
 
@@ -26,7 +25,7 @@ const Paginator = ({ pages }) => {
         {i}
       </Button>
     );
-  } 
+  }
 
   return <div className={styles.paginator}>{buttons}</div>;
 };
