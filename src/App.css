@@ -1,10 +1,10 @@
 #root {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .active {
-  color: #ffffff;
+    color: #ffffff;
 }

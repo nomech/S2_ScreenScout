@@ -1,10 +1,10 @@
 .wrapper {
-  width: 100%;
-  padding: 0 200px;
+    width: 100%;
+    padding: 0 200px;
 }
 
 .divider {
-  border: none;
-  height: 4px;
-  background: linear-gradient(90deg, #6200e9 0%, #9c27af 50%, #6200e9 100%);
+    border: none;
+    height: 4px;
+    background: linear-gradient(90deg, #6200e9 0%, #9c27af 50%, #6200e9 100%);
 }

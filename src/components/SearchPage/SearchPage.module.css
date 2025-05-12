@@ -1,28 +1,28 @@
 .wrapper {
-  width: 100%;
-  padding: 0 200px;
+    width: 100%;
+    padding: 0 200px;
 }
 
 .divider {
-  border: none;
-  height: 4px;
-  background: linear-gradient(90deg, #6200e9 0%, #9c27af 50%, #6200e9 100%);
+    border: none;
+    height: 4px;
+    background: linear-gradient(90deg, #6200e9 0%, #9c27af 50%, #6200e9 100%);
 }
 
 .results {
-  font-size: 28 px;
-  font-weight: 400;
+    font-size: 28 px;
+    font-weight: 400;
 }
 
 .matching {
-  color: #8aa3a1;
-  font-family: Inter;
-  font-size: 18px;
-  font-weight: 400;
+    color: #8aa3a1;
+    font-family: Inter;
+    font-size: 18px;
+    font-weight: 400;
 }
 
 .textContainer {
-  border-bottom: 2px solid #3E3E52;
-  margin: 2rem 0;
-  padding: 2rem 0;
+    border-bottom: 2px solid #3e3e52;
+    margin: 2rem 0;
+    padding: 2rem 0;
 }

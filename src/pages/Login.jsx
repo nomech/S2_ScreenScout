@@ -2,7 +2,7 @@ import React from "react";
 import LoginCard from "../components/Login/LoginCard";
 
 const Login = () => {
-  return <LoginCard />;
+    return <LoginCard />;
 };
 
 export default Login;

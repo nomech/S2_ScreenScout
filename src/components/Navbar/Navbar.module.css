@@ -1,70 +1,70 @@
 .navbar {
-  width: 100%;
-  height: 75px;
-  background: linear-gradient(90deg, #6200e9 0%, #9c27af 100%);
-  display: flex;
-  justify-content: center;
+    width: 100%;
+    height: 75px;
+    background: linear-gradient(90deg, #6200e9 0%, #9c27af 100%);
+    display: flex;
+    justify-content: center;
 
-  padding: 0 2rem;
+    padding: 0 2rem;
 }
 
 .wrapper {
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 1800px;
-  height: 100%;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 1800px;
+    height: 100%;
 }
 
 .title {
-  color: #ffffff;
+    color: #ffffff;
 }
 
 .navList {
-  display: flex;
-  gap: 2rem;
-  list-style: none;
+    display: flex;
+    gap: 2rem;
+    list-style: none;
 }
 
 .navItem *,
 .profile {
-  color: #d5d5d5;
-  font-family: Inter;
-  font-size: 20px;
-  font-weight: 700;
-  text-decoration: none;
+    color: #d5d5d5;
+    font-family: Inter;
+    font-size: 20px;
+    font-weight: 700;
+    text-decoration: none;
 }
 
 .navItem *:hover,
 .profile:hover {
-  color: #ffffff;
-  text-shadow: 0px 0px 100px #ffffff;
+    color: #ffffff;
+    text-shadow: 0px 0px 100px #ffffff;
 }
 
 .profile:hover {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .title {
-  color: #ffffff;
+    color: #ffffff;
 }
 
 .navList {
-  display: flex;
-  gap: 2rem;
-  list-style: none;
+    display: flex;
+    gap: 2rem;
+    list-style: none;
 }
 
 .navItem * {
-  color: #d5d5d5;
-  font-family: Inter;
-  font-size: 20px;
-  font-weight: 700;
-  text-decoration: none;
+    color: #d5d5d5;
+    font-family: Inter;
+    font-size: 20px;
+    font-weight: 700;
+    text-decoration: none;
 }
 
 .active {
-  color: #ffffff;
-  text-shadow: 0px 0 100px #ffffff;
+    color: #ffffff;
+    text-shadow: 0px 0 100px #ffffff;
 }

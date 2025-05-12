@@ -1,19 +1,19 @@
 * {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-  font-family: "Montserrat", sans-serif;
-  color: #ffffff;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Montserrat", sans-serif;
+    color: #ffffff;
 }
 
 body {
-  background-color: #0a0a23;
+    background-color: #0a0a23;
 }
 
 @font-face {
-  font-family: "Montserrat";
-  src: url("./assets/fonts/Montserrat-VariableFont_wght.ttf")
-    format("truetype-variations");
-  font-weight: 100 900;
-  font-style: normal;
+    font-family: "Montserrat";
+    src: url("./assets/fonts/Montserrat-VariableFont_wght.ttf")
+        format("truetype-variations");
+    font-weight: 100 900;
+    font-style: normal;
 }

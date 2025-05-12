@@ -5,43 +5,46 @@ import styles from "./Menu.module.css";
 import { useNavigate } from "react-router-dom";
 
 const Menu = ({ setIsOpen }) => {
-  const { signOutUser } = useContext(authContext);
-  const navigate = useNavigate();
+    const { signOutUser } = useContext(authContext);
+    const navigate = useNavigate();
 
-  const handleSignOut = async () => {
-    try {
-      setIsOpen(false);
-      await signOutUser();
-      navigate("/login");
-    } catch (error) {
-      console.error("Error signing out:", error);
-    }
-  };
+    const handleSignOut = async () => {
+        try {
+            setIsOpen(false);
+            await signOutUser();
+            navigate("/login");
+        } catch (error) {
+            console.error("Error signing out:", error);
+        }
+    };
 
-  return (
-    <div className={styles.menu}>
-      <ul className={styles.list}>
-        <li className={styles.listItem}>
-          <Button
-            className="menuButton"
-            onClick={() => navigate("/preferences")}
-          >
-            Preferences
-          </Button>
-        </li>
-        <li className={styles.listItem}>
-          <Button className="menuButton" onClick={() => navigate("/stats")}>
-            Stats
-          </Button>
-        </li>
-        <li className={styles.listItem}>
-          <Button className="menuButton" onClick={handleSignOut}>
-            Sign Out
-          </Button>
-        </li>
-      </ul>
-    </div>
-  );
+    return (
+        <div className={styles.menu}>
+            <ul className={styles.list}>
+                <li className={styles.listItem}>
+                    <Button
+                        className="menuButton"
+                        onClick={() => navigate("/preferences")}
+                    >
+                        Preferences
+                    </Button>
+                </li>
+                <li className={styles.listItem}>
+                    <Button
+                        className="menuButton"
+                        onClick={() => navigate("/stats")}
+                    >
+                        Stats
+                    </Button>
+                </li>
+                <li className={styles.listItem}>
+                    <Button className="menuButton" onClick={handleSignOut}>
+                        Sign Out
+                    </Button>
+                </li>
+            </ul>
+        </div>
+    );
 };
 
 export default Menu;
