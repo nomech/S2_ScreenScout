@@ -1,31 +1,30 @@
 .mediaGridContainer {
-  justify-content: center;
-  align-items: center;
-  padding: 2rem 0;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 0;
 }
 
 .title {
-  align-self: flex-start;
+    align-self: flex-start;
 }
 
 .mediaGrid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 20px;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
 }
 
 .card {
-  width: 200px;
-  border-radius: 0px 0px 8px 8px;
-  background: #16162e;
+    width: 200px;
+    border-radius: 0px 0px 8px 8px;
+    background: #16162e;
 }
 .containerGrid {
-  display: grid;
+    display: grid;
 }
 
 .containerList {
-  display: flex;
-  flex-direction: column;
+    display: flex;
 }
 
 .cardGrid {
@@ -35,8 +34,8 @@
 }
 
 .mediaTitle {
-  grid-row: 1;
-  text-align: center;
-  margin: 25px 0;
-  font-size: 16px;
+    grid-row: 1;
+    text-align: center;
+    margin: 25px 0;
+    font-size: 16px;
 }
