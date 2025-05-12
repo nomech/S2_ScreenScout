@@ -15,7 +15,29 @@ const Paginator = ({ pages }) => {
     };
 
     const buttons = [];
-    for (let i = 1; i <= pages; i++) {
+    const limit = 2;
+    const totalPages = pages;
+
+
+    const startPage = Math.max(2, page - limit);
+    const endPage = Math.min(totalPages - 1, page + limit);
+
+
+    buttons.push(
+        <Button
+            key={1}
+            className={page === 1 ? "active" : "inactive"}
+            onClick={() => onClick(1)}
+        >
+            1
+        </Button>
+    );
+
+    if (startPage > 2) {
+        buttons.push("...");
+    }
+
+    for (let i = startPage; i <= endPage; i++) {
         buttons.push(
             <Button
                 key={i}
@@ -23,6 +45,22 @@ const Paginator = ({ pages }) => {
                 onClick={() => onClick(i)}
             >
                 {i}
+            </Button>
+        );
+    }
+
+    if (endPage < totalPages - 1) {
+        buttons.push("...");
+    }
+
+    if (totalPages > 1) {
+        buttons.push(
+            <Button
+                key={totalPages}
+                className={page === totalPages ? "active" : "inactive"}
+                onClick={() => onClick(totalPages)}
+            >
+                {totalPages}
             </Button>
         );
     }
