@@ -1,6 +1,8 @@
 .banner {
     position: relative;
     height: 468px;
+    width: 100%;
+    max-width: 1340px;
 }
 
 .mediaContainer {
@@ -42,7 +44,6 @@
     padding: 48px 24px;
     z-index: 10;
     gap: 2rem;
-    width: 1340px;
 }
 
 .title {

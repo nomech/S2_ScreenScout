@@ -1,15 +1,17 @@
-.searchBar {
-    position: relative;
-    margin-top: 2rem;
-    width: 100%;
-}
-
 .searchContainer {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 1rem;
+    width: 100%;
+    max-width: 1340px;
+}
+
+.searchBar {
+    position: relative;
+    margin-top: 2rem;
+    width: 100%;
 }
 
 .buttonContainer {
