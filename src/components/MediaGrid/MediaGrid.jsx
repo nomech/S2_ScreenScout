@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import styles from "./MediaGrid.module.css";
 import { useFetch } from "../../hooks/useFetch";
 import Loading from "../Loading/Loading";
+import Button from "../Button/Button";
 
 const MediaGrid = ({ limit, title, setMatches, getTotalPages, url }) => {
     const { data, isLoading } = useFetch(url);
-    const [cardStyle, setCardStyle] = useState("Grid");
+    const [cardStyle, setCardStyle] = useState("List");
 
     const items = (data?.results || []).filter(
         (media) => media.media_type !== "person"
@@ -25,21 +26,22 @@ const MediaGrid = ({ limit, title, setMatches, getTotalPages, url }) => {
         setCardStyle("Grid");
     };
 
-    console.log(cardStyle);
+    console.log(data);
     return (
         <>
             {isLoading && <Loading />}
 
             <div className={styles.mediaGridContainer}>
-                <div className={styles.title}>
+                <div className={styles.header}>
                     <h1 className={styles.title}>{title}</h1>
+                    <Button>Style</Button>
                 </div>
                 <div
                     className={`${styles.mediaGrid} ${
                         styles["container" + cardStyle]
                     }`}
                 >
-                    {data &&
+                    {/*                     {data &&
                         items?.media_type != "person" &&
                         items.slice(0, limit).map((media) => (
                             <div
@@ -57,6 +59,40 @@ const MediaGrid = ({ limit, title, setMatches, getTotalPages, url }) => {
                                     <h3 className={styles.mediaTitle}>
                                         {media.title} {media.name}
                                     </h3>
+                                </div>
+                            </div>
+                        ))}
+ */}
+                    {data &&
+                        items?.media_type != "person" &&
+                        items.slice(0, limit).map((media) => (
+                            <div
+                                key={media.id}
+                                className={`${styles.card} ${
+                                    styles["card" + cardStyle]
+                                }`}
+                            >
+                                <img
+                                    className={styles.poster}
+                                    src={`https://image.tmdb.org/t/p/w200${media.poster_path}`}
+                                    alt={media.title}
+                                />
+                                <p className={styles.id}>ID: {media.id}</p>
+                                <div className={styles.mediaDetails}>
+                                    <h3 className={styles.mediaTitle}>
+                                        {media.title} {media.name}
+                                    </h3>
+                                    <p>
+                                        {media.release_date}
+                                        {media.first_air_date}
+                                    </p>
+                                    <p>{media.genre_ids}</p>
+                                    <p>{media.overview}</p>
+                                    <p>
+                                        {Math.round(media.vote_average)}
+                                        /10
+                                    </p>
+                                    <p>{media.vote_count} votes</p>
                                 </div>
                             </div>
                         ))}
