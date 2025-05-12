@@ -1,33 +1,6 @@
-.wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    padding: 0 200px;
-}
-
 .divider {
     border: none;
     height: 4px;
     width: 100%;
     background: linear-gradient(90deg, #6200e9 0%, #9c27af 50%, #6200e9 100%);
-}
-
-@media (max-width: 1480px) {
-    .wrapper {
-        padding:0 100px;
-    }
-}
-
-@media (max-width: 1280px) {
-    .wrapper {
-        padding:0 50px;
-    }
-}
-
-@media (max-width: 1180px) {
-    .wrapper {
-        padding: 0;
-    }
 }

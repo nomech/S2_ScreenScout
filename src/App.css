@@ -9,7 +9,30 @@
     color: #ffffff;
 }
 
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 0 200px;
+    gap: 4rem;
+}
 
-.wrapper{
-  
+@media (max-width: 1480px) {
+    .wrapper {
+        padding: 0 100px;
+    }
+}
+
+@media (max-width: 1280px) {
+    .wrapper {
+        padding: 0 50px;
+    }
+}
+
+@media (max-width: 1180px) {
+    .wrapper {
+        padding: 0;
+    }
 }

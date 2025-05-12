@@ -22,7 +22,7 @@ const SearchPage = () => {
     }, [setSearchString, searchParams]);
 
     return (
-        <div className={styles.wrapper}>
+        <div className="wrapper">
             <Banner />
             <SearchBar />
             {

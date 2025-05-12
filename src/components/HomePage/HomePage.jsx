@@ -10,7 +10,7 @@ const Home = () => {
     const trendingTvUrl =
         "https://api.themoviedb.org/3/trending/tv/week?language=?language=en-US&page=1";
     return (
-        <div className={styles.wrapper}>
+        <div className="wrapper">
             <Banner />
 
             <SearchBar />
