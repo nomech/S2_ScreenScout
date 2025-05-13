@@ -115,8 +115,16 @@ const DetailedCard = ({ id, mediaType, onClose }) => {
                                                     alt={actor.name}
                                                 />
                                             </div>
-                                            <p>{actor.name}</p>
-                                            <p>{actor.character}</p>
+                                            <div
+                                                className={styles.nameContainer}
+                                            >
+                                                <p className={styles.name}>
+                                                    {actor.name}
+                                                </p>
+                                                <p className={styles.character}>
+                                                    {actor.character}
+                                                </p>
+                                            </div>
                                         </div>
                                     ))}
                             </div>
