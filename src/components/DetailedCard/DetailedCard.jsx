@@ -21,7 +21,8 @@ const DetailedCard = ({ id, mediaType, onClose }) => {
         isLoading: creditsLoading,
     } = useFetch(creditsUrl);
 
-    console.log(credits);
+    const placeholderImg =
+        "https://res.cloudinary.com/don3yyddm/image/upload/v1746637138/Screenshot_2025-05-07_185714_vnsk5g.png";
     return (
         <>
             {mediaIsLoading && (
@@ -77,7 +78,8 @@ const DetailedCard = ({ id, mediaType, onClose }) => {
                                         <p>
                                             {media.runtime
                                                 ? media.runtime + " min"
-                                                : "E" + media.number_of_episodes}
+                                                : "E" +
+                                                  media.number_of_episodes}
                                         </p>
                                     </div>
                                     <p className={styles.tagline}>
@@ -105,7 +107,11 @@ const DetailedCard = ({ id, mediaType, onClose }) => {
                                             <div className={styles.profile}>
                                                 <img
                                                     className={styles.actorImg}
-                                                    src={`https://image.tmdb.org/t/p/w200${actor.profile_path}`}
+                                                    src={
+                                                        actor.profile_path
+                                                            ? `https://image.tmdb.org/t/p/w200${actor.profile_path}`
+                                                            : placeholderImg
+                                                    }
                                                     alt={actor.name}
                                                 />
                                             </div>
