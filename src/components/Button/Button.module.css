@@ -86,8 +86,15 @@
 
 .listButton,
 .gridButton {
+    background-color: #232339;
+    border: 1px solid #39394d;
     margin: 0;
     width: fit-content;
     height: fit-content;
     padding: 0.5rem;
+}
+.watchlistButton {
+    width: fit-content;
+    padding: 0 1rem;
+    height: 35px;
 }

@@ -123,6 +123,9 @@ const MediaGrid = ({ limit, title, setMatches, getTotalPages, url }) => {
                                                 {media.vote_count} people voted
                                             </p>
                                         </div>
+                                        <Button className="watchlistButton">
+                                            Add to Watchlist
+                                        </Button>
                                     </div>
                                 </div>
                             </div>

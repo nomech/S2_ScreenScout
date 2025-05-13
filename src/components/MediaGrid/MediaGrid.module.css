@@ -141,5 +141,5 @@
 .votes {
     display: flex;
     gap: 0.5rem;
-    margin: auto 0 0;
+    margin: auto 0 20px;
 }
