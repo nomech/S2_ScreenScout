@@ -34,14 +34,16 @@ const MediaGrid = ({ limit, title, setMatches, getTotalPages, url }) => {
             <div className={styles.mediaGridContainer}>
                 <div className={styles.header}>
                     <h1 className={styles.title}>{title}</h1>
-                    <Button>Style</Button>
+                    <Button onClick={setGridStyle}>Grid</Button>
+                    <Button onClick={setListStyle}>List</Button>
                 </div>
                 <div
                     className={`${styles.mediaGrid} ${
                         styles["container" + cardStyle]
                     }`}
                 >
-                    {/*                     {data &&
+                    {data &&
+                        cardStyle === "Grid" &&
                         items?.media_type != "person" &&
                         items.slice(0, limit).map((media) => (
                             <div
@@ -62,37 +64,41 @@ const MediaGrid = ({ limit, title, setMatches, getTotalPages, url }) => {
                                 </div>
                             </div>
                         ))}
- */}
                     {data &&
+                        cardStyle === "List" &&
                         items?.media_type != "person" &&
                         items.slice(0, limit).map((media) => (
                             <div
                                 key={media.id}
-                                className={`${styles.card} ${
-                                    styles["card" + cardStyle]
-                                }`}
+                                className={`${styles["card" + cardStyle]}`}
                             >
                                 <img
-                                    className={styles.poster}
-                                    src={`https://image.tmdb.org/t/p/w200${media.poster_path}`}
-                                    alt={media.title}
+                                    className={styles.backdrop}
+                                    src={`https://image.tmdb.org/t/p/original${media.backdrop_path}`}
                                 />
-                                <p className={styles.id}>ID: {media.id}</p>
-                                <div className={styles.mediaDetails}>
-                                    <h3 className={styles.mediaTitle}>
-                                        {media.title} {media.name}
-                                    </h3>
-                                    <p>
-                                        {media.release_date}
-                                        {media.first_air_date}
-                                    </p>
-                                    <p>{media.genre_ids}</p>
-                                    <p>{media.overview}</p>
-                                    <p>
-                                        {Math.round(media.vote_average)}
-                                        /10
-                                    </p>
-                                    <p>{media.vote_count} votes</p>
+                                <div className={`${styles.card}`}>
+                                    <img
+                                        className={styles.poster}
+                                        src={`https://image.tmdb.org/t/p/w200${media.poster_path}`}
+                                        alt={media.title}
+                                    />
+                                    <p className={styles.id}>ID: {media.id}</p>
+                                    <div className={styles.mediaDetails}>
+                                        <h3 className={styles.mediaTitle}>
+                                            {media.title} {media.name}
+                                        </h3>
+                                        <p>
+                                            {media.release_date}
+                                            {media.first_air_date}
+                                        </p>
+                                        <p>{media.genre_ids}</p>
+                                        <p>{media.overview}</p>
+                                        <p>
+                                            {Math.round(media.vote_average)}
+                                            /10
+                                        </p>
+                                        <p>{media.vote_count} votes</p>
+                                    </div>
                                 </div>
                             </div>
                         ))}
