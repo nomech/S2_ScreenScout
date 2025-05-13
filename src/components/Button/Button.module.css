@@ -98,3 +98,13 @@
     padding: 0 1rem;
     height: 35px;
 }
+
+.closeButton {
+    position: absolute;
+    z-index: 10;
+    right: 0;
+    width: unset;
+    height: unset;
+    padding: 4px 2rem;
+    border-radius: 0;
+}

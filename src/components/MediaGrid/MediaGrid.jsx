@@ -5,10 +5,14 @@ import Loading from "../Loading/Loading";
 import Button from "../Button/Button";
 import listIcon from "../../assets/icons/listIcon.svg";
 import gridIcon from "../../assets/icons/gridIcon.svg";
+import DetailedCard from "../DetailedCard/DetailedCard";
 
 const MediaGrid = ({ limit, title, setMatches, getTotalPages, url }) => {
     const { data, isLoading } = useFetch(url);
     const [cardStyle, setCardStyle] = useState("Grid");
+    const [showDetailedCard, setShowDetailedCard] = useState(false);
+    const [detailedCardId, setDetailedCardId] = useState(null);
+    const [mediaType, setMediaType] = useState(null);
 
     const items = (data?.results || []).filter(
         (media) => media.media_type !== "person"
@@ -28,7 +32,19 @@ const MediaGrid = ({ limit, title, setMatches, getTotalPages, url }) => {
         setCardStyle("Grid");
     };
 
+    const handleCardClick = (id, media) => {
+        setDetailedCardId(id);
+        setMediaType(media);
+        setShowDetailedCard(true);
+    };
+
+    const handleCloseDetailedCard = () => {
+        setShowDetailedCard(false);
+        setDetailedCardId(null);
+    };
+
     console.log(data);
+
     return (
         <>
             {isLoading && <Loading />}
@@ -56,9 +72,10 @@ const MediaGrid = ({ limit, title, setMatches, getTotalPages, url }) => {
                         items.slice(0, limit).map((media) => (
                             <div
                                 key={media.id}
-                                className={`${styles.card} ${
-                                    styles["card" + cardStyle]
-                                }`}
+                                className={`${styles.card}`}
+                                onClick={() =>
+                                    handleCardClick(media.id, media.media_type)
+                                }
                             >
                                 <img
                                     className="poster"
@@ -132,6 +149,13 @@ const MediaGrid = ({ limit, title, setMatches, getTotalPages, url }) => {
                         ))}
                 </div>
             </div>
+            {showDetailedCard && (
+                <DetailedCard
+                    id={detailedCardId}
+                    mediaType={mediaType}
+                    onClose={handleCloseDetailedCard}
+                />
+            )}
         </>
     );
 };
