@@ -3,10 +3,12 @@ import styles from "./MediaGrid.module.css";
 import { useFetch } from "../../hooks/useFetch";
 import Loading from "../Loading/Loading";
 import Button from "../Button/Button";
+import listIcon from "../../assets/icons/listIcon.svg";
+import gridIcon from "../../assets/icons/gridIcon.svg";
 
 const MediaGrid = ({ limit, title, setMatches, getTotalPages, url }) => {
     const { data, isLoading } = useFetch(url);
-    const [cardStyle, setCardStyle] = useState("List");
+    const [cardStyle, setCardStyle] = useState("Grid");
 
     const items = (data?.results || []).filter(
         (media) => media.media_type !== "person"
@@ -34,8 +36,14 @@ const MediaGrid = ({ limit, title, setMatches, getTotalPages, url }) => {
             <div className={styles.mediaGridContainer}>
                 <div className={styles.header}>
                     <h1 className={styles.title}>{title}</h1>
-                    <Button onClick={setGridStyle}>Grid</Button>
-                    <Button onClick={setListStyle}>List</Button>
+                    <div className={styles.butonContiner}>
+                        <Button className="listButton" onClick={setGridStyle}>
+                            <img className={styles.gridIcon} src={gridIcon} />
+                        </Button>
+                        <Button className="gridButton" onClick={setListStyle}>
+                            <img className={styles.listIcon} src={listIcon} />
+                        </Button>
+                    </div>
                 </div>
                 <div
                     className={`${styles.mediaGrid} ${
@@ -87,17 +95,34 @@ const MediaGrid = ({ limit, title, setMatches, getTotalPages, url }) => {
                                         <h3 className={styles.mediaTitle}>
                                             {media.title} {media.name}
                                         </h3>
-                                        <p>
-                                            {media.release_date}
-                                            {media.first_air_date}
+                                        <div className={styles.macroData}>
+                                            <p className={styles.release}>
+                                                {media.release_date}
+                                                {media.first_air_date}
+                                            </p>
+                                            {media.genre_ids.map((genre) => {
+                                                return (
+                                                    <p
+                                                        key={genre}
+                                                        className={styles.genre}
+                                                    >
+                                                        {genre}
+                                                    </p>
+                                                );
+                                            })}
+                                        </div>
+                                        <p className={styles.overview}>
+                                            {media.overview}
                                         </p>
-                                        <p>{media.genre_ids}</p>
-                                        <p>{media.overview}</p>
-                                        <p>
-                                            {Math.round(media.vote_average)}
-                                            /10
-                                        </p>
-                                        <p>{media.vote_count} votes</p>
+                                        <div className={styles.votes}>
+                                            <p>
+                                                {Math.round(media.vote_average)}
+                                                /10
+                                            </p>
+                                            <p>
+                                                {media.vote_count} people voted
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

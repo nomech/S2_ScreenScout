@@ -12,6 +12,16 @@
     margin-bottom: 2rem;
 }
 
+.butonContiner {
+    display: flex;
+    gap: 1rem;
+}
+.listIcon,
+.gridIcon {
+    width: 18px;
+    height: 14px;
+}
+
 .title {
     align-self: flex-start;
 }
@@ -61,7 +71,7 @@
     bottom: 0;
     right: 0;
     left: 0;
-    background-color: rgba(0, 0, 0, 0.600);
+    background-color: rgba(0, 0, 0, 0.6);
     z-index: 10;
 }
 
@@ -87,11 +97,49 @@
 }
 
 .cardList .mediaDetails {
+    display: flex;
+    flex-direction: column;
     grid-column: 2;
     grid-row: 1;
     padding: 0 2rem;
 }
+
 .id {
     grid-column: 3;
     justify-self: end;
+    color: #565656;
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.cardList .mediaTitle {
+    color: #ffc107;
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.macroData {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 0;
+    gap: 1rem;
+}
+
+.macroData p {
+    color: #8b96a2;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.overview {
+    color: #eaeaea;
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.votes {
+    display: flex;
+    gap: 0.5rem;
+    margin: auto 0 0;
 }

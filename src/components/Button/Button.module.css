@@ -83,3 +83,11 @@
     background-color: #7928d1;
     border: 1px solid #39394d;
 }
+
+.listButton,
+.gridButton {
+    margin: 0;
+    width: fit-content;
+    height: fit-content;
+    padding: 0.5rem;
+}
