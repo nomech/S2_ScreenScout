@@ -37,6 +37,12 @@
     width: 200px;
     border-radius: 0px 0px 8px 8px;
     background: #16162e;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.card:hover {
+    transform: scale(1.02);
 }
 
 .mediaTitle {
