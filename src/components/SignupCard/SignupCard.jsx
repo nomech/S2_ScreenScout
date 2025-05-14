@@ -9,6 +9,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { signupFormValidation } from "../../utils/formValidation";
 
 const SignupCard = () => {
+    const apiName = import.meta.env.VITE_CLOUDINARY_NAME;
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
         firstName: "",
@@ -16,8 +17,7 @@ const SignupCard = () => {
         email: "",
         password: "",
         confirmPassword: "",
-        previewUrl:
-            "https://res.cloudinary.com/don3yyddm/image/upload/v1746637138/Screenshot_2025-05-07_185714_vnsk5g.png",
+        previewUrl: `https://res.cloudinary.com/${apiName}/image/upload/v1746637138/Screenshot_2025-05-07_185714_vnsk5g.png`,
     });
 
     const [isLoading, setIsLoading] = useState(false);
@@ -99,6 +99,7 @@ const SignupCard = () => {
 
     const handleFileChange = (e) => {
         const file = e.target.files[0];
+
         if (file && file.type.startsWith("image/")) {
             const previewUrl = URL.createObjectURL(file);
             setFormData((prevData) => ({
@@ -109,21 +110,20 @@ const SignupCard = () => {
         } else {
             setFormData((prevData) => ({
                 ...prevData,
-                previewUrl:
-                    "https://res.cloudinary.com/don3yyddm/image/upload/Screenshot_2025-05-07_185714_vnsk5g.png",
+                previewUrl: `https://res.cloudinary.com/${apiName}/image/upload/Screenshot_2025-05-07_185714_vnsk5g.png`,
             }));
             setError("Please select a valid image file.");
         }
     };
-
+    
     const handleFileUpload = async () => {
         try {
             const form = new FormData();
             form.append("file", formData.image);
             form.append("upload_preset", "upload_preset_screenscout");
-            form.append("cloud_name", "don3yyddm");
+            form.append("cloud_name", apiName);
             const response = await fetch(
-                "https://api.cloudinary.com/v1_1/don3yyddm/upload",
+                `https://api.cloudinary.com/v1_1/${apiName}/upload`,
                 {
                     method: "POST",
                     body: form,
