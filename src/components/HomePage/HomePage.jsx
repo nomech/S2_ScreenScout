@@ -12,9 +12,7 @@ const Home = () => {
     return (
         <div className="wrapper">
             <Banner />
-
             <SearchBar />
-
             <MediaGrid
                 title="Trending Movies"
                 limit={10}

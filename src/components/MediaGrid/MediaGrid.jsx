@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import styles from "./MediaGrid.module.css";
 import { useFetch } from "../../hooks/useFetch";
 import Loading from "../Loading/Loading";
@@ -8,6 +8,8 @@ import gridIcon from "../../assets/icons/gridIcon.svg";
 import DetailedCard from "../DetailedCard/DetailedCard";
 import { authContext } from "../../context/authContext";
 import { useWatchList } from "../../hooks/useWatchList";
+import Card from "../Card/Card";
+import ListCard from "../ListCard.jsx/ListCard";
 
 const MediaGrid = ({ limit, title, setMatches, getTotalPages, url }) => {
     const [cardStyle, setCardStyle] = useState("Grid");
@@ -33,7 +35,6 @@ const MediaGrid = ({ limit, title, setMatches, getTotalPages, url }) => {
         }
 
         hasFetched.current = true;
-
         const fetchWatchlist = async () => {
             try {
                 const data = await getWatchList(user.uid);
@@ -47,9 +48,7 @@ const MediaGrid = ({ limit, title, setMatches, getTotalPages, url }) => {
     }, [user, getWatchList]);
 
     useEffect(() => {
-        if (!user) {
-            return;
-        }
+        if (!user) return;
 
         const initDefaultWatchlist = async () => {
             try {
@@ -73,9 +72,6 @@ const MediaGrid = ({ limit, title, setMatches, getTotalPages, url }) => {
         (media) => media.media_type !== "person"
     );
 
-    const setListStyle = () => setCardStyle("List");
-    const setGridStyle = () => setCardStyle("Grid");
-
     const handleCardClick = (id, media) => {
         setDetailedCardId(id);
         setMediaType(media);
@@ -95,6 +91,7 @@ const MediaGrid = ({ limit, title, setMatches, getTotalPages, url }) => {
             [media.media_type]: [...(prev?.[media.media_type] || []), media.id],
         }));
     };
+
     const handleRemoveFromWatchlist = async (e, media) => {
         e.stopPropagation();
         await removeFromWatchList(user.uid, media);
@@ -113,12 +110,26 @@ const MediaGrid = ({ limit, title, setMatches, getTotalPages, url }) => {
             <div className={styles.mediaGridContainer}>
                 <div className={styles.header}>
                     <h1 className={styles.title}>{title}</h1>
-                    <div className={styles.butonContiner}>
-                        <Button className="listButton" onClick={setGridStyle}>
-                            <img className={styles.gridIcon} src={gridIcon} />
+                    <div className={styles.buttonContainer}>
+                        <Button
+                            className="gridButton"
+                            onClick={() => setCardStyle("Grid")}
+                        >
+                            <img
+                                className={styles.gridIcon}
+                                src={gridIcon}
+                                alt="Grid"
+                            />
                         </Button>
-                        <Button className="gridButton" onClick={setListStyle}>
-                            <img className={styles.listIcon} src={listIcon} />
+                        <Button
+                            className="listButton"
+                            onClick={() => setCardStyle("List")}
+                        >
+                            <img
+                                className={styles.listIcon}
+                                src={listIcon}
+                                alt="List"
+                            />
                         </Button>
                     </div>
                 </div>
@@ -128,121 +139,29 @@ const MediaGrid = ({ limit, title, setMatches, getTotalPages, url }) => {
                         styles["container" + cardStyle]
                     }`}
                 >
-                    {data &&
-                        cardStyle === "Grid" &&
-                        items.slice(0, limit).map((media) => (
-                            <div
-                                key={media.id}
-                                className={styles.card}
-                                onClick={() =>
-                                    handleCardClick(media.id, media.media_type)
-                                }
-                            >
-                                {data &&
-                                    !watchlist?.[media.media_type].includes(
-                                        media.id
-                                    ) && (
-                                        <Button
-                                            className="addButton"
-                                            onClick={(e) =>
-                                                handleAddToWatchlist(e, media)
-                                            }
-                                        >
-                                            +
-                                        </Button>
-                                    )}
-
-                                {data &&
-                                    watchlist?.[media.media_type].includes(
-                                        media.id
-                                    ) && (
-                                        <Button
-                                            className="addButton"
-                                            onClick={(e) =>
-                                                handleRemoveFromWatchlist(
-                                                    e,
-                                                    media
-                                                )
-                                            }
-                                        >
-                                            -
-                                        </Button>
-                                    )}
-
-                                <img
-                                    className="poster"
-                                    src={`https://image.tmdb.org/t/p/w200${media.poster_path}`}
-                                    alt={media.title}
+                    {items
+                        .slice(0, limit)
+                        .map((media) =>
+                            cardStyle === "Grid" ? (
+                                <Card
+                                    key={media.id}
+                                    media={media}
+                                    watchlist={watchlist}
+                                    onCardClick={handleCardClick}
+                                    onAddToWatchlist={handleAddToWatchlist}
+                                    onRemoveFromWatchlist={
+                                        handleRemoveFromWatchlist
+                                    }
                                 />
-                                <div className="media-details">
-                                    <h3 className={styles.mediaTitle}>
-                                        {media.title || media.name}
-                                    </h3>
-                                </div>
-                            </div>
-                        ))}
-
-                    {data &&
-                        cardStyle === "List" &&
-                        items.slice(0, limit).map((media) => (
-                            <div
-                                key={media.id}
-                                className={styles["card" + cardStyle]}
-                            >
-                                <img
-                                    className={styles.backdrop}
-                                    src={`https://image.tmdb.org/t/p/original${media.backdrop_path}`}
-                                    alt=""
+                            ) : (
+                                <ListCard
+                                    key={media.id}
+                                    media={media}
+                                    user={user}
+                                    onAddToWatchlist={setWatchList}
                                 />
-                                <div className={styles.card}>
-                                    <img
-                                        className={styles.poster}
-                                        src={`https://image.tmdb.org/t/p/w200${media.poster_path}`}
-                                        alt={media.title}
-                                    />
-                                    <p className={styles.id}>ID: {media.id}</p>
-                                    <div className={styles.mediaDetails}>
-                                        <h3 className={styles.mediaTitle}>
-                                            {media.title || media.name}
-                                        </h3>
-                                        <div className={styles.macroData}>
-                                            <p className={styles.release}>
-                                                {media.release_date ||
-                                                    media.first_air_date}
-                                            </p>
-                                            {media.genre_ids.map((genre) => (
-                                                <p
-                                                    key={genre}
-                                                    className={styles.genre}
-                                                >
-                                                    {genre}
-                                                </p>
-                                            ))}
-                                        </div>
-                                        <p className={styles.overview}>
-                                            {media.overview}
-                                        </p>
-                                        <div className={styles.votes}>
-                                            <p>
-                                                {Math.round(media.vote_average)}
-                                                /10
-                                            </p>
-                                            <p>
-                                                {media.vote_count} people voted
-                                            </p>
-                                        </div>
-                                        <Button
-                                            className="watchlistButton"
-                                            onClick={() =>
-                                                setWatchList(user.uid, media)
-                                            }
-                                        >
-                                            Add to Watchlist
-                                        </Button>
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
+                            )
+                        )}
                 </div>
             </div>
 

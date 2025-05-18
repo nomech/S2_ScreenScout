@@ -12,10 +12,11 @@
     margin-bottom: 2rem;
 }
 
-.butonContiner {
+.buttonContainer {
     display: flex;
     gap: 1rem;
 }
+
 .listIcon,
 .gridIcon {
     width: 18px;
@@ -27,30 +28,11 @@
 }
 
 .mediaGrid {
+    display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 20px;
     width: 100%;
     justify-items: center;
-}
-
-.card {
-    position: relative;
-    width: 200px;
-    border-radius: 0px 0px 8px 8px;
-    background: #16162e;
-    cursor: pointer;
-    transition: transform 0.2s ease;
-}
-
-.card:hover {
-    transform: scale(1.02);
-}
-
-.mediaTitle {
-    grid-row: 1;
-    text-align: center;
-    margin: 25px 0;
-    font-size: 16px;
 }
 
 .containerGrid {
@@ -60,93 +42,4 @@
 .containerList {
     display: flex;
     flex-direction: column;
-}
-
-.cardList {
-    position: relative;
-    width: 100%;
-    border-radius: 8px;
-    background: #16162e;
-    height: 336px;
-    overflow: hidden;
-}
-
-.cardList::before {
-    position: absolute;
-    content: "";
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0.6);
-    z-index: 10;
-}
-
-.cardList .card {
-    display: grid;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 100%;
-    background-color: transparent;
-    padding: 1rem;
-    z-index: 20;
-}
-
-.cardList img {
-    width: 100%;
-}
-
-.cardList .mediaTitle {
-    margin: 0;
-    align-self: flex-start;
-    text-align: left;
-}
-
-.cardList .mediaDetails {
-    display: flex;
-    flex-direction: column;
-    grid-column: 2;
-    grid-row: 1;
-    padding: 0 2rem;
-}
-
-.id {
-    grid-column: 3;
-    justify-self: end;
-    color: #565656;
-    font-family: Inter;
-    font-size: 14px;
-    font-weight: bold;
-}
-
-.cardList .mediaTitle {
-    color: #ffc107;
-    font-size: 32px;
-    font-weight: bold;
-}
-
-.macroData {
-    display: flex;
-    align-items: center;
-    padding: 0.5rem 0;
-    gap: 1rem;
-}
-
-.macroData p {
-    color: #8b96a2;
-    font-size: 16px;
-    font-weight: 600;
-}
-
-.overview {
-    color: #eaeaea;
-    font-size: 18px;
-    font-weight: 400;
-}
-
-.votes {
-    display: flex;
-    gap: 0.5rem;
-    margin: auto 0 20px;
 }

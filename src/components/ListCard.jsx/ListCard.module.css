@@ -1,0 +1,92 @@
+.cardList {
+    position: relative;
+    width: 100%;
+    border-radius: 8px;
+    background: #16162e;
+    height: 336px;
+    overflow: hidden;
+}
+
+.cardList::before {
+    position: absolute;
+    content: "";
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 10;
+}
+
+.card {
+    display: grid;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: transparent;
+    padding: 1rem;
+    z-index: 20;
+}
+
+.backdrop {
+    width: 100%;
+}
+
+.poster {
+    width: 200px;
+    border-radius: 8px;
+}
+
+.mediaDetails {
+    display: flex;
+    flex-direction: column;
+    grid-column: 2;
+    grid-row: 1;
+    padding: 0 2rem;
+}
+
+.id {
+    grid-column: 3;
+    justify-self: end;
+    color: #565656;
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.mediaTitle {
+    color: #ffc107;
+    font-size: 32px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.macroData {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 0;
+    gap: 1rem;
+}
+
+.macroData p {
+    color: #8b96a2;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.overview {
+    color: #eaeaea;
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.votes {
+    display: flex;
+    gap: 0.5rem;
+    margin: auto 0 20px;
+}
+
+.watchlistButton {
+    align-self: flex-start;
+}

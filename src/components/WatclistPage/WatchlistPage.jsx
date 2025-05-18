@@ -1,10 +1,14 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { useWatchList } from "../../hooks/useWatchList";
 import { authContext } from "../../context/authContext";
+import WatchlistGrid from "../WatchlistGrid/WatchlistGrid";
 
 const WatchlistPage = () => {
+    const [showDetailedCard, setShowDetailedCard] = useState(false);
+    const [detailedCardId, setDetailedCardId] = useState(null);
+    const [mediaType, setMediaType] = useState("movie");
     const [watchlistData, setWatchlistData] = useState(null);
-
+    const [watchlist, setWatchlist] = useState(null);
     const { getWatchList } = useWatchList();
     const { user } = useContext(authContext);
     const hasFetched = useRef(false);
@@ -17,6 +21,7 @@ const WatchlistPage = () => {
 
             hasFetched.current = true;
             const list = await getWatchList(user.uid);
+            setWatchlist(list);
             const urlList = { tv: [], movie: [] };
 
             for (const key in list) {
@@ -55,13 +60,27 @@ const WatchlistPage = () => {
                     mediaList[key].push(data);
                 }
             }
+            console.log(mediaList);
+
             setWatchlistData(mediaList);
         };
 
         constructUrlList();
     }, [user, getWatchList]);
 
-    return <></>;
+    const handleCardClick = (id, media) => {
+        setDetailedCardId(id);
+        setMediaType(media);
+        setShowDetailedCard(true);
+    };
+
+    return (
+        <WatchlistGrid
+            data={watchlistData}
+            onCardClick={handleCardClick}
+            watchlist={watchlist}
+        />
+    );
 };
 
 export default WatchlistPage;
