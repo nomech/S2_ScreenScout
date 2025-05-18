@@ -11,6 +11,7 @@ import AuthenticatedUsers from "../components/AuthenticatedUsers/AuthenticatedUs
 import ForgotPasswordCard from "../components/ForgotPasswordCard/ForgotPasswordCard";
 import NotFound from "../components/NotFound/NotFound";
 import Search from "../pages/Search";
+import Watchlist from "../pages/Watchlist";
 
 export const routes = createBrowserRouter(
     createRoutesFromElements(
@@ -25,13 +26,16 @@ export const routes = createBrowserRouter(
                     }
                     exact
                 />
+
+                <Route path="/search" element={<Search />} />
+                <Route path="/watchlist" element={<Watchlist />} />
+
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
                 <Route
                     path="/forgot-password"
                     element={<ForgotPasswordCard />}
                 />
-                <Route path="/search" element={<Search />} />
                 <Route path="*" element={<NotFound />} />
             </Route>
         </>

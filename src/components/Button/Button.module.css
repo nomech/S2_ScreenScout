@@ -108,3 +108,14 @@
     padding: 4px 2rem;
     border-radius: 0;
 }
+
+.addButton {
+    position: absolute;
+    width: fit-content;
+    height: fit-content;
+    padding: 3px 5px;
+    right: 5px;
+    top: 5px;
+    background-color: #232339;
+    border: 1px solid #39394d;
+}

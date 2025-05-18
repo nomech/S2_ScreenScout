@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import styles from "./MediaGrid.module.css";
 import { useFetch } from "../../hooks/useFetch";
 import Loading from "../Loading/Loading";
@@ -6,17 +6,62 @@ import Button from "../Button/Button";
 import listIcon from "../../assets/icons/listIcon.svg";
 import gridIcon from "../../assets/icons/gridIcon.svg";
 import DetailedCard from "../DetailedCard/DetailedCard";
+import { authContext } from "../../context/authContext";
+import { useWatchList } from "../../hooks/useWatchList";
 
 const MediaGrid = ({ limit, title, setMatches, getTotalPages, url }) => {
-    const { data, isLoading } = useFetch(url);
     const [cardStyle, setCardStyle] = useState("Grid");
     const [showDetailedCard, setShowDetailedCard] = useState(false);
     const [detailedCardId, setDetailedCardId] = useState(null);
     const [mediaType, setMediaType] = useState(null);
+    const [watchlist, setWatchlist] = useState(null);
 
-    const items = (data?.results || []).filter(
-        (media) => media.media_type !== "person"
-    );
+    const { data, isLoading } = useFetch(url);
+    const { user } = useContext(authContext);
+    const {
+        setDefaultWatchList,
+        setWatchList,
+        getWatchList,
+        removeFromWatchList,
+    } = useWatchList();
+
+    const hasFetched = useRef(false);
+
+    useEffect(() => {
+        if (!user || hasFetched.current) {
+            return;
+        }
+
+        hasFetched.current = true;
+
+        const fetchWatchlist = async () => {
+            try {
+                const data = await getWatchList(user.uid);
+                setWatchlist(data);
+            } catch (err) {
+                console.error("Error fetching watchlist:", err);
+            }
+        };
+
+        fetchWatchlist();
+    }, [user, getWatchList]);
+
+    useEffect(() => {
+        if (!user) {
+            return;
+        }
+
+        const initDefaultWatchlist = async () => {
+            try {
+                await setDefaultWatchList(user.uid);
+            } catch (error) {
+                console.error("Error fetching watchlist:", error);
+            }
+        };
+
+        initDefaultWatchlist();
+    }, [setDefaultWatchList, user]);
+
     useEffect(() => {
         if (setMatches && data && !isLoading) {
             setMatches(data.total_results);
@@ -24,13 +69,12 @@ const MediaGrid = ({ limit, title, setMatches, getTotalPages, url }) => {
         }
     }, [setMatches, getTotalPages, data, isLoading]);
 
-    const setListStyle = () => {
-        setCardStyle("List");
-    };
+    const items = (data?.results || []).filter(
+        (media) => media.media_type !== "person"
+    );
 
-    const setGridStyle = () => {
-        setCardStyle("Grid");
-    };
+    const setListStyle = () => setCardStyle("List");
+    const setGridStyle = () => setCardStyle("Grid");
 
     const handleCardClick = (id, media) => {
         setDetailedCardId(id);
@@ -43,7 +87,24 @@ const MediaGrid = ({ limit, title, setMatches, getTotalPages, url }) => {
         setDetailedCardId(null);
     };
 
-    console.log(data);
+    const handleAddToWatchlist = async (e, media) => {
+        e.stopPropagation();
+        await setWatchList(user.uid, media);
+        setWatchlist((prev) => ({
+            ...prev,
+            [media.media_type]: [...(prev?.[media.media_type] || []), media.id],
+        }));
+    };
+    const handleRemoveFromWatchlist = async (e, media) => {
+        e.stopPropagation();
+        await removeFromWatchList(user.uid, media);
+        setWatchlist((prev) => ({
+            ...prev,
+            [media.media_type]: prev?.[media.media_type].filter(
+                (item) => item !== media.id
+            ),
+        }));
+    };
 
     return (
         <>
@@ -61,6 +122,7 @@ const MediaGrid = ({ limit, title, setMatches, getTotalPages, url }) => {
                         </Button>
                     </div>
                 </div>
+
                 <div
                     className={`${styles.mediaGrid} ${
                         styles["container" + cardStyle]
@@ -68,15 +130,45 @@ const MediaGrid = ({ limit, title, setMatches, getTotalPages, url }) => {
                 >
                     {data &&
                         cardStyle === "Grid" &&
-                        items?.media_type != "person" &&
                         items.slice(0, limit).map((media) => (
                             <div
                                 key={media.id}
-                                className={`${styles.card}`}
+                                className={styles.card}
                                 onClick={() =>
                                     handleCardClick(media.id, media.media_type)
                                 }
                             >
+                                {data &&
+                                    !watchlist?.[media.media_type].includes(
+                                        media.id
+                                    ) && (
+                                        <Button
+                                            className="addButton"
+                                            onClick={(e) =>
+                                                handleAddToWatchlist(e, media)
+                                            }
+                                        >
+                                            +
+                                        </Button>
+                                    )}
+
+                                {data &&
+                                    watchlist?.[media.media_type].includes(
+                                        media.id
+                                    ) && (
+                                        <Button
+                                            className="addButton"
+                                            onClick={(e) =>
+                                                handleRemoveFromWatchlist(
+                                                    e,
+                                                    media
+                                                )
+                                            }
+                                        >
+                                            -
+                                        </Button>
+                                    )}
+
                                 <img
                                     className="poster"
                                     src={`https://image.tmdb.org/t/p/w200${media.poster_path}`}
@@ -84,24 +176,25 @@ const MediaGrid = ({ limit, title, setMatches, getTotalPages, url }) => {
                                 />
                                 <div className="media-details">
                                     <h3 className={styles.mediaTitle}>
-                                        {media.title} {media.name}
+                                        {media.title || media.name}
                                     </h3>
                                 </div>
                             </div>
                         ))}
+
                     {data &&
                         cardStyle === "List" &&
-                        items?.media_type != "person" &&
                         items.slice(0, limit).map((media) => (
                             <div
                                 key={media.id}
-                                className={`${styles["card" + cardStyle]}`}
+                                className={styles["card" + cardStyle]}
                             >
                                 <img
                                     className={styles.backdrop}
                                     src={`https://image.tmdb.org/t/p/original${media.backdrop_path}`}
+                                    alt=""
                                 />
-                                <div className={`${styles.card}`}>
+                                <div className={styles.card}>
                                     <img
                                         className={styles.poster}
                                         src={`https://image.tmdb.org/t/p/w200${media.poster_path}`}
@@ -110,23 +203,21 @@ const MediaGrid = ({ limit, title, setMatches, getTotalPages, url }) => {
                                     <p className={styles.id}>ID: {media.id}</p>
                                     <div className={styles.mediaDetails}>
                                         <h3 className={styles.mediaTitle}>
-                                            {media.title} {media.name}
+                                            {media.title || media.name}
                                         </h3>
                                         <div className={styles.macroData}>
                                             <p className={styles.release}>
-                                                {media.release_date}
-                                                {media.first_air_date}
+                                                {media.release_date ||
+                                                    media.first_air_date}
                                             </p>
-                                            {media.genre_ids.map((genre) => {
-                                                return (
-                                                    <p
-                                                        key={genre}
-                                                        className={styles.genre}
-                                                    >
-                                                        {genre}
-                                                    </p>
-                                                );
-                                            })}
+                                            {media.genre_ids.map((genre) => (
+                                                <p
+                                                    key={genre}
+                                                    className={styles.genre}
+                                                >
+                                                    {genre}
+                                                </p>
+                                            ))}
                                         </div>
                                         <p className={styles.overview}>
                                             {media.overview}
@@ -140,7 +231,12 @@ const MediaGrid = ({ limit, title, setMatches, getTotalPages, url }) => {
                                                 {media.vote_count} people voted
                                             </p>
                                         </div>
-                                        <Button className="watchlistButton">
+                                        <Button
+                                            className="watchlistButton"
+                                            onClick={() =>
+                                                setWatchList(user.uid, media)
+                                            }
+                                        >
                                             Add to Watchlist
                                         </Button>
                                     </div>
@@ -149,6 +245,7 @@ const MediaGrid = ({ limit, title, setMatches, getTotalPages, url }) => {
                         ))}
                 </div>
             </div>
+
             {showDetailedCard && (
                 <DetailedCard
                     id={detailedCardId}
