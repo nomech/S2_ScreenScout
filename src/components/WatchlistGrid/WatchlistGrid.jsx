@@ -1,14 +1,31 @@
-import React from "react";
 import styles from "./WatchlistGrid.module.css";
 import Card from "../Card/Card";
+import { useWatchList } from "../../hooks/useWatchList";
 import Loading from "../Loading/Loading";
+import { useContext, useState } from "react";
+import { authContext } from "../../context/authContext";
 
-const watchlist = ({
-    data,
-    handleCardClick,
-    handleRemoveFromWatchlist,
-    watchlist,
-}) => {
+const Watchlist = ({ data }) => {
+    const [showDetailedCard, setShowDetailedCard] = useState(false);
+    const [detailedCardId, setDetailedCardId] = useState(null);
+    const [mediaType, setMediaType] = useState("movie");
+
+    const { user } = useContext(authContext);
+
+    const { removeFromWatchList } = useWatchList();
+
+    const handleRemoveFromWatchlist = async (e, media) => {
+        console.log(media);
+        e.stopPropagation();
+        await removeFromWatchList(user.uid, media.id, mediaType);
+    };
+
+    const handleCardClick = (id, media) => {
+        setDetailedCardId(id);
+        setMediaType(media);
+        setShowDetailedCard(true);
+    };
+
     return (
         <div className="wrapper">
             {!data && <Loading />}
@@ -23,7 +40,7 @@ const watchlist = ({
                                 onRemoveFromWatchlist={
                                     handleRemoveFromWatchlist
                                 }
-                                watchlist={watchlist}
+                                isInWatchlist={true}
                             />
                         );
                     })}
@@ -32,4 +49,4 @@ const watchlist = ({
     );
 };
 
-export default watchlist;
+export default Watchlist;

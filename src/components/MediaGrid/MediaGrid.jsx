@@ -94,7 +94,7 @@ const MediaGrid = ({ limit, title, setMatches, getTotalPages, url }) => {
 
     const handleRemoveFromWatchlist = async (e, media) => {
         e.stopPropagation();
-        await removeFromWatchList(user.uid, media);
+        await removeFromWatchList(user.uid, media.id, media.media_type);
         setWatchlist((prev) => ({
             ...prev,
             [media.media_type]: prev?.[media.media_type].filter(
@@ -145,6 +145,9 @@ const MediaGrid = ({ limit, title, setMatches, getTotalPages, url }) => {
                             cardStyle === "Grid" ? (
                                 <Card
                                     key={media.id}
+                                    isInWatchlist={watchlist?.[
+                                        media.media_type
+                                    ]?.includes(media.id)}
                                     media={media}
                                     watchlist={watchlist}
                                     onCardClick={handleCardClick}

@@ -3,13 +3,11 @@ import Button from "../Button/Button";
 
 const Card = ({
     media,
-    watchlist,
     onCardClick,
     onAddToWatchlist,
     onRemoveFromWatchlist,
+    isInWatchlist,
 }) => {
-    const isInWatchlist = watchlist?.[media.media_type]?.includes(media.id);
-    console.log(watchlist);
 
     return (
         <div

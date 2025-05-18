@@ -49,14 +49,13 @@ export const useWatchList = () => {
         }
     };
 
-    const removeFromWatchList = async (uid, data) => {
+    const removeFromWatchList = async (uid, mediaId, mediaType) => {
         const currentData = await getWatchList(uid);
 
-        if (currentData[data.media_type].includes(data.id)) {
+        if (currentData[mediaType].includes(mediaId)) {
             try {
-                const { media_type, id } = data;
-                currentData[media_type] = currentData[media_type].filter(
-                    (item) => item !== id
+                currentData[mediaType] = currentData[mediaType].filter(
+                    (item) => item !== mediaId
                 );
                 const docRef = doc(db, "watchlists", uid);
                 await setDoc(docRef, currentData);
