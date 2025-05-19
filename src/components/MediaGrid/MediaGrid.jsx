@@ -22,7 +22,7 @@ const MediaGrid = ({ limit, title, setMatches, getTotalPages, url }) => {
     const { user } = useContext(authContext);
     const {
         setDefaultWatchList,
-        setWatchList,
+        createWatchList,
         getWatchList,
         removeFromWatchList,
     } = useWatchList();
@@ -85,7 +85,7 @@ const MediaGrid = ({ limit, title, setMatches, getTotalPages, url }) => {
 
     const handleAddToWatchlist = async (e, media) => {
         e.stopPropagation();
-        await setWatchList(user.uid, media);
+        await createWatchList(user.uid, media);
         setWatchlist((prev) => ({
             ...prev,
             [media.media_type]: [...(prev?.[media.media_type] || []), media.id],
@@ -161,7 +161,7 @@ const MediaGrid = ({ limit, title, setMatches, getTotalPages, url }) => {
                                     key={media.id}
                                     media={media}
                                     user={user}
-                                    onAddToWatchlist={setWatchList}
+                                    onAddToWatchlist={handleAddToWatchlist}
                                 />
                             )
                         )}

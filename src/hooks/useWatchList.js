@@ -24,9 +24,7 @@ export const useWatchList = () => {
     const getWatchList = async (uid) => {
         const docRef = doc(db, "watchlists", uid);
         const docSnap = await getDoc(docRef);
-        console.log("Im running");
         if (docSnap.exists()) {
-            console.log(docSnap.data());
             return docSnap.data();
         } else {
             console.error("No such document!");
@@ -34,7 +32,7 @@ export const useWatchList = () => {
         }
     };
 
-    const setWatchList = async (uid, data) => {
+    const createWatchList = async (uid, data) => {
         const currentData = await getWatchList(uid);
 
         if (!currentData[data.media_type].includes(data.id)) {
@@ -67,7 +65,7 @@ export const useWatchList = () => {
 
     return {
         setDefaultWatchList,
-        setWatchList,
+        createWatchList,
         getWatchList,
         removeFromWatchList,
     };
