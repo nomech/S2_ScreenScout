@@ -3,4 +3,5 @@
     height: 4px;
     width: 100%;
     background: linear-gradient(90deg, #6200e9 0%, #9c27af 50%, #6200e9 100%);
+    max-width: 1340px;
 }

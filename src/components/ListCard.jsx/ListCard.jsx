@@ -1,9 +1,41 @@
 import styles from "./ListCard.module.css";
 import Button from "../Button/Button";
+import { useWatchList } from "../../hooks/useWatchList";
+import { authContext } from "../../context/authContext";
+import { useContext } from "react";
 
-const ListCard = ({ media, user, onAddToWatchlist }) => {
+const ListCard = ({ media, onCardClick, setWatchlist, isInWatchlist }) => {
+    const { createWatchList, removeFromWatchList } = useWatchList();
+    const { user } = useContext(authContext);
+
+    const handleAddToWatchlist = async (e, media) => {
+        e.stopPropagation();
+
+        await createWatchList(user.uid, media);
+        setWatchlist((prev) => ({
+            ...prev,
+            [media.media_type]: [...(prev?.[media.media_type] || []), media.id],
+        }));
+    };
+
+    const handleRemoveFromWatchlist = async (e, media) => {
+        e.stopPropagation();
+        console.log("media", media.id);
+        await removeFromWatchList(user.uid, media.id, media.media_type);
+
+        setWatchlist((prev) => ({
+            ...prev,
+            [media.media_type]: prev?.[media.media_type].filter((item) => {
+                return item.id ? item.id !== media.id : item !== media.id;
+            }),
+        }));
+    };
+
     return (
-        <div className={styles.cardList}>
+        <div
+            className={styles.cardList}
+            onClick={() => onCardClick(media.id, media.media_type)}
+        >
             <img
                 className={styles.backdrop}
                 src={`https://image.tmdb.org/t/p/original${media.backdrop_path}`}
@@ -24,7 +56,7 @@ const ListCard = ({ media, user, onAddToWatchlist }) => {
                         <p className={styles.release}>
                             {media.release_date || media.first_air_date}
                         </p>
-                        {media.genre_ids.map((genre) => (
+                        {media.genre_ids?.map((genre) => (
                             <p key={genre} className={styles.genre}>
                                 {genre}
                             </p>
@@ -35,12 +67,22 @@ const ListCard = ({ media, user, onAddToWatchlist }) => {
                         <p>{Math.round(media.vote_average)}/10</p>
                         <p>{media.vote_count} people voted</p>
                     </div>
-                    <Button
-                        className="watchlistButton"
-                        onClick={() => onAddToWatchlist(user.uid, media)}
-                    >
-                        Add to Watchlist
-                    </Button>
+                    {!isInWatchlist && (
+                        <Button
+                            className="watchlistButton"
+                            onClick={(e) => handleAddToWatchlist(e, media)}
+                        >
+                            Add to Watchlist
+                        </Button>
+                    )}
+                    {isInWatchlist && (
+                        <Button
+                            className="watchlistButton"
+                            onClick={(e) => handleRemoveFromWatchlist(e, media)}
+                        >
+                            Remove from Watchlist
+                        </Button>
+                    )}
                 </div>
             </div>
         </div>

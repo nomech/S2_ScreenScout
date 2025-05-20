@@ -4,10 +4,10 @@ import Button from "../Button/Button";
 import Input from "../Input/Input";
 import { useNavigate } from "react-router-dom";
 
-const SearchBar = ({ handleSearchString }) => {
+const SearchBar = () => {
     const [searchTerm, setSearchTerm] = useState("");
     const [mediaType, setMediaType] = useState("multi");
-    const [adult, setAdult] = useState(false);
+    //const [adult, setAdult] = useState(false);
 
     const navigate = useNavigate();
 
@@ -20,7 +20,7 @@ const SearchBar = ({ handleSearchString }) => {
 
         const params = new URLSearchParams({
             query: searchTerm,
-            include_adult: adult,
+            //include_adult: adult,
             language: "en-US",
             page: "1",
         });

@@ -1,13 +1,35 @@
 import styles from "./Card.module.css";
 import Button from "../Button/Button";
+import { useWatchList } from "../../hooks/useWatchList";
+import { authContext } from "../../context/authContext";
+import { useContext } from "react";
 
-const Card = ({
-    media,
-    onCardClick,
-    onAddToWatchlist,
-    onRemoveFromWatchlist,
-    isInWatchlist,
-}) => {
+const Card = ({ media, onCardClick, isInWatchlist, setWatchlist }) => {
+    const { createWatchList, removeFromWatchList } = useWatchList();
+    const { user } = useContext(authContext);
+
+    const handleAddToWatchlist = async (e, media) => {
+        e.stopPropagation();
+
+        await createWatchList(user.uid, media);
+        setWatchlist((prev) => ({
+            ...prev,
+            [media.media_type]: [...(prev?.[media.media_type] || null), media.id],
+        }));
+    };
+
+    const handleRemoveFromWatchlist = async (e, media) => {
+        e.stopPropagation();
+        console.log("media", media.id);
+        await removeFromWatchList(user.uid, media.id, media.media_type);
+
+        setWatchlist((prev) => ({
+            ...prev,
+            [media.media_type]: prev?.[media.media_type].filter((item) => {
+                return item.id ? item.id !== media.id : item !== media.id;
+            }),
+        }));
+    };
 
     return (
         <div
@@ -17,7 +39,7 @@ const Card = ({
             {!isInWatchlist && (
                 <Button
                     className="addButton"
-                    onClick={(e) => onAddToWatchlist(e, media)}
+                    onClick={(e) => handleAddToWatchlist(e, media)}
                 >
                     +
                 </Button>
@@ -26,7 +48,7 @@ const Card = ({
             {isInWatchlist && (
                 <Button
                     className="addButton"
-                    onClick={(e) => onRemoveFromWatchlist(e, media)}
+                    onClick={(e) => handleRemoveFromWatchlist(e, media)}
                 >
                     -
                 </Button>

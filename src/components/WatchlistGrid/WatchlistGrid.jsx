@@ -8,6 +8,7 @@ import Button from "../Button/Button";
 import DetailedCard from "../DetailedCard/DetailedCard";
 import listIcon from "../../assets/icons/listIcon.svg";
 import gridIcon from "../../assets/icons/gridIcon.svg";
+import ListCard from "../ListCard.jsx/ListCard";
 
 const Watchlist = () => {
     const [showDetailedCard, setShowDetailedCard] = useState(false);
@@ -17,7 +18,7 @@ const Watchlist = () => {
     const [cardStyle, setCardStyle] = useState("Grid");
 
     const { user } = useContext(authContext);
-    const { removeFromWatchList, getWatchList } = useWatchList();
+    const { getWatchList } = useWatchList();
 
     const hasFetched = useRef(false);
 
@@ -79,17 +80,6 @@ const Watchlist = () => {
         constructUrlList();
     }, [user, getWatchList]);
 
-    const handleRemoveFromWatchlist = async (e, media) => {
-        e.stopPropagation();
-        await removeFromWatchList(user.uid, media.id, media.media_type);
-        setWatchlist((prev) => ({
-            ...prev,
-            [media.media_type]: prev?.[media.media_type].filter((item) => {
-                return item.id !== media.id;
-            }),
-        }));
-    };
-
     const handleCardClick = (id, media) => {
         setDetailedCardId(id);
         setMediaType(media);
@@ -109,45 +99,96 @@ const Watchlist = () => {
         <>
             <div className="wrapper">
                 {!watchlist && <Loading />}
-                <div className={styles.button}>
-                    <Button onClick={handleOnClickMediaButton}>Movie</Button>
-                    <Button onClick={handleOnClickMediaButton}>TV</Button>
-                    <Button
-                        className="gridButton"
-                        onClick={() => setCardStyle("Grid")}
-                    >
-                        <img
-                            className={styles.gridIcon}
-                            src={gridIcon}
-                            alt="Grid"
-                        />
-                    </Button>
-                    <Button
-                        className="listButton"
-                        onClick={() => setCardStyle("List")}
-                    >
-                        <img
-                            className={styles.listIcon}
-                            src={listIcon}
-                            alt="List"
-                        />
-                    </Button>
-                </div>
+                {watchlist && watchlist[mediaType].length === 0 && (
+                    <div className={styles.emptyWatchlist}>
+                        <h2 className={styles.emptyTitle}>
+                            Your {mediaType} watchlist is empty
+                        </h2>
+                        <p className={styles.emptyText}>
+                            Add movies and TV shows to your watchlist to see
+                            them here.
+                        </p>
+                    </div>
+                )}
+
                 <div className={styles.watchlistContainer}>
-                    {watchlist &&
-                        watchlist[mediaType].map((media) => {
-                            return (
-                                <Card
-                                    key={media.id}
-                                    media={media}
-                                    onCardClick={handleCardClick}
-                                    onRemoveFromWatchlist={
-                                        handleRemoveFromWatchlist
+                    <div className={styles.buttons}>
+                        <div className={styles.filterButtons}>
+                            {watchlist && watchlist.movie.length > 0 && (
+                                <Button
+                                    onClick={handleOnClickMediaButton}
+                                    className={
+                                        mediaType == "movie"
+                                            ? "active"
+                                            : "inactive"
                                     }
-                                    isInWatchlist={true}
+                                >
+                                    Movie
+                                </Button>
+                            )}
+                            {watchlist && watchlist.tv.length > 0 && (
+                                <Button
+                                    onClick={handleOnClickMediaButton}
+                                    className={
+                                        mediaType == "tv"
+                                            ? "active"
+                                            : "inactive"
+                                    }
+                                >
+                                    TV
+                                </Button>
+                            )}
+                        </div>
+                        <div className={styles.styleButtons}>
+                            <Button
+                                className="gridButton"
+                                onClick={() => setCardStyle("Grid")}
+                            >
+                                <img
+                                    className={styles.gridIcon}
+                                    src={gridIcon}
+                                    alt="Grid"
                                 />
-                            );
-                        })}
+                            </Button>
+                            <Button
+                                className="listButton"
+                                onClick={() => setCardStyle("List")}
+                            >
+                                <img
+                                    className={styles.listIcon}
+                                    src={listIcon}
+                                    alt="List"
+                                />
+                            </Button>
+                        </div>
+                    </div>
+                    <div
+                        className={`${styles.watchlist} ${
+                            styles["container" + cardStyle]
+                        }`}
+                    >
+                        {watchlist &&
+                            watchlist[mediaType].map((media) =>
+                                cardStyle === "Grid" ? (
+                                    <Card
+                                        key={media.id}
+                                        media={media}
+                                        onCardClick={handleCardClick}
+                                        isInWatchlist={true}
+                                        setWatchlist={setWatchlist}
+                                    />
+                                ) : (
+                                    <ListCard
+                                        key={media.id}
+                                        media={media}
+                                        user={user}
+                                        isInWatchlist={true}
+                                        onCardClick={handleCardClick}
+                                        setWatchlist={setWatchlist}
+                                    />
+                                )
+                            )}
+                    </div>
                 </div>
             </div>
             {showDetailedCard && (

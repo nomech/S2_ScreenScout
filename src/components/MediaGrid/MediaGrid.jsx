@@ -20,12 +20,7 @@ const MediaGrid = ({ limit, title, setMatches, getTotalPages, url }) => {
 
     const { data, isLoading } = useFetch(url);
     const { user } = useContext(authContext);
-    const {
-        setDefaultWatchList,
-        createWatchList,
-        getWatchList,
-        removeFromWatchList,
-    } = useWatchList();
+    const { setDefaultWatchList, getWatchList } = useWatchList();
 
     const hasFetched = useRef(false);
 
@@ -83,26 +78,6 @@ const MediaGrid = ({ limit, title, setMatches, getTotalPages, url }) => {
         setDetailedCardId(null);
     };
 
-    const handleAddToWatchlist = async (e, media) => {
-        e.stopPropagation();
-        await createWatchList(user.uid, media);
-        setWatchlist((prev) => ({
-            ...prev,
-            [media.media_type]: [...(prev?.[media.media_type] || []), media.id],
-        }));
-    };
-
-    const handleRemoveFromWatchlist = async (e, media) => {
-        e.stopPropagation();
-        await removeFromWatchList(user.uid, media.id, media.media_type);
-        setWatchlist((prev) => ({
-            ...prev,
-            [media.media_type]: prev?.[media.media_type].filter(
-                (item) => item !== media.id
-            ),
-        }));
-    };
-
     return (
         <>
             {isLoading && <Loading />}
@@ -151,17 +126,18 @@ const MediaGrid = ({ limit, title, setMatches, getTotalPages, url }) => {
                                     media={media}
                                     watchlist={watchlist}
                                     onCardClick={handleCardClick}
-                                    onAddToWatchlist={handleAddToWatchlist}
-                                    onRemoveFromWatchlist={
-                                        handleRemoveFromWatchlist
-                                    }
+                                    setWatchlist={setWatchlist}
                                 />
                             ) : (
                                 <ListCard
                                     key={media.id}
                                     media={media}
                                     user={user}
-                                    onAddToWatchlist={handleAddToWatchlist}
+                                    isInWatchlist={watchlist?.[
+                                        media.media_type
+                                    ]?.includes(media.id)}
+                                    onCardClick={handleCardClick}
+                                    setWatchlist={setWatchlist}
                                 />
                             )
                         )}
