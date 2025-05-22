@@ -15,6 +15,7 @@ export const useWatchList = () => {
             await setDoc(docRef, {
                 movie: [],
                 tv: [],
+                watched: [],
             });
         } catch (error) {
             console.error("Error creating watchlist:", error);
@@ -25,6 +26,7 @@ export const useWatchList = () => {
         const docRef = doc(db, "watchlists", uid);
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
+            console.log(docSnap.data().watched);
             return docSnap.data();
         } else {
             console.error("No such document!");
@@ -63,10 +65,58 @@ export const useWatchList = () => {
         }
     };
 
+    const markAsWatched = async (uid, mediaId) => {
+        try {
+            const docRef = doc(db, "watchlists", uid);
+            const docSnap = await getDoc(docRef);
+            if (docSnap.exists()) {
+                const currentData = docSnap.data();
+                if (!currentData.watched.includes(mediaId)) {
+                    currentData.watched.push(mediaId);
+                    await setDoc(docRef, currentData);
+                }
+            } else {
+                console.error("No such document!");
+                return null;
+            }
+        } catch (error) {
+            console.error("Error marking as watched:", error);
+        }
+    };
+
+    const getWatchedMedia = async (uid) => {
+        const docRef = doc(db, "watchlists", uid);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+            return docSnap.data().watched;
+        } else {
+            console.error("No such document!");
+            return null;
+        }
+    };
+
+    const removeWatchedMedia = async (uid, mediaId) => {
+        const currentData = await getWatchList(uid);
+        if (currentData.watched.includes(mediaId)) {
+            try {
+                currentData.watched = currentData.watched.filter((media) => {
+                    return media !== mediaId;
+                });
+                const docRef = doc(db, "watchlists", uid);
+                await setDoc(docRef, currentData);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+    };
+
     return {
         setDefaultWatchList,
         createWatchList,
         getWatchList,
         removeFromWatchList,
+        markAsWatched,
+        getWatchedMedia,
+        removeWatchedMedia,
     };
 };

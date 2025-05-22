@@ -5,6 +5,8 @@ export const useFetch = (url) => {
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
 
+
+
     useEffect(() => {
         const controller = new AbortController();
         const options = {
@@ -23,7 +25,6 @@ export const useFetch = (url) => {
                     throw new Error("Network response was not ok");
                 }
                 const data = await response.json();
-
                 setData(data);
                 setError(null);
             } catch (error) {

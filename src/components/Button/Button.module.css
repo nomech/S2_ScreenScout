@@ -76,7 +76,30 @@
     border: 1px solid #39394d;
 }
 
-.active {
+.active,
+.addWatchlistButton {
+    height: 34px;
+    width: fit-content;
+    padding: 0 1rem;
+    background-color: #7928d1;
+    border: 1px solid #39394d;
+}
+
+.inactiveReview {
+    height: 34px;
+    width: fit-content;
+    padding: 0 1rem;
+    background-color: #232339;
+    color: #838383;
+    border: 1px solid #39394d;
+    cursor: default;
+}
+
+.inactiveReview:disabled {
+    background-color: #232339;
+}
+
+.activeReview {
     height: 34px;
     width: fit-content;
     padding: 0 1rem;
@@ -93,10 +116,29 @@
     height: fit-content;
     padding: 0.5rem;
 }
-.watchlistButton {
+
+.addWatchlistButton {
+    position: absolute;
+    right: -100px;
+}
+
+.removeWatchlistButton {
+    position: absolute;
+    right: -100px;
+    background-color: #232339;
+    border: 1px solid #39394d;
+}
+
+.removeWatchlistButton:hover {
+    background-color: #b54143;
+}
+
+.removeWatchlistButton,
+.watched {
     width: fit-content;
     padding: 0 1rem;
     height: 35px;
+    min-width: 180px;
 }
 
 .closeButton {
@@ -109,7 +151,8 @@
     border-radius: 0;
 }
 
-.addButton {
+.addButton,
+.watchButton {
     position: absolute;
     width: fit-content;
     height: fit-content;
@@ -118,4 +161,8 @@
     top: 5px;
     background-color: #232339;
     border: 1px solid #39394d;
+}
+
+.watchButton {
+    left: 5px;
 }
