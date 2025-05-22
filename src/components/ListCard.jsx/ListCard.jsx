@@ -4,13 +4,24 @@ import { useWatchList } from "../../hooks/useWatchList";
 import { authContext } from "../../context/authContext";
 import { useContext } from "react";
 
-const ListCard = ({ media, onCardClick, setWatchlist, isInWatchlist }) => {
-    const { createWatchList, removeFromWatchList } = useWatchList();
+const ListCard = ({
+    media,
+    onCardClick,
+    setWatchlist,
+    isInWatchlist,
+    toggleWatchStatus,
+    isWatched,
+}) => {
+    const {
+        createWatchList,
+        removeFromWatchList,
+        markAsWatched,
+        removeWatchedMedia,
+    } = useWatchList();
     const { user } = useContext(authContext);
 
     const handleAddToWatchlist = async (e, media) => {
         e.stopPropagation();
-
         await createWatchList(user.uid, media);
         setWatchlist((prev) => ({
             ...prev,
@@ -20,15 +31,29 @@ const ListCard = ({ media, onCardClick, setWatchlist, isInWatchlist }) => {
 
     const handleRemoveFromWatchlist = async (e, media) => {
         e.stopPropagation();
-        console.log("media", media.id);
         await removeFromWatchList(user.uid, media.id, media.media_type);
-
         setWatchlist((prev) => ({
             ...prev,
-            [media.media_type]: prev?.[media.media_type].filter((item) => {
-                return item.id ? item.id !== media.id : item !== media.id;
-            }),
+            [media.media_type]: prev?.[media.media_type].filter((item) =>
+                item.id ? item.id !== media.id : item !== media.id
+            ),
         }));
+    };
+
+    const handleMarkAsWatched = async (e, id) => {
+        e.stopPropagation();
+        await markAsWatched(user.uid, id);
+        toggleWatchStatus(id);
+    };
+
+    const handleRemoveAsWatched = async (e, id) => {
+        e.stopPropagation();
+        await removeWatchedMedia(user.uid, id);
+        toggleWatchStatus(id);
+    };
+
+    const handleReview = (e) => {
+        e.stopPropagation();
     };
 
     return (
@@ -67,22 +92,63 @@ const ListCard = ({ media, onCardClick, setWatchlist, isInWatchlist }) => {
                         <p>{Math.round(media.vote_average)}/10</p>
                         <p>{media.vote_count} people voted</p>
                     </div>
-                    {!isInWatchlist && (
-                        <Button
-                            className="watchlistButton"
-                            onClick={(e) => handleAddToWatchlist(e, media)}
-                        >
-                            Add to Watchlist
-                        </Button>
-                    )}
-                    {isInWatchlist && (
-                        <Button
-                            className="watchlistButton"
-                            onClick={(e) => handleRemoveFromWatchlist(e, media)}
-                        >
-                            Remove from Watchlist
-                        </Button>
-                    )}
+
+                    <div className={styles.buttonContainer}>
+                        <div className={styles.watchedReview}>
+                            {!isWatched && (
+                                <Button
+                                    className="watched"
+                                    onClick={(e) =>
+                                        handleMarkAsWatched(e, media.id)
+                                    }
+                                >
+                                    Mark as Watched
+                                </Button>
+                            )}
+                            {isWatched && (
+                                <Button
+                                    className="watched"
+                                    onClick={(e) =>
+                                        handleRemoveAsWatched(e, media.id)
+                                    }
+                                >
+                                    Mark as not watched
+                                </Button>
+                            )}
+                            <Button
+                                onClick={(e) => handleReview(e)}
+                                disabled={!isWatched}
+                                className={`${
+                                    isWatched
+                                        ? "activeReview"
+                                        : "inactiveReview"
+                                }`}
+                            >
+                                Review
+                            </Button>
+                            {!isInWatchlist && (
+                                <Button
+                                    className="addWatchlistButton"
+                                    onClick={(e) =>
+                                        handleAddToWatchlist(e, media)
+                                    }
+                                >
+                                    Add to Watchlist
+                                </Button>
+                            )}
+
+                            {isInWatchlist && (
+                                <Button
+                                    className="removeWatchlistButton"
+                                    onClick={(e) =>
+                                        handleRemoveFromWatchlist(e, media)
+                                    }
+                                >
+                                    Remove from Watchlist
+                                </Button>
+                            )}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

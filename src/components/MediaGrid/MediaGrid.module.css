@@ -18,11 +18,11 @@
     gap: 1rem;
 }
 
-.listIcon,
+/* .listIcon,
 .gridIcon {
     width: 18px;
     height: 14px;
-}
+} */
 
 .title {
     align-self: flex-start;

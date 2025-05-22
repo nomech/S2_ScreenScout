@@ -17,23 +17,22 @@ const MediaGrid = ({ limit, title, setMatches, getTotalPages, url }) => {
     const [detailedCardId, setDetailedCardId] = useState(null);
     const [mediaType, setMediaType] = useState(null);
     const [watchlist, setWatchlist] = useState(null);
+    const [watchedMedia, setWatchedMedia] = useState(null);
 
     const { data, isLoading } = useFetch(url);
     const { user } = useContext(authContext);
     const { setDefaultWatchList, getWatchList } = useWatchList();
-
     const hasFetched = useRef(false);
 
     useEffect(() => {
-        if (!user || hasFetched.current) {
-            return;
-        }
-
+        if (!user || hasFetched.current) return;
         hasFetched.current = true;
+
         const fetchWatchlist = async () => {
             try {
-                const data = await getWatchList(user.uid);
-                setWatchlist(data);
+                const watchListData = await getWatchList(user.uid);
+                setWatchlist(watchListData);
+                setWatchedMedia(watchListData.watched);
             } catch (err) {
                 console.error("Error fetching watchlist:", err);
             }
@@ -44,15 +43,13 @@ const MediaGrid = ({ limit, title, setMatches, getTotalPages, url }) => {
 
     useEffect(() => {
         if (!user) return;
-
         const initDefaultWatchlist = async () => {
             try {
                 await setDefaultWatchList(user.uid);
             } catch (error) {
-                console.error("Error fetching watchlist:", error);
+                console.error("Error initializing default watchlist:", error);
             }
         };
-
         initDefaultWatchlist();
     }, [setDefaultWatchList, user]);
 
@@ -63,9 +60,26 @@ const MediaGrid = ({ limit, title, setMatches, getTotalPages, url }) => {
         }
     }, [setMatches, getTotalPages, data, isLoading]);
 
-    const items = (data?.results || []).filter(
-        (media) => media.media_type !== "person"
-    );
+    const setWatchedStatus = (item) => {
+        return watchedMedia ? watchedMedia.includes(item.id) : false;
+    };
+
+    const items = (data?.results || [])
+        .filter((media) => media.media_type !== "person")
+        .map((media) => {
+            media.watched = setWatchedStatus(media);
+            return media;
+        });
+
+    const toggleWatchStatus = (id) => {
+        setWatchedMedia((previous) =>
+            previous
+                ? previous.includes(id)
+                    ? previous.filter((item) => item !== id)
+                    : [...previous, id]
+                : [id]
+        );
+    };
 
     const handleCardClick = (id, media) => {
         setDetailedCardId(id);
@@ -90,21 +104,13 @@ const MediaGrid = ({ limit, title, setMatches, getTotalPages, url }) => {
                             className="gridButton"
                             onClick={() => setCardStyle("Grid")}
                         >
-                            <img
-                                className={styles.gridIcon}
-                                src={gridIcon}
-                                alt="Grid"
-                            />
+                            <img className="icons" src={gridIcon} alt="Grid" />
                         </Button>
                         <Button
                             className="listButton"
                             onClick={() => setCardStyle("List")}
                         >
-                            <img
-                                className={styles.listIcon}
-                                src={listIcon}
-                                alt="List"
-                            />
+                            <img className="icons" src={listIcon} alt="List" />
                         </Button>
                     </div>
                 </div>
@@ -123,21 +129,25 @@ const MediaGrid = ({ limit, title, setMatches, getTotalPages, url }) => {
                                     isInWatchlist={watchlist?.[
                                         media.media_type
                                     ]?.includes(media.id)}
+                                    isWatched={watchedMedia?.includes(media.id)}
                                     media={media}
                                     watchlist={watchlist}
                                     onCardClick={handleCardClick}
                                     setWatchlist={setWatchlist}
+                                    toggleWatchStatus={toggleWatchStatus}
                                 />
                             ) : (
                                 <ListCard
                                     key={media.id}
                                     media={media}
                                     user={user}
-                                    isInWatchlist={watchlist?.[
+                                    isInWatchlist={watchlist[
                                         media.media_type
-                                    ]?.includes(media.id)}
+                                    ].includes(media.id)}
+                                    isWatched={watchedMedia?.includes(media.id)}
                                     onCardClick={handleCardClick}
                                     setWatchlist={setWatchlist}
+                                    toggleWatchStatus={toggleWatchStatus}
                                 />
                             )
                         )}

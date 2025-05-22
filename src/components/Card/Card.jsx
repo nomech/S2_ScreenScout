@@ -3,9 +3,25 @@ import Button from "../Button/Button";
 import { useWatchList } from "../../hooks/useWatchList";
 import { authContext } from "../../context/authContext";
 import { useContext } from "react";
+import minus from "../../assets/icons/minus.svg";
+import plus from "../../assets/icons/plus.svg";
+import eye from "../../assets/icons/eye.svg";
+import eyeClosed from "../../assets/icons/eye-closed.svg";
 
-const Card = ({ media, onCardClick, isInWatchlist, setWatchlist }) => {
-    const { createWatchList, removeFromWatchList } = useWatchList();
+const Card = ({
+    media,
+    onCardClick,
+    isInWatchlist,
+    setWatchlist,
+    toggleWatchStatus,
+    isWatched,
+}) => {
+    const {
+        createWatchList,
+        removeFromWatchList,
+        markAsWatched,
+        removeWatchedMedia,
+    } = useWatchList();
     const { user } = useContext(authContext);
 
     const handleAddToWatchlist = async (e, media) => {
@@ -14,7 +30,10 @@ const Card = ({ media, onCardClick, isInWatchlist, setWatchlist }) => {
         await createWatchList(user.uid, media);
         setWatchlist((prev) => ({
             ...prev,
-            [media.media_type]: [...(prev?.[media.media_type] || null), media.id],
+            [media.media_type]: [
+                ...(prev?.[media.media_type] || null),
+                media.id,
+            ],
         }));
     };
 
@@ -31,29 +50,55 @@ const Card = ({ media, onCardClick, isInWatchlist, setWatchlist }) => {
         }));
     };
 
+    const handleMarkAsWatched = async (e, id) => {
+        e.stopPropagation();
+        await markAsWatched(user.uid, id);
+        toggleWatchStatus(id);
+    };
+
+    const handleRemoveAsWatched = async (e, id) => {
+        e.stopPropagation();
+        await removeWatchedMedia(user.uid, id);
+        toggleWatchStatus(id);
+    };
+
     return (
         <div
             className={styles.card}
             onClick={() => onCardClick(media.id, media.media_type)}
         >
+            {!isWatched && (
+                <Button
+                    className="watchButton"
+                    onClick={(e) => handleMarkAsWatched(e, media.id)}
+                >
+                    <img className="icons" src={eye} alt="Mark watched" />
+                </Button>
+            )}
+            {isWatched && (
+                <Button
+                    className="watchButton"
+                    onClick={(e) => handleRemoveAsWatched(e, media.id)}
+                >
+                    <img className="icons" src={eyeClosed} alt="Mark watched" />
+                </Button>
+            )}
             {!isInWatchlist && (
                 <Button
                     className="addButton"
                     onClick={(e) => handleAddToWatchlist(e, media)}
                 >
-                    +
+                    <img className="icons" src={plus} alt="Add icon" />
                 </Button>
             )}
-
             {isInWatchlist && (
                 <Button
                     className="addButton"
                     onClick={(e) => handleRemoveFromWatchlist(e, media)}
                 >
-                    -
+                    <img className="icons" src={minus} alt="Remove icon" />
                 </Button>
             )}
-
             <img
                 className={styles.poster}
                 src={`https://image.tmdb.org/t/p/w200${media.poster_path}`}
