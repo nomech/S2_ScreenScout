@@ -18,7 +18,7 @@ const ListCard = ({
         markAsWatched,
         removeWatchedMedia,
     } = useWatchList();
-    const { user } = useContext(authContext);
+    const { user, verified } = useContext(authContext);
 
     const handleAddToWatchlist = async (e, media) => {
         e.stopPropagation();
@@ -95,7 +95,7 @@ const ListCard = ({
 
                     <div className={styles.buttonContainer}>
                         <div className={styles.watchedReview}>
-                            {!isWatched && (
+                            {!isWatched && verified && (
                                 <Button
                                     className="watched"
                                     onClick={(e) =>
@@ -115,18 +115,22 @@ const ListCard = ({
                                     Mark as not watched
                                 </Button>
                             )}
-                            <Button
-                                onClick={(e) => handleReview(e)}
-                                disabled={!isWatched}
-                                className={`${
-                                    isWatched
-                                        ? "activeReview"
-                                        : "inactiveReview"
-                                }`}
-                            >
-                                Review
-                            </Button>
-                            {!isInWatchlist && (
+
+                            {verified && (
+                                <Button
+                                    onClick={(e) => handleReview(e)}
+                                    disabled={!isWatched}
+                                    className={`${
+                                        isWatched
+                                            ? "activeReview"
+                                            : "inactiveReview"
+                                    }`}
+                                >
+                                    Review
+                                </Button>
+                            )}
+
+                            {!isInWatchlist && verified && (
                                 <Button
                                     className="addWatchlistButton"
                                     onClick={(e) =>

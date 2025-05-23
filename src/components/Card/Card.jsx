@@ -22,7 +22,7 @@ const Card = ({
         markAsWatched,
         removeWatchedMedia,
     } = useWatchList();
-    const { user } = useContext(authContext);
+    const { user, verified } = useContext(authContext);
 
     const handleAddToWatchlist = async (e, media) => {
         e.stopPropagation();
@@ -39,7 +39,6 @@ const Card = ({
 
     const handleRemoveFromWatchlist = async (e, media) => {
         e.stopPropagation();
-        console.log("media", media.id);
         await removeFromWatchList(user.uid, media.id, media.media_type);
 
         setWatchlist((prev) => ({
@@ -67,7 +66,7 @@ const Card = ({
             className={styles.card}
             onClick={() => onCardClick(media.id, media.media_type)}
         >
-            {!isWatched && (
+            {!isWatched && verified && (
                 <Button
                     className="watchButton"
                     onClick={(e) => handleMarkAsWatched(e, media.id)}
@@ -75,7 +74,7 @@ const Card = ({
                     <img className="icons" src={eye} alt="Mark watched" />
                 </Button>
             )}
-            {isWatched && (
+            {isWatched && verified && (
                 <Button
                     className="watchButton"
                     onClick={(e) => handleRemoveAsWatched(e, media.id)}
@@ -83,7 +82,7 @@ const Card = ({
                     <img className="icons" src={eyeClosed} alt="Mark watched" />
                 </Button>
             )}
-            {!isInWatchlist && (
+            {!isInWatchlist && verified && (
                 <Button
                     className="addButton"
                     onClick={(e) => handleAddToWatchlist(e, media)}
@@ -91,7 +90,7 @@ const Card = ({
                     <img className="icons" src={plus} alt="Add icon" />
                 </Button>
             )}
-            {isInWatchlist && (
+            {isInWatchlist && verified && (
                 <Button
                     className="addButton"
                     onClick={(e) => handleRemoveFromWatchlist(e, media)}

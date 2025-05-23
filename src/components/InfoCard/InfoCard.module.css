@@ -12,5 +12,11 @@
 .error p {
     font-size: 12px;
     color: #ff75ff;
-    
+}
+
+.verify {
+    border: none;
+    border-bottom: 1px solid #8a2be2;
+    opacity: 1;
+    padding: 1rem;
 }

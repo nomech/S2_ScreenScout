@@ -24,9 +24,9 @@ const Menu = ({ setIsOpen }) => {
                 <li className={styles.listItem}>
                     <Button
                         className="menuButton"
-                        onClick={() => navigate("/preferences")}
+                        onClick={() => navigate("/settings")}
                     >
-                        Preferences
+                        Settings
                     </Button>
                 </li>
                 <li className={styles.listItem}>

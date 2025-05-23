@@ -1,8 +1,12 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import Input from "../Input/Input";
 import Button from "../Button/Button";
 import styles from "./SignupCard.module.css";
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import {
+    createUserWithEmailAndPassword,
+    sendEmailVerification,
+    updateProfile,
+} from "firebase/auth";
 import { useState } from "react";
 import { auth } from "../../firebaseConfig";
 import { NavLink, useNavigate } from "react-router-dom";
@@ -61,7 +65,10 @@ const SignupCard = () => {
             const user = userCredential.user;
             const imageUrl = await handleFileUpload();
 
+            console.log(imageUrl);
+
             setSuccess(true);
+            sendEmailVerification(user);
             setFormData({
                 firstName: "",
                 lastName: "",
@@ -71,15 +78,19 @@ const SignupCard = () => {
                 previewUrl: "",
             });
 
+            console.log("updateProfile");
+
             await updateProfile(user, {
-                displayName: formData.name,
+                displayName: `${formData.firstName} ${formData.lastName}`,
                 photoURL: imageUrl,
             });
 
-            console.log("User profile updated:", user);
+            console.log("done");
 
             navigate("/");
         } catch (error) {
+            console.log(error);
+
             setError(error);
         } finally {
             setIsLoading(false);

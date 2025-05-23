@@ -7,12 +7,14 @@ export const authContext = createContext();
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
+    const [verified, setVerified] = useState(null);
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (user) {
                 console.log("User is signed in:", user);
                 setUser(user);
+                setVerified(user.emailVerified);
             } else {
                 setUser(null);
             }
@@ -32,7 +34,9 @@ export const AuthProvider = ({ children }) => {
     };
 
     return (
-        <authContext.Provider value={{ user, isLoading, signOutUser }}>
+        <authContext.Provider
+            value={{ user, isLoading, signOutUser, verified }}
+        >
             {children}
         </authContext.Provider>
     );

@@ -11,6 +11,7 @@ const Input = ({
     className,
     id,
     name,
+    readonly = false,
 }) => {
     return (
         <div className={styles.inputGroup}>
@@ -31,6 +32,7 @@ const Input = ({
                 id={id}
                 onKeyDown={onKeyDown}
                 name={name}
+                readonly={readonly}
             />
             {error && error[id] && (
                 <p className={styles.errorText}>{error[id]}</p>
