@@ -32,7 +32,7 @@ const Input = ({
                 id={id}
                 onKeyDown={onKeyDown}
                 name={name}
-                readonly={readonly}
+                readOnly={readonly}
             />
             {error && error[id] && (
                 <p className={styles.errorText}>{error[id]}</p>

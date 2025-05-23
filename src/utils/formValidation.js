@@ -61,3 +61,19 @@ export const forgotPasswordFormValidation = (formData, setError) => {
     setError(errors);
     return Object.keys(errors).length === 0;
 };
+
+export const updateProfileValidation = (formData, setError) => {
+    const { firstName, lastName, email } = formData;
+    const errors = {};
+
+    !firstName ? (errors.firstName = errorMessages.firstName) : "";
+    !lastName ? (errors.lastName = errorMessages.lastName) : "";
+    !email ? (errors.email = errorMessages.email) : "";
+    email && !emailRegex.test(email)
+        ? (errors.email = errorMessages.emailValid)
+        : "";
+
+    setError(errors);
+    
+    return Object.keys(errors).length === 0;
+};

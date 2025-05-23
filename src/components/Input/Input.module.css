@@ -16,6 +16,12 @@
     width: 100%;
 }
 
+.input:read-only {
+    outline: none;
+    color: #949497;
+    cursor: default;
+}
+
 .label {
     color: #949497;
     font-size: 13px;
@@ -49,4 +55,13 @@
 .errorText {
     font-size: 12px;
     color: #ff75ff;
+}
+
+.inputGroup:has(input[readonly]) .upload {
+    outline: none;
+    color: #949497;
+    border: 1px solid #2d2d34;
+    background: #15151d;
+    cursor: default;
+    pointer-events: none;
 }

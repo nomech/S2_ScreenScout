@@ -13,6 +13,13 @@
     background: #9c27b0;
 }
 
+.button:disabled {
+    color: #949497;
+    border: 1px solid #2d2d34;
+    background: #15151d;
+    cursor: default;
+}
+
 .login,
 .signup {
     width: 360px;
@@ -165,4 +172,27 @@
 
 .watchButton {
     left: 5px;
+}
+
+.resetPassword {
+    padding: 0.5rem;
+    width: fit-content;
+    height: fit-content;
+}
+
+.saveButton {
+    margin-top: 3rem;
+    align-self: center;
+}
+
+.saveButton[disabled],
+.resetPassword[disabled] {
+    background: #8d8d8d;
+    cursor: default;
+}
+
+.verify {
+    padding: 0.3rem 0.5rem;
+    width: fit-content;
+    height: fit-content;
 }

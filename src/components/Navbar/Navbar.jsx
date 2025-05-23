@@ -51,6 +51,12 @@ const Navbar = () => {
                             >
                                 Profile
                             </li>
+                            <li className={styles.navItem}></li>
+                            <img
+                                src={user.photoURL}
+                                alt="Profile"
+                                className={styles.profilePicture}
+                            />
                         </ul>
                     )}
                     {isOpen && <Menu setIsOpen={setIsOpen} />}
