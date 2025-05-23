@@ -7,6 +7,7 @@ import { useState } from "react";
 import { auth } from "../../firebaseConfig";
 import { NavLink, useNavigate } from "react-router-dom";
 import { signupFormValidation } from "../../utils/formValidation";
+import placeholder from "../../assets/images/placeholder.png";
 
 const SignupCard = () => {
     const apiName = import.meta.env.VITE_CLOUDINARY_NAME;
@@ -17,7 +18,7 @@ const SignupCard = () => {
         email: "",
         password: "",
         confirmPassword: "",
-        previewUrl: `https://res.cloudinary.com/${apiName}/image/upload/v1746637138/Screenshot_2025-05-07_185714_vnsk5g.png`,
+        previewUrl: `${placeholder}`,
     });
 
     const [isLoading, setIsLoading] = useState(false);
@@ -79,19 +80,7 @@ const SignupCard = () => {
 
             navigate("/");
         } catch (error) {
-            if (error.code === "auth/password-does-not-meet-requirements") {
-                setError((prev) => ({
-                    ...prev,
-                    confirmPassword: error.message
-                        .replace("Firebase: ", "")
-                        .replace(
-                            "(auth/password-does-not-meet-requirements).",
-                            ""
-                        ),
-                }));
-            } else {
-                setError(error);
-            }
+            setError(error);
         } finally {
             setIsLoading(false);
         }
@@ -110,12 +99,12 @@ const SignupCard = () => {
         } else {
             setFormData((prevData) => ({
                 ...prevData,
-                previewUrl: `https://res.cloudinary.com/${apiName}/image/upload/Screenshot_2025-05-07_185714_vnsk5g.png`,
+                previewUrl: `placeholder`,
             }));
             setError("Please select a valid image file.");
         }
     };
-    
+
     const handleFileUpload = async () => {
         try {
             const form = new FormData();

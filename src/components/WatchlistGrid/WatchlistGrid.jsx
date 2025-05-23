@@ -158,6 +158,7 @@ const Watchlist = () => {
                                 </Button>
                             )}
                         </div>
+
                         <div className={styles.styleButtons}>
                             <Button
                                 className="gridButton"

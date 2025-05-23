@@ -1,62 +1,63 @@
-export const signupFormValidation = (formData, setError) => {
-    let validForm = true;
-    if (!formData.firstName) {
-        setError((prev) => ({ ...prev, firstName: "First name is required" }));
-        validForm = false;
-    }
-    if (!formData.lastName) {
-        setError((prev) => ({ ...prev, lastName: "Last name is required" }));
-        validForm = false;
-    }
-    if (!formData.email) {
-        setError((prev) => ({ ...prev, email: "Email is required" }));
-        validForm = false;
-    }
-    if (!formData.password) {
-        setError((prev) => ({ ...prev, password: "Password is required" }));
-        validForm = false;
-    }
-    if (!formData.confirmPassword) {
-        setError((prev) => ({
-            ...prev,
-            confirmPassword: "Confirm Password is required",
-        }));
-        validForm = false;
-    }
+const emailRegex = /\S+@\S+\.\S+/;
 
-    if (formData.password !== formData.confirmPassword) {
-        setError((prev) => ({
-            ...prev,
-            confirmPassword: "Passwords do not match",
-        }));
-        validForm = false;
-    }
-
-    if (formData.password.length < 6) {
-        setError((prev) => ({
-            ...prev,
-            password: "Password must be at least 6 characters long",
-        }));
-        validForm = false;
-    }
-    if (formData.email.length > 0 && !/\S+@\S+\.\S+/.test(formData.email)) {
-        setError((prev) => ({ ...prev, email: "Invalid email address" }));
-        validForm = false;
-    }
-
-    return validForm;
+const errorMessages = {
+    firstName: "First name is required",
+    lastName: "Last name is required",
+    email: "Email is required",
+    emailValid: "Invalid email address",
+    passwordRequired: "Password is required",
+    passwordLength: "Password must be at least 6 characters long",
+    confirmPasswordRequired: "Confirm Password is required",
+    confirmPasswordMatch: "Passwords do not match",
 };
 
-export const forgotPasswordFormValidation = (email, setError) => {
-    let validForm = true;
-    setError(null);
-    if (email.email.length === 0) {
-        setError((prev) => ({ ...prev, email: "Email is required" }));
-        validForm = false;
-    }
-    if (email.email.length > 0 && !/\S+@\S+\.\S+/.test(email.email)) {
-        setError((prev) => ({ ...prev, email: "Invalid email address" }));
-        validForm = false;
-    }
-    return validForm;
+export const signInValidation = (formData, setError) => {
+    const { email, password } = formData;
+    const errors = {};
+
+    !email ? (errors.email = errorMessages.emailValid) : "";
+    email && !emailRegex.test(email)
+        ? (errors.email = errorMessages.emailValid)
+        : "";
+    !password ? (errors.password = errorMessages.passwordRequired) : "";
+
+    setError(errors);
+
+    return Object.keys(errors).length === 0;
+};
+
+export const signupFormValidation = (formData, setError) => {
+    const { firstName, lastName, email, password, confirmPassword } = formData;
+    const errors = {};
+
+    !firstName ? (errors.firstName = errorMessages.firstName) : "";
+    !lastName ? (errors.lastName = errorMessages.lastName) : "";
+    !email ? (errors.email = errorMessages.email) : "";
+    password.length < 6 ? (errors.password = errorMessages.passwordLength) : "";
+    !password ? (errors.password = errorMessages.passwordRequired) : "";
+    password !== confirmPassword
+        ? (errors.confirmPassword = errorMessages.confirmPasswordMatch)
+        : "";
+    !confirmPassword
+        ? (errors.confirmPassword = errorMessages.confirmPasswordRequired)
+        : "";
+    email && !emailRegex.test(email)
+        ? (errors.email = errorMessages.emailValid)
+        : "";
+
+    setError(errors);
+    return Object.keys(errors).length === 0;
+};
+
+export const forgotPasswordFormValidation = (formData, setError) => {
+    const { email } = formData;
+    const errors = {};
+
+    !email ? (errors.email = errorMessages.email) : "";
+    email && !emailRegex.test(email)
+        ? (errors.email = errorMessages.emailValid)
+        : "";
+
+    setError(errors);
+    return Object.keys(errors).length === 0;
 };

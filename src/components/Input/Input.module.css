@@ -1,7 +1,7 @@
 .inputGroup {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 2px;
     width: 100%;
 }
 
@@ -44,4 +44,9 @@
 
 .upload:hover {
     background: #9c27b0;
+}
+
+.errorText {
+    font-size: 12px;
+    color: #ff75ff;
 }
