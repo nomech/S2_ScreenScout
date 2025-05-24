@@ -185,12 +185,6 @@
     align-self: center;
 }
 
-.saveButton[disabled],
-.resetPassword[disabled] {
-    background: #8d8d8d;
-    cursor: default;
-}
-
 .verify {
     padding: 0.3rem 0.5rem;
     width: fit-content;

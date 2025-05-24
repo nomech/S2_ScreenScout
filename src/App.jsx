@@ -7,7 +7,7 @@ import InfoCard from "./components/InfoCard/InfoCard";
 // import Button from "./components/Button/Button";
 
 function App() {
-    const { verified } = useContext(authContext);
+    const { verified, user } = useContext(authContext);
     const [showInfoCard, setShowInfoCard] = useState(false);
 
     useEffect(() => {
@@ -23,13 +23,13 @@ function App() {
     return (
         <>
             <Navbar />
-            {!verified && showInfoCard && (
+            {user && !verified && showInfoCard && (
                 <InfoCard
                     style="verify"
-                    text="An email was sent to your email, you need to verify before you can start adding media to your watchlist"
+                    text={`An email was sent to your email, you need to verify before you can start adding media to your watchlist.
+                        if you didn't receive the email, please check your spam folder or click on the verify button in settings to resend it.`}
                 />
             )}
-
             <Outlet />
         </>
     );

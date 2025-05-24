@@ -34,24 +34,3 @@
     font-size: 14px;
     font-weight: 400;
 }
-
-.profileContainer {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-}
-
-.profilePicture {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    overflow: hidden;
-}
-
-.profilePicture img {
-    width: 128px;
-    height: 128px;
-    overflow: hidden;
-    border: #8a2be2 solid 3px;
-    border-radius: 144px;
-}

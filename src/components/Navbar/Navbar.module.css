@@ -71,7 +71,20 @@
 }
 
 .profilePicture {
-    width: 44px;
-    height: 44px;
+    width: auto;
+    height: auto;
     border-radius: 50%;
+    max-width: 128px;
+    max-height: 128px;
+}
+
+.frame {
+    display: flex;
+    overflow: hidden;
+    height: 64px;
+    width: 64px;
+    border: #8a2be2 solid 3px;
+    border-radius: 144px;
+    align-items: center;
+    justify-content: center;
 }

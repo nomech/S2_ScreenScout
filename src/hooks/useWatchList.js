@@ -26,7 +26,6 @@ export const useWatchList = () => {
         const docRef = doc(db, "watchlists", uid);
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
-            console.log(docSnap.data().watched);
             return docSnap.data();
         } else {
             console.error("No such document!");

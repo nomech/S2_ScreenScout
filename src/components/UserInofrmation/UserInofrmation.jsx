@@ -34,8 +34,8 @@ const UserInformation = () => {
     useEffect(() => {
         if (user) {
             setFormData({
-                firstName: user.displayName.split(" ")[0],
-                lastName: user.displayName.split(" ")[1],
+                firstName: user.displayName?.split(" ")[0],
+                lastName: user.displayName?.split(" ")[1],
                 email: user.email,
                 photoUrl: user.photoURL,
             });
@@ -110,6 +110,7 @@ const UserInformation = () => {
                             label="Update profile picture +"
                             readonly={readonly}
                             setIsLoading={setIsLoading}
+                            isLoading={isLoading}
                             onUploadComplete={handleUploadComplete}
                         />
 

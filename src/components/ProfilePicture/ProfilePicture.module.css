@@ -1,9 +1,9 @@
 .profilePicture img {
-    width: 128px;
-    height: 128px;
     overflow: hidden;
-    border: #8a2be2 solid 3px;
-    border-radius: 144px;
+    max-width: 230px;
+    max-height: 230px;
+    width: auto;
+    height: auto;
 }
 
 .profileContainer {
@@ -17,4 +17,15 @@
     justify-content: center;
     width: 100%;
     overflow: hidden;
+}
+
+.frame {
+    display: flex;
+    overflow: hidden;
+    height: 123px;
+    width: 123px;
+    border: #8a2be2 solid 3px;
+    border-radius: 144px;
+    align-items: center;
+    justify-content: center;
 }

@@ -11,6 +11,7 @@ const ProfilePicture = ({
     label,
     readonly = false,
     setIsLoading,
+    isLoading,
 }) => {
     const [previewUrl, setPreviewUrl] = useState(placeholder);
     const [isUploading, setIsUploading] = useState(false);
@@ -53,8 +54,11 @@ const ProfilePicture = ({
     return (
         <div className={styles.profileContainer}>
             <div className={styles.profilePicture}>
-                <img src={previewUrl} alt="Profile preview" />
+                <div className={styles.frame}>
+                    <img src={previewUrl} alt="Profile preview" />
+                </div>
             </div>
+
             <Input
                 label={`${!isUploading ? label : "Uploading…"}`}
                 className="file-uploader"
@@ -62,7 +66,7 @@ const ProfilePicture = ({
                 onChange={handleFileChange}
                 id="upload"
                 name="upload"
-                readonly={readonly || isUploading}
+                readonly={readonly || isUploading || isLoading}
             />
         </div>
     );

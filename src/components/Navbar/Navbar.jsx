@@ -5,7 +5,7 @@ import { authContext } from "../../context/authContext";
 import Menu from "../Menu/Menu";
 
 const Navbar = () => {
-    const { user } = useContext(authContext);
+    const { user, verified } = useContext(authContext);
 
     const [isOpen, setIsOpen] = useState(false);
 
@@ -35,14 +35,16 @@ const Navbar = () => {
                                     TV Shows
                                 </NavLink>
                             </li>
-                            <li className={styles.navItem}>
-                                <NavLink
-                                    to="/watchlist"
-                                    className={styles.link}
-                                >
-                                    Watchlist
-                                </NavLink>
-                            </li>
+                            {verified && (
+                                <li className={styles.navItem}>
+                                    <NavLink
+                                        to="/watchlist"
+                                        className={styles.link}
+                                    >
+                                        Watchlist
+                                    </NavLink>
+                                </li>
+                            )}
                             <li
                                 className={`${styles.navItem} ${
                                     styles.profile
@@ -51,12 +53,15 @@ const Navbar = () => {
                             >
                                 Profile
                             </li>
-                            <li className={styles.navItem}></li>
-                            <img
-                                src={user.photoURL}
-                                alt="Profile"
-                                className={styles.profilePicture}
-                            />
+                            <li className={styles.navItem}>
+                                <div className={styles.frame}>
+                                    <img
+                                        src={user.photoURL}
+                                        alt="Profile"
+                                        className={styles.profilePicture}
+                                    />
+                                </div>
+                            </li>
                         </ul>
                     )}
                     {isOpen && <Menu setIsOpen={setIsOpen} />}
