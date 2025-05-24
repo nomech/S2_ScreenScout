@@ -17,6 +17,7 @@
     background: #1a1a1a;
     display: flex;
     flex-direction: column;
+    min-height: 700px;
 }
 
 .detailedCardContainer::before {
@@ -148,4 +149,14 @@
 
 .character {
     font-size: 14px;
+}
+
+.loadingContainer {
+    position: relative;
+    width: 1242px;
+    background: #1a1a1a;
+    height: 700px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

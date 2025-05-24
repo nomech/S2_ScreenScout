@@ -24,11 +24,16 @@ function App() {
         <>
             <Navbar />
             {user && !verified && showInfoCard && (
-                <InfoCard
-                    style="verify"
-                    text={`An email was sent to your email, you need to verify before you can start adding media to your watchlist.
-                        if you didn't receive the email, please check your spam folder or click on the verify button in settings to resend it.`}
-                />
+                <>
+                    <InfoCard
+                        style="verify"
+                        text={`An email was sent to your email, you need to verify before you can start adding media to your watchlist.`}
+                    />
+                    <InfoCard
+                        style="verify"
+                        text={`If you didn't receive the email, please check your spam folder or click on the verify button in settings to resend it.`}
+                    />
+                </>
             )}
             <Outlet />
         </>

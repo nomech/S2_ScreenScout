@@ -3,9 +3,10 @@ import { useFetch } from "../../hooks/useFetch";
 import styles from "./DetailedCard.module.css";
 import Loading from "../Loading/Loading";
 import Button from "../Button/Button";
+import film from "../../assets/icons/film.svg";
+import placeholder from "../../assets/images/placeholder.png";
 
 const DetailedCard = ({ id, mediaType, onClose }) => {
-    console.log(id);
     const movieUrl = `https://api.themoviedb.org/3/${mediaType}/${id}`;
 
     const {
@@ -21,13 +22,15 @@ const DetailedCard = ({ id, mediaType, onClose }) => {
         isLoading: creditsLoading,
     } = useFetch(creditsUrl);
 
-    const placeholderImg =
-        "https://res.cloudinary.com/don3yyddm/image/upload/v1746637138/Screenshot_2025-05-07_185714_vnsk5g.png";
+    const getImgSrc = (path, size = "original") => {
+        return path ? `https://image.tmdb.org/t/p/${size}${path}` : film;
+    };
+    
     return (
         <>
             {mediaIsLoading && (
                 <div className={styles.backlay}>
-                    <div className={styles.detailedCardContainer}>
+                    <div className={styles.loadingContainer}>
                         <Button className="closeButton" onClick={onClose}>
                             X
                         </Button>
@@ -51,7 +54,7 @@ const DetailedCard = ({ id, mediaType, onClose }) => {
                             <div className={styles.detailsContainer}>
                                 <img
                                     className={styles.poster}
-                                    src={`https://image.tmdb.org/t/p/w300${media.poster_path}`}
+                                    src={getImgSrc(media.poster_path, "w300")}
                                     alt={media.title}
                                 />
                                 <div className={styles.details}>
@@ -110,7 +113,7 @@ const DetailedCard = ({ id, mediaType, onClose }) => {
                                                     src={
                                                         actor.profile_path
                                                             ? `https://image.tmdb.org/t/p/w200${actor.profile_path}`
-                                                            : placeholderImg
+                                                            : placeholder
                                                     }
                                                     alt={actor.name}
                                                 />
