@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import styles from "./SearchBar.module.css";
 import Button from "../Button/Button";
 import FilterPanel from "../FIlterPanel/FilterPanel";
 import { useNavigate } from "react-router-dom";
 
 const SearchBar = () => {
-    const [searchTerm, setSearchTerm] = useState("");
     const [mediaType, setMediaType] = useState("multi");
     const [filterParameters, setFilterParameters] = useState({
         query: "",

@@ -93,13 +93,22 @@ const MediaGrid = ({ limit, title, setMatches, getTotalPages, url }) => {
         .filter((media) => media.media_type !== "person")
         .map((media) => {
             media.watched = setWatchedStatus(media);
-            if (movieGenres)
+
+            if (media.media_type === "movie" && movieGenres) {
                 media.genres = media.genre_ids.map((id) => {
-                    movieGenres.find((genre) => {
-                        console.log(genre.id == id);
-                    });
+                    const matchedGenre = movieGenres.find(
+                        (genre) => genre.id === id
+                    );
+                    return matchedGenre?.name;
                 });
-            //console.log(media);
+            } else if (media.media_type === "tv" && tvGenres) {
+                media.genres = media.genre_ids.map((id) => {
+                    const matchedGenre = tvGenres.find(
+                        (genre) => genre.id === id
+                    );
+                    return matchedGenre?.name;
+                });
+            }
 
             return media;
         });
