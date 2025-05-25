@@ -9,8 +9,8 @@ import Paginator from "../Paginator/Paginator";
 const SearchPage = () => {
     const [matches, setMatches] = useState(null);
     const [searchString, setSearchString] = useState("");
-    const [searchParams] = useSearchParams();
     const [pages, setPages] = useState(1);
+    const [searchParams] = useSearchParams();
 
     const url = `https://api.themoviedb.org/3/search/${searchParams.get(
         "media_type"

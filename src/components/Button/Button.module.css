@@ -191,3 +191,17 @@
     width: fit-content;
     height: fit-content;
 }
+
+.genreButton,
+.ratingButton,
+.durationButton {
+    padding: 0.3rem 0.5rem;
+    width: fit-content;
+    height: fit-content;
+    background-color: #374151;
+    border: 1px solid #39394d;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 500;
+    gap: 1rem;
+}

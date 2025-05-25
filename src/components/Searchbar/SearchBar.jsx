@@ -1,36 +1,35 @@
 import React, { useState } from "react";
 import styles from "./SearchBar.module.css";
 import Button from "../Button/Button";
-import Input from "../Input/Input";
+import FilterPanel from "../FIlterPanel/FilterPanel";
 import { useNavigate } from "react-router-dom";
 
 const SearchBar = () => {
     const [searchTerm, setSearchTerm] = useState("");
     const [mediaType, setMediaType] = useState("multi");
-    //const [adult, setAdult] = useState(false);
+    const [filterParameters, setFilterParameters] = useState({
+        query: "",
+        include_adult: false,
+        language: "en-US",
+        page: "1",
+    });
 
     const navigate = useNavigate();
 
     const handleOnChange = (e) => {
-        setSearchTerm(e.target.value);
+        setFilterParameters((previous) => {
+            return { ...previous, query: e.target.value };
+        });
     };
 
     const handleOnSubmit = (e) => {
         e.preventDefault();
+        console.log(filterParameters);
 
-        const params = new URLSearchParams({
-            query: searchTerm,
-            //include_adult: adult,
-            language: "en-US",
-            page: "1",
-        });
+        const params = new URLSearchParams(filterParameters);
 
         navigate(`/search?media_type=${mediaType}&${params.toString()}`);
     };
-
-    /*   const handleAdultChange = () => {
-    setAdult((previous) => !previous);
-  }; */
 
     const handleOnClickMediaType = (e) => {
         let type = e.target.innerText.toLowerCase();
@@ -46,7 +45,7 @@ const SearchBar = () => {
                 <input
                     type="text"
                     className={styles.searchInput}
-                    value={searchTerm}
+                    value={filterParameters.query}
                     onChange={handleOnChange}
                     placeholder="Search for movies and tv shows..."
                 />
@@ -54,6 +53,10 @@ const SearchBar = () => {
                     Search
                 </Button>
             </form>
+            <FilterPanel
+                mediaFilter={mediaType}
+                setFilterParameters={setFilterParameters}
+            />
             <div className={styles.buttonContainer}>
                 <Button
                     className={mediaType == "multi" ? "active" : "inactive"}
@@ -73,15 +76,6 @@ const SearchBar = () => {
                 >
                     TV
                 </Button>
-                {/*        <Input
-          label="18+"
-          type="checkbox"
-          value={adult}
-          onChange={handleAdultChange}
-          className={styles.adult}
-          id="adult"
-          name="adult"
-        /> */}
             </div>
         </div>
     );

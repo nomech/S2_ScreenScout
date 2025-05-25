@@ -1,0 +1,47 @@
+.filterPanel {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    padding: 16px;
+    background-color: #232339;
+    border-radius: 8px;
+    gap: 1rem;
+}
+
+.genres,
+.rating,
+.duration {
+    display: flex;
+    width: 100%;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.adultContent {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.adultContent input {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    margin-left: 0.5rem;
+}
+
+.adultContent label {
+    pointer-events: none;
+}
+
+.year {
+    display: flex;
+    width: 100%;
+    gap: 1rem;
+    width: 100%;
+}
+
+.year input {
+    width: 55%;
+}

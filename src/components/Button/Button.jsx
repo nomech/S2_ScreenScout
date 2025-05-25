@@ -8,6 +8,7 @@ const Button = ({
     ariaLabel,
     type,
     ref,
+    value,
 }) => {
     return (
         <button
@@ -17,6 +18,7 @@ const Button = ({
             aria-label={ariaLabel}
             type={type}
             ref={ref}
+            value={value}
         >
             {children}
         </button>

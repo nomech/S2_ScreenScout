@@ -10,6 +10,7 @@ import { authContext } from "../../context/authContext";
 import { useWatchList } from "../../hooks/useWatchList";
 import Card from "../Card/Card";
 import ListCard from "../ListCard.jsx/ListCard";
+import GenreContext from "../../context/GenreContext";
 
 const MediaGrid = ({ limit, title, setMatches, getTotalPages, url }) => {
     const [cardStyle, setCardStyle] = useState("Grid");
@@ -20,9 +21,14 @@ const MediaGrid = ({ limit, title, setMatches, getTotalPages, url }) => {
     const [watchedMedia, setWatchedMedia] = useState(null);
 
     const { data, isLoading } = useFetch(url);
-    const { user } = useContext(authContext);
     const { setDefaultWatchList, getWatchList } = useWatchList();
+
+    const { user } = useContext(authContext);
+    const { movieGenres, tvGenres } = useContext(GenreContext);
+
     const hasFetched = useRef(false);
+
+    console.log(data);
 
     useEffect(() => {
         if (!user || hasFetched.current) return;
@@ -64,12 +70,19 @@ const MediaGrid = ({ limit, title, setMatches, getTotalPages, url }) => {
         return watchedMedia ? watchedMedia.includes(item.id) : false;
     };
 
-    const items = (data?.results || [])
-        .filter((media) => media.media_type !== "person")
-        .map((media) => {
-            media.watched = setWatchedStatus(media);
-            return media;
+    const filterItemsByFilterParams = (items, filterParams) => {
+        if (!filterParams) {
+            return items;
+        }
+        console.log(filterParams.genre);
+        items.filter((item) => {
+            return item.genre_ids.includes(parseInt(filterParams.genre));
         });
+
+        console.log(items);
+
+        return items;
+    };
 
     const toggleWatchStatus = (id) => {
         setWatchedMedia((previous) =>
@@ -91,6 +104,15 @@ const MediaGrid = ({ limit, title, setMatches, getTotalPages, url }) => {
         setShowDetailedCard(false);
         setDetailedCardId(null);
     };
+
+    const items = filterItemsByFilterParams(
+        (data?.results || [])
+            .filter((media) => media.media_type !== "person")
+            .map((media) => {
+                media.watched = setWatchedStatus(media);
+                return media;
+            })
+    );
 
     return (
         <>
