@@ -81,7 +81,7 @@ const ListCard = ({
                         <p className={styles.release}>
                             {media.release_date || media.first_air_date}
                         </p>
-                        {media.genre_ids?.map((genre) => (
+                        {media.genres?.map((genre) => (
                             <p key={genre} className={styles.genre}>
                                 {genre}
                             </p>
