@@ -10,9 +10,11 @@
 
     --color-bg-primary: #0a0a23;
     --color-bg-secondary: #232339;
-    --color-bg-disabled: #8d8d8d;
+    --color-bg-tertiary: #1a1a24;
+    --disabled: #8d8d8d;
     --color-bg-dark: #15151d;
     --color-bg-alt: #16162e;
+    --color-bg-warning: #b54143;
 
     --color-bg-overlay: rgba(0, 0, 0, 0.6);
     --color-bg-overlay-light: rgba(0, 0, 0, 0.5);

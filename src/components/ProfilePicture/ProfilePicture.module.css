@@ -9,7 +9,7 @@
 .profileContainer {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: var(--spacing-medium);
 }
 
 .profilePicture {
@@ -24,7 +24,7 @@
     overflow: hidden;
     height: 123px;
     width: 123px;
-    border: #8a2be2 solid 3px;
+    border: var(--color-border-accent) solid 3px;
     border-radius: 144px;
     align-items: center;
     justify-content: center;

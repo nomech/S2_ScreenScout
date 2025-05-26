@@ -3,6 +3,7 @@ import styles from "./SearchBar.module.css";
 import Button from "../Button/Button";
 import FilterPanel from "../FIlterPanel/FilterPanel";
 import { useNavigate } from "react-router-dom";
+import filterIcon from "../../assets/icons/filter.svg";
 
 const SearchBar = () => {
     const [mediaType, setMediaType] = useState("multi");
@@ -12,6 +13,8 @@ const SearchBar = () => {
         language: "en-US",
         page: "1",
     });
+
+    const [openFIlterPanel, setOpenFilterPanel] = useState(false);
 
     const navigate = useNavigate();
 
@@ -38,6 +41,12 @@ const SearchBar = () => {
         setMediaType(type.toLowerCase());
     };
 
+    const handleOnClickFilter = () => {
+        console.log("click");
+
+        setOpenFilterPanel((previous) => !previous);
+    };
+
     return (
         <div className={styles.searchContainer}>
             <form className={styles.searchBar} onSubmit={handleOnSubmit}>
@@ -51,11 +60,20 @@ const SearchBar = () => {
                 <Button type="submit" className="search">
                     Search
                 </Button>
+                <Button
+                    type="button"
+                    className="filter"
+                    onClick={handleOnClickFilter}
+                >
+                    <img className="icons" src={filterIcon} alt="filterIcon" />
+                </Button>
             </form>
-            <FilterPanel
-                mediaFilter={mediaType}
-                setFilterParameters={setFilterParameters}
-            />
+            {openFIlterPanel && (
+                <FilterPanel
+                    mediaFilter={mediaType}
+                    setFilterParameters={setFilterParameters}
+                />
+            )}
             <div className={styles.buttonContainer}>
                 <Button
                     className={mediaType == "multi" ? "active" : "inactive"}

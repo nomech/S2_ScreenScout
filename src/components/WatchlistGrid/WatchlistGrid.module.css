@@ -21,16 +21,16 @@
     display: flex;
     place-items: flex-end;
     justify-content: space-between;
-    gap: 1rem;
+    gap: var(--spacing-small);
     width: 100%;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+    margin-top: var(--spacing-medium);
+    margin-bottom: var(--spacing-medium);
 }
 
 .styleButtons,
 .filterButtons {
     display: flex;
-    gap: 0.5rem;
+    gap: var(--spacing-xsmall);
 }
 
 .containerGrid {

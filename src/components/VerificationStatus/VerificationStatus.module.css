@@ -4,13 +4,13 @@
     justify-content: center;
     flex-direction: column;
     width: 100%;
-    margin: 2rem;
-    gap: 2rem;
+    margin: var(--spacing-medium);
+    gap: var(--spacing-medium);
 }
 
-.verificationMessage{
+.verificationMessage {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 1rem;
+    gap: var(--spacing-small);
 }

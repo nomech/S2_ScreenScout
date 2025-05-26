@@ -1,7 +1,7 @@
 .card {
     position: relative;
     width: 200px;
-    border-radius: 0px 0px 8px 8px;
+    border-radius: 0 0 8px 8px;
     background: #16162e;
     cursor: pointer;
     transition: transform 0.2s ease;
@@ -31,4 +31,46 @@
     top: 10px;
     right: 10px;
     z-index: 50;
+}
+
+@media (max-width: 768px) {
+    .card {
+        width: 160px;
+    }
+
+    .mediaDetails {
+        padding: 0.4rem;
+    }
+
+    .mediaTitle {
+        font-size: 14px;
+        margin: 20px 0;
+    }
+
+    .addButton {
+        top: var(--spacing-small);
+        right: var(--spacing-small);
+    }
+}
+
+@media (max-width: 480px) {
+    .card {
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto var(--spacing-small);
+    }
+
+    .mediaDetails {
+        padding: 0.25rem;
+    }
+
+    .mediaTitle {
+        font-size: 12px;
+        margin: 15px 0;
+    }
+
+    .addButton {
+        top: 6px;
+        right: 6px;
+    }
 }

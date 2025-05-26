@@ -8,24 +8,23 @@
 .input {
     height: 48px;
     flex-shrink: 0;
-    border-radius: 4px;
-    border: 1px solid #2d2d34;
-    background: #15151d;
-    color: #ffffff;
-    padding: 0 1rem;
+    border-radius: var(--radius-small);
+    border: 1px solid var(--color-border);
+    background: var(--color-bg-dark);
+    color: var(--color-text);
+    padding: 0 var(--spacing-small);
     width: 100%;
 }
 
 .input:read-only {
     outline: none;
-    color: #949497;
+    color: var(--color-text-muted);
     cursor: default;
 }
 
 .label {
-    color: #949497;
+    color: var(--color-text-muted);
     font-size: 13px;
-    font-weight: 400;
 }
 
 .input[type="file"] {
@@ -36,12 +35,11 @@
     display: flex;
     justify-content: center;
     align-self: center;
-    padding: 12px 16px;
+    padding: 12px var(--spacing-small);
     width: 50%;
-    border-radius: 8px;
-    background: #7e22ce;
-    color: #ffffff;
-    font-family: Inter;
+    border-radius: var(--radius);
+    background: var(--color-primary);
+    color: var(--color-text);
     font-size: 14px;
     font-weight: 700;
     transition: background-color 0.2s ease;
@@ -49,7 +47,7 @@
 }
 
 .upload:hover {
-    background: #9c27b0;
+    background: var(--color-secondary-hover);
 }
 
 .errorText {
@@ -59,9 +57,9 @@
 
 .inputGroup:has(input[readonly]) .upload {
     outline: none;
-    color: #949497;
-    border: 1px solid #2d2d34;
-    background: #15151d;
+    color: var(--color-text-muted);
+    border: 1px solid var(--color-border);
+    background: var(--color-bg-dark);
     cursor: default;
     pointer-events: none;
 }

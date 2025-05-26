@@ -1,6 +1,6 @@
 .mediaGridContainer {
     display: grid;
-    padding: 2rem 0;
+    padding: var(--spacing-medium) 0;
     width: 100%;
     max-width: 1340px;
 }
@@ -10,12 +10,12 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    margin-bottom: 2rem;
+    margin-bottom: var(--spacing-medium);
 }
 
 .buttonContainer {
     display: flex;
-    gap: 1rem;
+    gap: var(--spacing-small);
 }
 
 .title {
@@ -37,4 +37,10 @@
 .containerList {
     display: flex;
     flex-direction: column;
+}
+
+@media (max-width: 768px) {
+    .buttonContainer {
+        display: none;
+    }
 }
