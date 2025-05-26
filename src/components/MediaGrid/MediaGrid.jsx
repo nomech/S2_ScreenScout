@@ -10,7 +10,7 @@ import { authContext } from "../../context/authContext";
 import { useWatchList } from "../../hooks/useWatchList";
 import Card from "../Card/Card";
 import ListCard from "../ListCard.jsx/ListCard";
-import GenreContext from "../../context/GenreContext";
+import GenreContext from "../../context/genreContext";
 
 const MediaGrid = ({ limit, title, setMatches, getTotalPages, url }) => {
     const [cardStyle, setCardStyle] = useState("Grid");
