@@ -2,21 +2,21 @@
     cursor: pointer;
     transition: background-color 0.2s ease;
     border: none;
-    background: #7e22ce;
+    background-color: var(--color-primary);
     font-weight: 700;
     width: 360px;
     height: 47px;
-    border-radius: 8px;
+    border-radius: var(--radius);
 }
 
 .button:hover {
-    background: #9c27b0;
+    background: var(--color-primary-hover);
 }
 
 .button:disabled {
-    color: #949497;
-    border: 1px solid #2d2d34;
-    background: #15151d;
+    color: var(--color-text-mute);
+    border: 1px solid var(--color-border);
+    background-color: var(--color-bg-dark);
     cursor: default;
 }
 
@@ -24,38 +24,35 @@
 .signup {
     width: 360px;
     height: 47px;
-    border-radius: 8px;
-    background: #7e22ce;
-    color: #ffffff;
-    font-family: Inter;
-    font-size: 16px;
+    border-radius: var(--radius);
+    background: var(--color-primary);
+    color: var(--color-text);
+    font-size: var(--spacing-small);
 }
 
 .signup:disabled {
-    background: #8d8d8d;
+    background: var(--color-bg-disabled);
     cursor: default;
 }
 
 .menuButton {
     display: flex;
     align-items: center;
-    padding-left: 1rem;
-    background-color: #6415c0;
+    padding-left: var(--spacing-small);
+    background-color: var(--color-secondary);
     height: 100%;
     width: 100%;
-    color: #d5d5d5;
-    font-family: Inter;
+    color: var(--color-text-secondary);
     font-size: 20px;
     text-decoration: none;
     border: none;
     transition: background-color 0.1s ease-in;
-    color: #d5d5d5;
-    font-family: Inter;
+    color: var(--color-text-secondary);
     text-decoration: none;
 }
 
 .menuButton:hover {
-    color: #ffffff;
+    color: var(--color-text);
     background-color: #7928d1;
 }
 
@@ -63,49 +60,22 @@
     width: 190px;
     height: 38px;
     position: absolute;
-    right: 15px;
+    right: var(--spacing-small);
     top: 10px;
 }
 
-.searchMediatype {
-    height: 34px;
-    width: fit-content;
-    padding: 0 1rem;
-    background-color: #232339;
-    border: 1px solid #39394d;
-}
-
-.inactive {
-    height: 34px;
-    width: fit-content;
-    padding: 0 1rem;
-    background-color: #232339;
-    border: 1px solid #39394d;
-}
-
-.active,
-.addWatchlistButton {
-    height: 34px;
-    width: fit-content;
-    padding: 0 1rem;
-    background-color: #7928d1;
-    border: 1px solid #39394d;
-}
-
+.inactive,
+.searchMediatype,
 .inactiveReview {
     height: 34px;
     width: fit-content;
-    padding: 0 1rem;
-    background-color: #232339;
-    color: #838383;
-    border: 1px solid #39394d;
-    cursor: default;
+    padding: 0 var(--spacing-small);
+    background-color: var(--color-bg-secondary);
+    border: 1px solid var(--color-border-light);
 }
 
-.inactiveReview:disabled {
-    background-color: #232339;
-}
-
+.active,
+.addWatchlistButton,
 .activeReview {
     height: 34px;
     width: fit-content;
@@ -114,9 +84,15 @@
     border: 1px solid #39394d;
 }
 
+.inactiveReview:disabled {
+    background-color: var(--color-bg-secondary);
+    color: #838383;
+    cursor: default;
+}
+
 .listButton,
 .gridButton {
-    background-color: #232339;
+    background-color: var(--color-bg-secondary);
     border: 1px solid #39394d;
     margin: 0;
     width: fit-content;
@@ -132,7 +108,7 @@
 .removeWatchlistButton {
     position: absolute;
     right: -100px;
-    background-color: #232339;
+    background-color: var(--color-bg-secondary);
     border: 1px solid #39394d;
 }
 
@@ -167,7 +143,7 @@
     padding: 3px 5px;
     right: 5px;
     top: 5px;
-    background-color: #232339;
+    background-color: var(--color-bg-secondary);
     border: 1px solid #39394d;
 }
 
@@ -200,8 +176,66 @@
     height: fit-content;
     background-color: #374151;
     border: 1px solid #39394d;
-    color: #ffffff;
+    color: var(--color-text);
     font-size: 14px;
     font-weight: 500;
     gap: 1rem;
+}
+
+@media (max-width: 768px) {
+    .login,
+    .signup,
+    .clearButton {
+        width: 100%;
+        max-width: 360px;
+        height: 42px;
+        font-size: 14px;
+    }
+
+    .menuButton {
+        font-size: 18px;
+        padding-left: 0.75rem;
+    }
+
+    .search {
+        width: 150px;
+        right: 10px;
+        top: 8px;
+    }
+
+    .searchMediatype,
+    .inactive,
+    .active,
+    .listButton,
+    .gridButton,
+    .verify,
+    .genreButton,
+    .ratingButton,
+    .durationButton {
+        padding: 0 0.75rem;
+        height: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .menuButton {
+        font-size: 16px;
+        padding-left: 0.5rem;
+    }
+
+    .search {
+        display: none;
+    }
+
+    .searchMediatype,
+    .inactive,
+    .active,
+    .listButton,
+    .gridButton,
+    .verify,
+    .genreButton,
+    .ratingButton,
+    .durationButton {
+        width: 100%;
+    }
 }

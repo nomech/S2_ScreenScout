@@ -1,11 +1,10 @@
 .navbar {
     width: 100%;
     height: 75px;
-    background: linear-gradient(90deg, #6200e9 0%, #9c27af 100%);
+    background: var(--gradient-primary);
     display: flex;
     justify-content: center;
-
-    padding: 0 2rem;
+    padding: 0 var(--spacing-medium);
 }
 
 .wrapper {
@@ -23,13 +22,13 @@
 
 .navList {
     display: flex;
-    gap: 2rem;
+    gap: var(--spacing-medium);
     list-style: none;
 }
 
 .navItem *,
 .profile {
-    color: #d5d5d5;
+    color: var(--color-text-secondary);
     font-family: Inter;
     font-size: 20px;
     font-weight: 700;
@@ -37,9 +36,10 @@
 }
 
 .navItem *:hover,
-.profile:hover {
-    color: #ffffff;
-    text-shadow: 0px 0px 100px #ffffff;
+.profile:hover,
+.active {
+    color: var(--color-text);
+    text-shadow: 0px 0px 100px var(--color-text);
 }
 
 .profile:hover {
@@ -47,27 +47,14 @@
 }
 
 .title {
-    color: #ffffff;
+    color: var(--color-text);
 }
 
 .navList {
     display: flex;
-    gap: 2rem;
+    gap: var(--spacing-medium);
     list-style: none;
     align-items: center;
-}
-
-.navItem * {
-    color: #d5d5d5;
-    font-family: Inter;
-    font-size: 20px;
-    font-weight: 700;
-    text-decoration: none;
-}
-
-.active {
-    color: #ffffff;
-    text-shadow: 0px 0 100px #ffffff;
 }
 
 .profilePicture {
@@ -83,8 +70,60 @@
     overflow: hidden;
     height: 64px;
     width: 64px;
-    border: #8a2be2 solid 3px;
+    border: var(--color-border-accent) solid 3px;
     border-radius: 144px;
     align-items: center;
     justify-content: center;
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        height: 60px;
+        padding: 0 1rem;
+    }
+
+    .wrapper {
+        width: 100%;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .navList {
+        display: none;
+    }
+
+    /* You can add a hamburger menu icon here */
+}
+
+@media (max-width: 480px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        height: auto;
+        padding: var(--spacing-xsmall) var(--spacing-small);
+    }
+
+    .wrapper {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .navList {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap: var(--spacing-small);
+        background: var(--color-bg-dark);
+        padding: var(--spacing-small) 0;
+    }
+
+    .navItem {
+        padding: var(--spacing-xsmall) var(--spacing-small);
+    }
+
+    .profilePicture,
+    .frame {
+        height: 40px;
+        width: 40px;
+    }
 }
