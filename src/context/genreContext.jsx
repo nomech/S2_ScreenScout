@@ -16,10 +16,10 @@ export const GenreProvider = ({ children }) => {
 
     useEffect(() => {
         console.log(movieData);
-        if (movieData) {
+        if (tvData) {
             setTvGenres(tvData.genres);
         }
-        if (tvData) {
+        if (movieData) {
             setMovieGenres(movieData.genres);
         }
     }, [movieData, tvData]);
@@ -32,4 +32,3 @@ export const GenreProvider = ({ children }) => {
 };
 
 export default GenreContext;
- 
