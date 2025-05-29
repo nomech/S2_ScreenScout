@@ -15,21 +15,20 @@ const Navbar = () => {
     };
 
     useEffect(() => {
-        if (!isOpen) {
-            return;
+        const handleClickOutside = (event) => {
+            if (!menuRef.current.contains(event.target)) {
+                setIsOpen(false);
+            }
+        };
+
+        if (isOpen) {
+            document.addEventListener("mousedown", handleClickOutside);
         }
 
-        console.log();
-
-        document.addEventListener("click", (event) => {
-            const classList = event.target.classList;
-            console.log(classList);
-
-            if (classList.contains("_menu_1mpso_1")) {
-                console.log("!!!!");
-            }
-        });
-    });
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [isOpen]);
 
     return (
         <>
