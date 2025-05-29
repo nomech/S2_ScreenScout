@@ -1,17 +1,35 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useRef, useEffect } from "react";
 import styles from "./Navbar.module.css";
 import { NavLink } from "react-router-dom";
 import { authContext } from "../../context/authContext";
 import Menu from "../Menu/Menu";
 
 const Navbar = () => {
-    const { user, verified } = useContext(authContext);
-
     const [isOpen, setIsOpen] = useState(false);
 
+    const menuRef = useRef();
+
+    const { user, verified } = useContext(authContext);
     const toggleMenu = () => {
         setIsOpen(!isOpen);
     };
+
+    useEffect(() => {
+        if (!isOpen) {
+            return;
+        }
+
+        console.log();
+
+        document.addEventListener("click", (event) => {
+            const classList = event.target.classList;
+            console.log(classList);
+
+            if (classList.contains("_menu_1mpso_1")) {
+                console.log("!!!!");
+            }
+        });
+    });
 
     return (
         <>
@@ -64,7 +82,7 @@ const Navbar = () => {
                             </li>
                         </ul>
                     )}
-                    {isOpen && <Menu setIsOpen={setIsOpen} />}
+                    {isOpen && <Menu setIsOpen={setIsOpen} ref={menuRef} />}
                 </div>
             </nav>
         </>

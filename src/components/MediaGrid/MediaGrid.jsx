@@ -12,11 +12,19 @@ import Card from "../Card/Card";
 import ListCard from "../ListCard.jsx/ListCard";
 import GenreContext from "../../context/genreContext";
 
-const MediaGrid = ({ limit, title, setMatches, getTotalPages, url }) => {
+const MediaGrid = ({
+    limit = 20,
+    title,
+    setMatches,
+    getTotalPages,
+    tv = false,
+    movie = false,
+    url,
+}) => {
     const [cardStyle, setCardStyle] = useState("Grid");
     const [showDetailedCard, setShowDetailedCard] = useState(false);
     const [detailedCardId, setDetailedCardId] = useState(null);
-    const [mediaType, setMediaType] = useState(null);
+    const [mediaType, setMediaType] = useState("movie");
     const [watchlist, setWatchlist] = useState(null);
     const [watchedMedia, setWatchedMedia] = useState(null);
 
@@ -62,7 +70,13 @@ const MediaGrid = ({ limit, title, setMatches, getTotalPages, url }) => {
             setMatches(data.total_results);
             getTotalPages(data.total_pages);
         }
-    }, [setMatches, getTotalPages, data, isLoading]);
+
+        if (movie) {
+            setMediaType("movie");
+        } else if (tv) {
+            setMediaType("tv");
+        }
+    }, [setMatches, getTotalPages, data, isLoading, setMediaType, movie, tv]);
 
     const setWatchedStatus = (item) => {
         return watchedMedia ? watchedMedia.includes(item.id) : false;
@@ -78,9 +92,9 @@ const MediaGrid = ({ limit, title, setMatches, getTotalPages, url }) => {
         );
     };
 
-    const handleCardClick = (id, media) => {
+    const handleCardClick = (id, type) => {
         setDetailedCardId(id);
-        setMediaType(media);
+        setMediaType(type);
         setShowDetailedCard(true);
     };
 
@@ -113,6 +127,7 @@ const MediaGrid = ({ limit, title, setMatches, getTotalPages, url }) => {
             return media;
         });
 
+    console.log(items);
     return (
         <>
             {isLoading && <Loading />}
@@ -147,8 +162,9 @@ const MediaGrid = ({ limit, title, setMatches, getTotalPages, url }) => {
                             cardStyle === "Grid" ? (
                                 <Card
                                     key={media.id}
+                                    mediaType={mediaType}
                                     isInWatchlist={watchlist?.[
-                                        media.media_type
+                                        mediaType
                                     ]?.includes(media.id)}
                                     isWatched={watchedMedia?.includes(media.id)}
                                     media={media}
@@ -162,8 +178,9 @@ const MediaGrid = ({ limit, title, setMatches, getTotalPages, url }) => {
                                     key={media.id}
                                     media={media}
                                     user={user}
+                                    mediaType={mediaType}
                                     isInWatchlist={watchlist[
-                                        media.media_type
+                                        mediaType
                                     ].includes(media.id)}
                                     isWatched={watchedMedia?.includes(media.id)}
                                     onCardClick={handleCardClick}

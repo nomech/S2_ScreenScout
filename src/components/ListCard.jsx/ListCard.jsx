@@ -11,6 +11,7 @@ const ListCard = ({
     isInWatchlist,
     toggleWatchStatus,
     isWatched,
+    mediaType,
 }) => {
     const {
         createWatchList,
@@ -25,16 +26,16 @@ const ListCard = ({
         await createWatchList(user.uid, media);
         setWatchlist((prev) => ({
             ...prev,
-            [media.media_type]: [...(prev?.[media.media_type] || []), media.id],
+            [mediaType]: [...(prev?.[mediaType] || []), media.id],
         }));
     };
 
     const handleRemoveFromWatchlist = async (e, media) => {
         e.stopPropagation();
-        await removeFromWatchList(user.uid, media.id, media.media_type);
+        await removeFromWatchList(user.uid, media.id, mediaType);
         setWatchlist((prev) => ({
             ...prev,
-            [media.media_type]: prev?.[media.media_type].filter((item) =>
+            [mediaType]: prev?.[mediaType].filter((item) =>
                 item.id ? item.id !== media.id : item !== media.id
             ),
         }));
@@ -56,10 +57,11 @@ const ListCard = ({
         e.stopPropagation();
     };
 
+
     return (
         <div
             className={styles.cardList}
-            onClick={() => onCardClick(media.id, media.media_type)}
+            onClick={() => onCardClick(media.id, mediaType)}
         >
             <img
                 className={styles.backdrop}
@@ -82,8 +84,8 @@ const ListCard = ({
                             {media.release_date || media.first_air_date}
                         </p>
                         {media.genres?.map((genre) => (
-                            <p key={genre} className={styles.genre}>
-                                {genre}
+                            <p key={genre.id} className={styles.genre}>
+                                {genre?.name || genre}
                             </p>
                         ))}
                     </div>

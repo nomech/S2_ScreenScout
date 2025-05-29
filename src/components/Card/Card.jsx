@@ -15,6 +15,7 @@ const Card = ({
     setWatchlist,
     toggleWatchStatus,
     isWatched,
+    mediaType,
 }) => {
     const {
         createWatchList,
@@ -30,20 +31,17 @@ const Card = ({
         await createWatchList(user.uid, media);
         setWatchlist((prev) => ({
             ...prev,
-            [media.media_type]: [
-                ...(prev?.[media.media_type] || null),
-                media.id,
-            ],
+            [mediaType]: [...(prev?.[mediaType] || null), media.id],
         }));
     };
 
     const handleRemoveFromWatchlist = async (e, media) => {
         e.stopPropagation();
-        await removeFromWatchList(user.uid, media.id, media.media_type);
+        await removeFromWatchList(user.uid, media.id, mediaType);
 
         setWatchlist((prev) => ({
             ...prev,
-            [media.media_type]: prev?.[media.media_type].filter((item) => {
+            [mediaType]: prev?.[mediaType].filter((item) => {
                 return item.id ? item.id !== media.id : item !== media.id;
             }),
         }));
@@ -64,7 +62,7 @@ const Card = ({
     return (
         <div
             className={styles.card}
-            onClick={() => onCardClick(media.id, media.media_type)}
+            onClick={() => onCardClick(media.id, mediaType)}
         >
             {!isWatched && verified && (
                 <Button

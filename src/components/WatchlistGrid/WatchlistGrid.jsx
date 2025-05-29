@@ -30,6 +30,10 @@ const Watchlist = () => {
 
             hasFetched.current = true;
             const list = await getWatchList(user.uid);
+
+            list.movie.length > 0 ? setMediaType("movie") : setMediaType("tv");
+            list.tv.length > 0 ? setMediaType("tv") : setMediaType("movie");
+
             setWatchedMedia(list.watched);
 
             const urlList = { tv: [], movie: [] };
@@ -88,6 +92,7 @@ const Watchlist = () => {
     }, [user, getWatchList, getWatchedMedia, watchedMedia]);
 
     const handleCardClick = (id, media) => {
+        console.log(media);
         setDetailedCardId(id);
         setMediaType(media);
         setShowDetailedCard(true);
@@ -103,8 +108,6 @@ const Watchlist = () => {
     };
 
     const toggleWatchStatus = (id) => {
-        console.log(id);
-
         setWatchedMedia((previous) =>
             previous
                 ? previous.includes(id)
@@ -193,6 +196,7 @@ const Watchlist = () => {
                                     <Card
                                         key={media.id}
                                         media={media}
+                                        mediaType={mediaType}
                                         onCardClick={handleCardClick}
                                         isInWatchlist={true}
                                         setWatchlist={setWatchlist}
@@ -206,6 +210,7 @@ const Watchlist = () => {
                                         key={media.id}
                                         media={media}
                                         user={user}
+                                        mediaType={mediaType}
                                         isWatched={watchedMedia.includes(
                                             media.id
                                         )}

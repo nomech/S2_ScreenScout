@@ -4,7 +4,7 @@ import Button from "../Button/Button";
 import styles from "./Menu.module.css";
 import { useNavigate } from "react-router-dom";
 
-const Menu = ({ setIsOpen }) => {
+const Menu = ({ setIsOpen, ref }) => {
     const { signOutUser } = useContext(authContext);
     const navigate = useNavigate();
 
@@ -19,7 +19,7 @@ const Menu = ({ setIsOpen }) => {
     };
 
     return (
-        <div className={styles.menu}>
+        <div className={styles.menu} ref={ref}>
             <ul className={styles.list}>
                 <li className={styles.listItem}>
                     <Button

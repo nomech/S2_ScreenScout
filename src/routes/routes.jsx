@@ -13,6 +13,8 @@ import NotFound from "../components/NotFound/NotFound";
 import Search from "../pages/Search";
 import Watchlist from "../pages/Watchlist";
 import Settings from "../pages/Settings";
+import Movies from "../pages/Movies";
+import Tv from "../pages/Tv";
 
 export const routes = createBrowserRouter(
     createRoutesFromElements(
@@ -51,6 +53,23 @@ export const routes = createBrowserRouter(
                     element={
                         <AuthenticatedUsers>
                             <Settings />{" "}
+                        </AuthenticatedUsers>
+                    }
+                />
+                <Route
+                    path="/movies"
+                    element={
+                        <AuthenticatedUsers>
+                            <Movies />{" "}
+                        </AuthenticatedUsers>
+                    }
+                />
+
+                <Route
+                    path="/tv-shows"
+                    element={
+                        <AuthenticatedUsers>
+                            <Tv />
                         </AuthenticatedUsers>
                     }
                 />
