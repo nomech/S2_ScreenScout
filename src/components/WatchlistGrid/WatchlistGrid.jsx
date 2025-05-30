@@ -3,14 +3,18 @@ import Card from "../Card/Card";
 import { useWatchList } from "../../hooks/useWatchList";
 import Loading from "../Loading/Loading";
 import { useContext, useEffect, useRef, useState } from "react";
-import { authContext } from "../../context/authContext";
+import AuthContext from "../../context/AuthContext";
 import Button from "../Button/Button";
 import DetailedCard from "../DetailedCard/DetailedCard";
 import listIcon from "../../assets/icons/listIcon.svg";
 import gridIcon from "../../assets/icons/gridIcon.svg";
 import ListCard from "../ListCard.jsx/ListCard";
+import tv from "../../assets/icons/tv.svg";
+import film from "../../assets/icons/film.svg";
 
+// This component renders a watchlist of movies and TV shows, allowing users to view details, mark items as watched, and toggle their watchlist status.
 const Watchlist = () => {
+    // State variables to manage the watchlist, detailed card visibility, media type, card style, and watched media
     const [showDetailedCard, setShowDetailedCard] = useState(false);
     const [detailedCardId, setDetailedCardId] = useState(null);
     const [mediaType, setMediaType] = useState("movie");
@@ -18,24 +22,30 @@ const Watchlist = () => {
     const [watchlist, setWatchlist] = useState(null);
     const [watchedMedia, setWatchedMedia] = useState(null);
 
-    const { user } = useContext(authContext);
+    // Context to access user authentication
+    const { user } = useContext(AuthContext);
+
+    // Custom hook to fetch the watchlist and watched media
     const { getWatchList, getWatchedMedia } = useWatchList();
+
+    // Ref to track if the watchlist has been fetched to avoid multiple fetches
     const hasFetched = useRef(false);
 
+    // Effect to fetch the watchlist and watched media when the component mounts or when the user changes
     useEffect(() => {
+        // Function to construct the URL list for fetching media details
         const constructUrlList = async () => {
             if (!user || hasFetched.current) {
                 return;
             }
 
+            // Set the flag to indicate that the watchlist has been fetched
             hasFetched.current = true;
             const list = await getWatchList(user.uid);
 
-            list.movie.length > 0 ? setMediaType("movie") : setMediaType("tv");
-            list.tv.length > 0 ? setMediaType("tv") : setMediaType("movie");
-
             setWatchedMedia(list.watched);
 
+            // Create a list of URLs for fetching media details
             const urlList = { tv: [], movie: [] };
             for (const key in list) {
                 if (key !== "watched") {
@@ -46,7 +56,10 @@ const Watchlist = () => {
                 }
             }
 
+            // Set controller to handle fetch requests
             const controller = new AbortController();
+
+            // Options for the fetch request, including headers and signal for aborting
             const options = {
                 method: "GET",
                 headers: {
@@ -56,6 +69,7 @@ const Watchlist = () => {
                 signal: controller.signal,
             };
 
+            // Function to fetch data from the constructed URLs
             const fetchData = async (url) => {
                 try {
                     const response = await fetch(url, options);
@@ -69,6 +83,7 @@ const Watchlist = () => {
                         data.media_type = "movie";
                     }
 
+                    // Add watched status to the media data
                     data.watched = watchedMedia?.includes(data.id)
                         ? true
                         : false;
@@ -78,6 +93,7 @@ const Watchlist = () => {
                 }
             };
 
+            // Fetch data for each URL and construct the watchlist object
             const mediaList = { tv: [], movie: [] };
             for (const key in urlList) {
                 for (const url of urlList[key]) {
@@ -85,28 +101,33 @@ const Watchlist = () => {
                     mediaList[key].push(data);
                 }
             }
+
+            // Set the watchlist state with the fetched media list
             setWatchlist(mediaList);
         };
 
         constructUrlList();
     }, [user, getWatchList, getWatchedMedia, watchedMedia]);
 
+    // Function to handle card click events, setting the detailed card ID and media type, and showing the detailed card
     const handleCardClick = (id, media) => {
-        console.log(media);
         setDetailedCardId(id);
         setMediaType(media);
         setShowDetailedCard(true);
     };
 
+    // Function to handle media type
     const handleOnClickMediaButton = (e) => {
         setMediaType(e.target.innerText.toLowerCase());
     };
 
+    // Function to handle closing the detailed card
     const handleCloseDetailedCard = () => {
         setShowDetailedCard(false);
         setDetailedCardId(null);
     };
 
+    // Function to toggle the watch status of a media item
     const toggleWatchStatus = (id) => {
         setWatchedMedia((previous) =>
             previous
@@ -120,7 +141,10 @@ const Watchlist = () => {
     return (
         <>
             <div className="wrapper">
+                {/* Conditional rendering for loading state and empty watchlist message */}
                 {!watchlist && <Loading />}
+
+                {/* Conditional rendering for empty watchlist message */}
                 {watchlist && watchlist[mediaType].length === 0 && (
                     <div className={styles.emptyWatchlist}>
                         <h2 className={styles.emptyTitle}>
@@ -133,6 +157,7 @@ const Watchlist = () => {
                     </div>
                 )}
 
+                {/* Watchlist container with buttons for filtering media type and changing card style */}
                 <div className={styles.watchlistContainer}>
                     <div className={styles.buttons}>
                         <div className={styles.filterButtons}>
@@ -145,6 +170,11 @@ const Watchlist = () => {
                                             : "inactive"
                                     }
                                 >
+                                    <img
+                                        className="icons"
+                                        src={film}
+                                        alt="Movie Icon"
+                                    />
                                     Movie
                                 </Button>
                             )}
@@ -157,6 +187,11 @@ const Watchlist = () => {
                                             : "inactive"
                                     }
                                 >
+                                    <img
+                                        className="icons"
+                                        src={tv}
+                                        alt="Tv Icon"
+                                    />
                                     TV
                                 </Button>
                             )}
@@ -190,6 +225,7 @@ const Watchlist = () => {
                             styles["container" + cardStyle]
                         }`}
                     >
+                        {/* Render media cards based on the selected card style */}
                         {watchlist &&
                             watchlist[mediaType].map((media) =>
                                 cardStyle === "Grid" ? (
@@ -224,6 +260,8 @@ const Watchlist = () => {
                     </div>
                 </div>
             </div>
+
+            {/* Render the detailed card if showDetailedCard is true */}
             {showDetailedCard && (
                 <DetailedCard
                     id={detailedCardId}

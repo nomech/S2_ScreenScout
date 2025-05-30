@@ -1,9 +1,10 @@
 import styles from "./ListCard.module.css";
 import Button from "../Button/Button";
 import { useWatchList } from "../../hooks/useWatchList";
-import { authContext } from "../../context/authContext";
+import AuthContext from "../../context/AuthContext";
 import { useContext } from "react";
 
+// This component renders a card for displaying media details such as movies or TV shows in a list format.
 const ListCard = ({
     media,
     onCardClick,
@@ -13,14 +14,16 @@ const ListCard = ({
     isWatched,
     mediaType,
 }) => {
+    // Importing functions from the useWatchList to manage watchlist actions
     const {
         createWatchList,
         removeFromWatchList,
         markAsWatched,
         removeWatchedMedia,
     } = useWatchList();
-    const { user, verified } = useContext(authContext);
+    const { user, verified } = useContext(AuthContext);
 
+    // Adds a media item to the user's watchlist
     const handleAddToWatchlist = async (e, media) => {
         e.stopPropagation();
         await createWatchList(user.uid, media);
@@ -30,6 +33,7 @@ const ListCard = ({
         }));
     };
 
+    // Removes a media item from the user's watchlist
     const handleRemoveFromWatchlist = async (e, media) => {
         e.stopPropagation();
         await removeFromWatchList(user.uid, media.id, mediaType);
@@ -41,22 +45,24 @@ const ListCard = ({
         }));
     };
 
+    // Marks a media item as watched
     const handleMarkAsWatched = async (e, id) => {
         e.stopPropagation();
         await markAsWatched(user.uid, id);
         toggleWatchStatus(id);
     };
 
+    // Removes a media item from the watched list
     const handleRemoveAsWatched = async (e, id) => {
         e.stopPropagation();
         await removeWatchedMedia(user.uid, id);
         toggleWatchStatus(id);
     };
 
+    // Handles the review action, currently does nothing but can be extended later
     const handleReview = (e) => {
         e.stopPropagation();
     };
-
 
     return (
         <div

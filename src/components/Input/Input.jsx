@@ -1,5 +1,6 @@
 import styles from "./Input.module.css";
 
+// This component renders a styled input field with optional label, error message, and various properties.
 const Input = ({
     label,
     type = "text",
@@ -14,6 +15,7 @@ const Input = ({
     readonly = false,
 }) => {
     return (
+        // Render an input field with a label and error message if applicable
         <div className={styles.inputGroup}>
             {label && (
                 <label

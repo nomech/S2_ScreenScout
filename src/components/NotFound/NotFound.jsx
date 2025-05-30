@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./NotFound.module.css";
 
+// This component renders a 404 Not Found page with a message indicating that the requested page does not exist.
 const NotFound = () => {
     return (
         <div className={styles.container}>

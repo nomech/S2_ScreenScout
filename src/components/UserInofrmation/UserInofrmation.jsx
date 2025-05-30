@@ -7,16 +7,16 @@ import {
 import Input from "../Input/Input";
 import Button from "../Button/Button";
 import styles from "./UserInformation.module.css";
-import { authContext } from "../../context/authContext";
+import AuthContext from "../../context/AuthContext";
 import { formatFireBaseFeedback } from "../../utils/fromatFirebaseErrors";
 import { updateProfileValidation } from "../../utils/formValidation";
 import InfoCard from "../InfoCard/InfoCard";
 import { auth } from "../../firebaseConfig";
 import ProfilePicture from "../ProfilePicture/ProfilePicture";
 
+// This component renders a user information form that allows users to update their profile details such as name, email, and profile picture. It also includes functionality for resetting the password.
 const UserInformation = () => {
-    const { user } = useContext(authContext);
-
+    // State to manage form data, readonly state, loading state, error messages, and success messages
     const [formData, setFormData] = useState({
         firstName: "",
         lastName: "",
@@ -28,9 +28,15 @@ const UserInformation = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
     const [success, setSuccess] = useState(false);
+
+    // Context to access user authentication information
+    const { user } = useContext(AuthContext);
+
+    // Cloudinary configuration for profile picture upload
     const cloudinaryName = import.meta.env.VITE_CLOUDINARY_NAME;
     const uploadPreset = "upload_preset_screenscout";
 
+    // Effect to initialize form data with user information when the component mounts or when the user changes
     useEffect(() => {
         if (user) {
             setFormData({
@@ -42,11 +48,13 @@ const UserInformation = () => {
         }
     }, [user]);
 
+    // Function to handle the completion of profile picture upload
     const handleUploadComplete = (url) => {
         setFormData((prev) => ({ ...prev, photoUrl: url }));
         setIsLoading(false);
     };
 
+    // Function to handle input changes in the form
     const handleOnChange = (e) => {
         const { name, value } = e.target;
         setFormData((prev) => ({
@@ -55,35 +63,47 @@ const UserInformation = () => {
         }));
     };
 
+    // Function to toggle the readonly state and handle profile updates
     const toggleReadOnly = async (e) => {
         e.preventDefault();
+
+        // If the form is readonly, switch to edit mode; otherwise, validate and update the profile
         if (!readonly) {
+            // Validate the form data before proceeding
             if (!updateProfileValidation(formData, setError)) {
                 return;
             }
+
             try {
                 setIsLoading(true);
                 setError(null);
 
+                // Update the user's profile with the new information
                 await updateProfile(user, {
                     displayName: `${formData.firstName} ${formData.lastName}`,
                     photoURL: formData.photoUrl,
                 });
 
+                // If the email has changed, update it as well
                 if (formData.email !== user.email) {
                     await updateEmail(user, formData.email);
                 }
             } catch (error) {
+                // Handle errors during profile update
                 setReadOnly((prev) => !prev);
+                // Format the Firebase error message and set it in the error state
                 formatFireBaseFeedback(error.code, setError);
             } finally {
+                // Reset loading state after the operation is complete
                 setIsLoading(false);
             }
         }
 
+        // Toggle the readonly state
         setReadOnly((prev) => !prev);
     };
 
+    // Function to handle password reset
     const handlePasswordReset = async () => {
         try {
             await sendPasswordResetEmail(auth, user.email);
@@ -102,6 +122,7 @@ const UserInformation = () => {
                         onSubmit={toggleReadOnly}
                         className={styles.userInformationForm}
                     >
+                        {/* Profile picture upload component with placeholder, cloudinary configuration, and error handling */}
                         <ProfilePicture
                             placeholder={user.photoURL}
                             cloudinaryName={cloudinaryName}
@@ -114,6 +135,7 @@ const UserInformation = () => {
                             onUploadComplete={handleUploadComplete}
                         />
 
+                        {/* Input fields for first name, last name, and email with error handling */}
                         <div className={styles.inputContainer}>
                             <Input
                                 id="firstName"
@@ -176,6 +198,7 @@ const UserInformation = () => {
                         </Button>
                     </form>
 
+                    {/* Display error messages if any */}
                     {error && error.firebase && (
                         <InfoCard style="error" text={error.firebase} />
                     )}

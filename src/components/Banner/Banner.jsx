@@ -1,20 +1,29 @@
-import React, { useState, useEffect } from "react";
-import styles from "./Banner.module.css";
+import { useState, useEffect } from "react";
 import { useFetch } from "../../hooks/useFetch";
+import styles from "./Banner.module.css";
 import Loading from "../Loading/Loading";
 
+// This componenet is a banner that displays trending media from The Movie Database (TMDB).
+
 const Banner = () => {
+    // Fetches trending media data from TMDB API
     const { data, isLoading } = useFetch(
         "https://api.themoviedb.org/3/trending/all/week?language=en-US"
     );
 
+    // State to keep track of the current index of the media being displayed
     const [currentIndex, setCurrentIndex] = useState(0);
 
+    // Effect to change the current index every 5 seconds
+    // It cycles through the media results to create a slideshow effect
+
     useEffect(() => {
+        // If there are no results, do not set up the interval
         if (!data?.results?.length) {
             return;
         }
 
+        // Set up an interval to change the current index every 5 seconds
         const interval = setInterval(() => {
             setCurrentIndex((prev) => (prev + 1) % data.results.length);
         }, 5000);
@@ -22,16 +31,22 @@ const Banner = () => {
     }, [data]);
 
     return (
+        // The banner component displays the media in a slideshow format
         <div className={styles.banner}>
+            {/* If the data is still loading, show a loading spinner */}
             {isLoading && <Loading />}
+
+            {/* Map through the media results and display each one */}
             {data &&
                 data.results.map((media, index) => (
+                    // Display each media item in a container
                     <div
                         key={media.id}
                         className={`${styles.mediaContainer} ${
                             index === currentIndex ? styles.activeSlide : ""
                         }`}
                     >
+                        {/* If the media does not have a backdrop path, do not display the backdrop image */}
                         <div className={styles.backdrop}>
                             <img
                                 className={styles.backdrop}
@@ -39,6 +54,8 @@ const Banner = () => {
                                 alt={media.title}
                             />
                         </div>
+
+                        {/* Display the media details such as poster, title, and overview */}
                         <div key={media.id} className={styles.mediaDetails}>
                             <img
                                 className={styles.poster}

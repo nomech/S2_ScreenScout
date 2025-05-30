@@ -6,12 +6,13 @@ import Button from "../Button/Button";
 import listIcon from "../../assets/icons/listIcon.svg";
 import gridIcon from "../../assets/icons/gridIcon.svg";
 import DetailedCard from "../DetailedCard/DetailedCard";
-import { authContext } from "../../context/authContext";
+import AuthContext from "../../context/AuthContext";
 import { useWatchList } from "../../hooks/useWatchList";
 import Card from "../Card/Card";
 import ListCard from "../ListCard.jsx/ListCard";
-import GenreContext from "../../context/genreContext";
+import GenreContext from "../../context/GenreContext";
 
+// This component renders a grid of media items (movies or TV shows) with options to view details and manage watchlists.
 const MediaGrid = ({
     limit = 20,
     title,
@@ -21,6 +22,7 @@ const MediaGrid = ({
     movie = false,
     url,
 }) => {
+    // State variables to manage the grid style, detailed card visibility, and media type
     const [cardStyle, setCardStyle] = useState("Grid");
     const [showDetailedCard, setShowDetailedCard] = useState(false);
     const [detailedCardId, setDetailedCardId] = useState(null);
@@ -28,18 +30,29 @@ const MediaGrid = ({
     const [watchlist, setWatchlist] = useState(null);
     const [watchedMedia, setWatchedMedia] = useState(null);
 
+    // Custom hook to fetch data from the provided URL
     const { data, isLoading } = useFetch(url);
+
+    // Importing functions from the useWatchList hook to manage watchlist actions
     const { setDefaultWatchList, getWatchList } = useWatchList();
 
-    const { user } = useContext(authContext);
+    // Contexts to access user authentication and genre data
+    const { user } = useContext(AuthContext);
     const { movieGenres, tvGenres } = useContext(GenreContext);
 
+    // Ref to track if the watchlist has been fetched to avoid multiple fetches
     const hasFetched = useRef(false);
 
     useEffect(() => {
-        if (!user || hasFetched.current) return;
+        // Fetch the watchlist only once when the user is authenticated
+        if (!user || hasFetched.current) {
+            return;
+        }
+
+        // Set the flag to indicate that the watchlist has been fetched
         hasFetched.current = true;
 
+        // Function to fetch the watchlist and watched media
         const fetchWatchlist = async () => {
             try {
                 const watchListData = await getWatchList(user.uid);
@@ -53,6 +66,7 @@ const MediaGrid = ({
         fetchWatchlist();
     }, [user, getWatchList]);
 
+    // Effect to initialize the default watchlist when the user is authenticated
     useEffect(() => {
         if (!user) return;
         const initDefaultWatchlist = async () => {
@@ -65,12 +79,15 @@ const MediaGrid = ({
         initDefaultWatchlist();
     }, [setDefaultWatchList, user]);
 
+    // Effect to update matches and media type when data is loaded
     useEffect(() => {
+        // If setMatches is provided, update the total matches and total pages
         if (setMatches && data && !isLoading) {
             setMatches(data.total_results);
             getTotalPages(data.total_pages);
         }
 
+        // Determine the media type based on the provided props
         if (movie) {
             setMediaType("movie");
         } else if (tv) {
@@ -78,10 +95,12 @@ const MediaGrid = ({
         }
     }, [setMatches, getTotalPages, data, isLoading, setMediaType, movie, tv]);
 
+    // Function to check if a media item is watched based on its ID
     const setWatchedStatus = (item) => {
         return watchedMedia ? watchedMedia.includes(item.id) : false;
     };
 
+    // Function to toggle the watch status of a media item
     const toggleWatchStatus = (id) => {
         setWatchedMedia((previous) =>
             previous
@@ -92,22 +111,26 @@ const MediaGrid = ({
         );
     };
 
+    // Function to handle card click events, showing the detailed card view
     const handleCardClick = (id, type) => {
         setDetailedCardId(id);
         setMediaType(type);
         setShowDetailedCard(true);
     };
 
+    // Function to close the detailed card view
     const handleCloseDetailedCard = () => {
         setShowDetailedCard(false);
         setDetailedCardId(null);
     };
 
+    // Filter and map the media items from the fetched data
     const items = (data?.results || [])
         .filter((media) => media.media_type !== "person")
         .map((media) => {
             media.watched = setWatchedStatus(media);
 
+            // Map genre IDs to genre names based on the media type
             if (media.media_type === "movie" && movieGenres) {
                 media.genres = media.genre_ids.map((id) => {
                     const matchedGenre = movieGenres.find(
@@ -127,12 +150,13 @@ const MediaGrid = ({
             return media;
         });
 
-    console.log(items);
     return (
         <>
+            {/* Render loading state while data is being fetched */}
             {isLoading && <Loading />}
 
-            <div className={styles.mediaGridContainer}>
+            {/* Render the media grid container with title and buttons for grid/list view */}
+            <section className={styles.mediaGridContainer}>
                 <div className={styles.header}>
                     <h1 className={styles.title}>{title}</h1>
                     <div className={styles.buttonContainer}>
@@ -151,6 +175,7 @@ const MediaGrid = ({
                     </div>
                 </div>
 
+                {/* Render the media items in a grid or list format based on the selected card style */}
                 <div
                     className={`${styles.mediaGrid} ${
                         styles["container" + cardStyle]
@@ -190,8 +215,9 @@ const MediaGrid = ({
                             )
                         )}
                 </div>
-            </div>
+            </section>
 
+            {/* Render the detailed card view if it is set to be shown */}
             {showDetailedCard && (
                 <DetailedCard
                     id={detailedCardId}

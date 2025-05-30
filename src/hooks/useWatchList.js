@@ -1,15 +1,20 @@
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { db } from "../firebaseConfig";
 
+// This hook provides functionality to manage a user's watchlist, including creating, updating, and retrieving watchlists from Firestore.
 export const useWatchList = () => {
+    // Function to set a default watchlist for a user
     const setDefaultWatchList = async (uid) => {
+        // Check if the watchlist document already exists for the user
         const docRef = doc(db, "watchlists", uid);
         const docSnap = await getDoc(docRef);
 
+        // If the document exists, no need to create a new one
         if (docSnap.exists()) {
             return;
         }
 
+        // If the document does not exist, create a new watchlist with empty arrays for movies, TV shows, and watched media
         try {
             const docRef = doc(db, "watchlists", uid);
             await setDoc(docRef, {
@@ -22,6 +27,7 @@ export const useWatchList = () => {
         }
     };
 
+    
     const getWatchList = async (uid) => {
         const docRef = doc(db, "watchlists", uid);
         const docSnap = await getDoc(docRef);

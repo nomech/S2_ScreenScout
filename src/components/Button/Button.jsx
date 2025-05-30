@@ -11,6 +11,7 @@ const Button = ({
     value,
 }) => {
     return (
+        // The Button component is a reusable button component that can be customized with different styles and properties.
         <button
             className={`${styles.button} ${styles[className]}`}
             disabled={disabled}

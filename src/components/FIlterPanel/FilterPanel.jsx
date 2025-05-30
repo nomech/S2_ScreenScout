@@ -1,12 +1,16 @@
 import { useEffect, useState } from "react";
 import styles from "./FilterPanel.module.css";
+import reset from "../../assets/icons/reset.svg";
 
 import Button from "../Button/Button";
 
+// This component provides a filter panel for selecting the release year and adult content preference.
 const FilterPanel = ({ setFilterParameters }) => {
+    // Hooks to manage state and side effects
     const [year, setYear] = useState();
     const [adult, setAdult] = useState(false);
 
+    // Handlers for changing filter parameters
     const handleOnChangeYear = (e) => {
         const value = e.target.value;
         setYear(value);
@@ -18,6 +22,7 @@ const FilterPanel = ({ setFilterParameters }) => {
         });
     };
 
+    // Handler for toggling adult content filter
     const handleOnChangeAdult = (e) => {
         const checked = e.target.checked;
         setAdult(checked);
@@ -29,6 +34,7 @@ const FilterPanel = ({ setFilterParameters }) => {
         });
     };
 
+    // Get the current year to set year filter default value
     const currentYear = new Date().getFullYear();
 
     useEffect(() => {
@@ -43,6 +49,7 @@ const FilterPanel = ({ setFilterParameters }) => {
                 <label htmlFor="range">
                     <h3>Release Year</h3>
                 </label>
+                {/* Range input for selecting the release year */}
                 <input
                     type="range"
                     value={year}
@@ -57,6 +64,7 @@ const FilterPanel = ({ setFilterParameters }) => {
                 <p>{year}</p>
             </div>
 
+            {/* Checkbox for filtering adult content */}
             <div className={styles.adultContent}>
                 <label htmlFor="adult">
                     <h3>Adult Content (NSFW)</h3>
@@ -69,7 +77,12 @@ const FilterPanel = ({ setFilterParameters }) => {
                     onChange={(e) => handleOnChangeAdult(e)}
                 />
             </div>
-            <Button className="clearButton">Reset</Button>
+
+            {/* Button to reset filters */}
+            <Button className="clearButton">
+                <img className="icons" src={reset} alt="Reset icon" />
+                Reset
+            </Button>
         </div>
     );
 };

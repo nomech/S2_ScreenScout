@@ -3,7 +3,7 @@
     top: 75px;
     right: 0;
     width: 252px;
-    height: 185px;
+    height: 184px;
     background-color: var(--color-primary);
     z-index: 100;
 }
@@ -13,6 +13,7 @@
     flex-direction: column;
     gap: 2px;
     list-style: none;
+    flex-grow: 1;
 }
 
 .listItem {

@@ -1,14 +1,19 @@
 import { useState, useContext } from "react";
-import { authContext } from "../../context/authContext";
+import AuthContext from "../../context/AuthContext";
 import { sendEmailVerification } from "firebase/auth";
 import Button from "../Button/Button";
 import styles from "./VerificationStatus.module.css";
 
+// This component displays the email verification status of a user and provides a button to resend the verification email if needed.
 const VerificationStatus = () => {
-    const { user, verified } = useContext(authContext);
+    // State to manage the verification status and whether the email has been sent
     const [status, setStatus] = useState("");
     const [hasSent, setHasSent] = useState(false);
 
+    // Context to access user authentication information
+    const { user, verified } = useContext(AuthContext);
+
+    // Function to handle sending the verification email
     const onHandleVerification = async () => {
         try {
             await sendEmailVerification(user);

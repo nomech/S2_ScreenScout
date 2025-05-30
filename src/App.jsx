@@ -2,12 +2,12 @@ import { useState, useEffect, useContext } from "react";
 import "./App.css";
 import { Outlet } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
-import { authContext } from "./context/authContext";
+import AuthContext from "./context/AuthContext";
 import InfoCard from "./components/InfoCard/InfoCard";
 // import Button from "./components/Button/Button";
 
 function App() {
-    const { verified, user } = useContext(authContext);
+    const { verified, user } = useContext(AuthContext);
     const [showInfoCard, setShowInfoCard] = useState(false);
 
     useEffect(() => {
