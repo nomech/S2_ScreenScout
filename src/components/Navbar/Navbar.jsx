@@ -39,65 +39,73 @@ const Navbar = () => {
 
     return (
         <>
-            <nav className={styles.navbar}>
-                <div className={styles.wrapper}>
-                    <h1 className={styles.title}>ScreenScout</h1>
+            <header>
+                <nav className={styles.navbar}>
+                    <div className={styles.wrapper}>
+                        <h1 className={styles.title}>ScreenScout</h1>
 
-                    {/* Render navigation links only if the user is logged in */}
-                    {user && (
-                        <ul className={styles.navList}>
-                            <li className={styles.navItem}>
-                                <NavLink to="/" className={styles.link}>
-                                    Home
-                                </NavLink>
-                            </li>
-                            <li className={styles.navItem}>
-                                <NavLink to="/movies" className={styles.link}>
-                                    Movies
-                                </NavLink>
-                            </li>
-                            <li className={styles.navItem}>
-                                <NavLink to="/tv-shows" className={styles.link}>
-                                    TV Shows
-                                </NavLink>
-                            </li>
-
-                            {/* Render Watchlist link only if the user is verified */}
-                            {verified && (
+                        {/* Render navigation links only if the user is logged in */}
+                        {user && (
+                            <ul className={styles.navList}>
                                 <li className={styles.navItem}>
-                                    <NavLink
-                                        to="/watchlist"
-                                        className={styles.link}
-                                    >
-                                        Watchlist
+                                    <NavLink to="/" className={styles.link}>
+                                        Home
                                     </NavLink>
                                 </li>
-                            )}
+                                <li className={styles.navItem}>
+                                    <NavLink
+                                        to="/movies"
+                                        className={styles.link}
+                                    >
+                                        Movies
+                                    </NavLink>
+                                </li>
+                                <li className={styles.navItem}>
+                                    <NavLink
+                                        to="/tv-shows"
+                                        className={styles.link}
+                                    >
+                                        TV Shows
+                                    </NavLink>
+                                </li>
 
-                            {/* Profile menu item that toggles the menu when clicked */}
-                            <li
-                                className={`${styles.navItem} ${
-                                    styles.profile
-                                } ${isOpen ? styles.active : ""}`}
-                                onClick={toggleMenu}
-                            >
-                                Profile
-                            </li>
-                            <li className={styles.navItem}>
-                                <div className={styles.frame}>
-                                    <img
-                                        src={user.photoURL}
-                                        alt="Profile"
-                                        className={styles.profilePicture}
-                                    />
-                                </div>
-                            </li>
-                        </ul>
-                    )}
-                    {/* Render the profile menu if it is open */}
-                    {isOpen && <Menu setIsOpen={setIsOpen} ref={menuRef} />}
-                </div>
-            </nav>
+                                {/* Render Watchlist link only if the user is verified */}
+                                {verified && (
+                                    <li className={styles.navItem}>
+                                        <NavLink
+                                            to="/watchlist"
+                                            className={styles.link}
+                                        >
+                                            Watchlist
+                                        </NavLink>
+                                    </li>
+                                )}
+
+                                {/* Profile menu item that toggles the menu when clicked */}
+                                <li
+                                    className={`${styles.navItem} ${
+                                        styles.profile
+                                    } ${isOpen ? styles.active : ""}`}
+                                    onClick={toggleMenu}
+                                >
+                                    Profile
+                                </li>
+                                <li className={styles.navItem}>
+                                    <div className={styles.frame}>
+                                        <img
+                                            src={user.photoURL}
+                                            alt="Profile"
+                                            className={styles.profilePicture}
+                                        />
+                                    </div>
+                                </li>
+                            </ul>
+                        )}
+                        {/* Render the profile menu if it is open */}
+                        {isOpen && <Menu setIsOpen={setIsOpen} ref={menuRef} />}
+                    </div>
+                </nav>
+            </header>
         </>
     );
 };

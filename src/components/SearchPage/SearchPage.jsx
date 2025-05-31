@@ -28,7 +28,7 @@ const SearchPage = () => {
     }, [setSearchString, searchParams]);
 
     return (
-        <div className="wrapper">
+        <>
             {/* Banner and SearchBar components for the search page */}
             <Banner />
             <SearchBar />
@@ -54,7 +54,7 @@ const SearchPage = () => {
                 getTotalPages={setPages}
             />
             <Paginator items={matches} pages={pages} />
-        </div>
+        </>
     );
 };
 

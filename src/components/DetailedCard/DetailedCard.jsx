@@ -64,7 +64,7 @@ const DetailedCard = ({ id, mediaType, onClose }) => {
                             className={styles.backdrop}
                             src={`https://image.tmdb.org/t/p/original${media.backdrop_path}`}
                             alt=""
-                            artia-hidden="true"
+                            aria-hidden="true"
                             loading="lazy"
                         />
                         {/* Overlay containing media details and credits */}
@@ -86,10 +86,16 @@ const DetailedCard = ({ id, mediaType, onClose }) => {
                                         {media.title ? media.title : media.name}
                                     </h1>
                                     <div className={styles.macroData}>
-                                        <time>
+                                        <time
+                                            dateTime={
+                                                media.release_date
+                                                    ? media.release_date
+                                                    : media.first_air_date
+                                            }
+                                        >
                                             {media.release_date
                                                 ? media.release_date
-                                                : media.first_air_date}{" "}
+                                                : media.first_air_date}
                                         </time>
                                         <span>|</span>
                                         <ul className={styles.genreList}>
@@ -97,6 +103,7 @@ const DetailedCard = ({ id, mediaType, onClose }) => {
                                                 <li
                                                     key={genre.id}
                                                     className={styles.genre}
+                                                    aria-hidden="true"
                                                 >
                                                     {genre.name}
                                                 </li>

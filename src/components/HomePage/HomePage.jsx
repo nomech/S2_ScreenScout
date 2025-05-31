@@ -12,7 +12,7 @@ const Home = () => {
         "https://api.themoviedb.org/3/trending/tv/week?language=?language=en-US&page=1";
     return (
         // Render the home page with a wrapper containing the banner, search bar, and media grids
-        <div className="wrapper">
+        <>
             <Banner />
             <SearchBar />
             <MediaGrid
@@ -30,7 +30,7 @@ const Home = () => {
                 url={trendingTvUrl}
                 tv={true}
             />
-        </div>
+        </>
     );
 };
 

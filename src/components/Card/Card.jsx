@@ -80,6 +80,11 @@ const Card = ({
         <article
             className={styles.card}
             onClick={() => onCardClick(media.id, mediaType)}
+            onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                    onCardClick(media.id, mediaType);
+                }
+            }}
             tabIndex={0}
         >
             {/* If the media is not in the watchlist and the user is verified, show the watch button */}
@@ -88,7 +93,11 @@ const Card = ({
                     className="watchButton"
                     onClick={(e) => handleMarkAsWatched(e, media.id)}
                 >
-                    <img className="icons" src={eye} alt="Mark watched" />
+                    <img
+                        className="icons"
+                        src={eye}
+                        alt="Mark media as watched"
+                    />
                 </Button>
             )}
 
@@ -98,7 +107,11 @@ const Card = ({
                     className="watchButton"
                     onClick={(e) => handleRemoveAsWatched(e, media.id)}
                 >
-                    <img className="icons" src={eyeClosed} alt="Mark watched" />
+                    <img
+                        className="icons"
+                        src={eyeClosed}
+                        alt="Mark media as not watched"
+                    />
                 </Button>
             )}
 
@@ -108,7 +121,11 @@ const Card = ({
                     className="addButton"
                     onClick={(e) => handleAddToWatchlist(e, media)}
                 >
-                    <img className="icons" src={plus} alt="Add icon" />
+                    <img
+                        className="icons"
+                        src={plus}
+                        alt="Add media to watchlist"
+                    />
                 </Button>
             )}
 
@@ -118,7 +135,11 @@ const Card = ({
                     className="addButton"
                     onClick={(e) => handleRemoveFromWatchlist(e, media)}
                 >
-                    <img className="icons" src={minus} alt="Remove icon" />
+                    <img
+                        className="icons"
+                        src={minus}
+                        alt="Remove media from watchlist"
+                    />
                 </Button>
             )}
 

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styles from "./FilterPanel.module.css";
 import reset from "../../assets/icons/reset.svg";
 
@@ -6,8 +6,10 @@ import Button from "../Button/Button";
 
 // This component provides a filter panel for selecting the release year and adult content preference.
 const FilterPanel = ({ setFilterParameters }) => {
+    const currentYear = new Date().getFullYear();
+
     // Hooks to manage state and side effects
-    const [year, setYear] = useState();
+    const [year, setYear] = useState(currentYear);
     const [adult, setAdult] = useState(false);
 
     // Handlers for changing filter parameters
@@ -34,14 +36,14 @@ const FilterPanel = ({ setFilterParameters }) => {
         });
     };
 
-    // Get the current year to set year filter default value
-    const currentYear = new Date().getFullYear();
-
-    useEffect(() => {
-        if (!year) {
-            setYear(currentYear);
-        }
-    }, [currentYear, year]);
+    const handleOnClickReset = () => {
+        setYear(currentYear);
+        setAdult(false);
+        setFilterParameters({
+            year: currentYear,
+            include_adult: false,
+        });
+    };
 
     return (
         <section className={styles.filterPanel}>
@@ -73,14 +75,14 @@ const FilterPanel = ({ setFilterParameters }) => {
                     type="checkbox"
                     id="adult"
                     name="adult"
-                    value={adult}
+                    checked={adult}
                     onChange={(e) => handleOnChangeAdult(e)}
                 />
             </div>
 
             {/* Button to reset filters */}
-            <Button className="clearButton">
-                <img className="icons" src={reset} alt="Reset icon" />
+            <Button className="clearButton" onClick={handleOnClickReset}>
+                <img className="icons" src={reset} alt="Reset the filter" />
                 Reset
             </Button>
         </section>

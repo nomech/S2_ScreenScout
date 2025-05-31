@@ -105,7 +105,11 @@ const ListCard = ({
                             {media.release_date || media.first_air_date}
                         </time>
                         {media.genres?.map((genre) => (
-                            <span key={genre.id} className={styles.genre}>
+                            <span
+                                key={genre.id}
+                                className={styles.genre}
+                                aria-hidden="true"
+                            >
                                 {genre?.name || genre}
                             </span>
                         ))}

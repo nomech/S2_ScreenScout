@@ -83,8 +83,14 @@ const SearchBar = () => {
                     type="button"
                     className="filter"
                     onClick={handleOnClickFilter}
+                    aria-label="Open filterpanel"
                 >
-                    <img className="icons" src={filterIcon} alt="filterIcon" />
+                    <img
+                        className="icons"
+                        src={filterIcon}
+                        alt=""
+                        aria-hidden="true"
+                    />
                 </Button>
             </form>
 
