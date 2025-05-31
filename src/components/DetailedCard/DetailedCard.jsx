@@ -49,48 +49,61 @@ const DetailedCard = ({ id, mediaType, onClose }) => {
 
             {/* If media data is successfully fetched, display detailed information */}
             {media && (
-                <div className={styles.backlay}>
-                    <div className={styles.detailedCardContainer}>
+                <aside className={styles.backlay}>
+                    <article className={styles.detailedCardContainer}>
                         {/* Close button to exit the detailed view */}
-                        <Button className="closeButton" onClick={onClose}>
+                        <Button
+                            className="closeButton"
+                            onClick={onClose}
+                            ariaLabel="Close details"
+                        >
                             X
                         </Button>
                         {/* Background image for the detailed card */}
                         <img
                             className={styles.backdrop}
                             src={`https://image.tmdb.org/t/p/original${media.backdrop_path}`}
-                            alt={media.title}
+                            alt=""
+                            artia-hidden="true"
+                            loading="lazy"
                         />
                         {/* Overlay containing media details and credits */}
                         <div className={styles.overlay}>
-                            <div className={styles.detailsContainer}>
+                            <section className={styles.detailsContainer}>
                                 {/* Display media poster, title, release date, genres, runtime, tagline, and overview */}
-                                <img
-                                    className={styles.poster}
-                                    src={getImgSrc(media.poster_path, "w300")}
-                                    alt={media.title}
-                                />
+                                <figure>
+                                    <img
+                                        className={styles.poster}
+                                        src={getImgSrc(
+                                            media.poster_path,
+                                            "w300"
+                                        )}
+                                        alt={media.title}
+                                    />
+                                </figure>
                                 <div className={styles.details}>
                                     <h1 className={styles.title}>
                                         {media.title ? media.title : media.name}
                                     </h1>
                                     <div className={styles.macroData}>
-                                        <p>
+                                        <time>
                                             {media.release_date
                                                 ? media.release_date
                                                 : media.first_air_date}{" "}
-                                        </p>
-                                        <p>|</p>
-                                        {media.genres &&
-                                            media.genres.map((genre) => (
-                                                <p
+                                        </time>
+                                        <span>|</span>
+                                        <ul className={styles.genreList}>
+                                            {media.genres?.map((genre) => (
+                                                <li
                                                     key={genre.id}
                                                     className={styles.genre}
                                                 >
                                                     {genre.name}
-                                                </p>
+                                                </li>
                                             ))}
-                                        <p>|</p>
+                                        </ul>
+
+                                        <span>|</span>
                                         <p>
                                             {media.runtime
                                                 ? media.runtime + " min"
@@ -106,10 +119,10 @@ const DetailedCard = ({ id, mediaType, onClose }) => {
                                     </p>
                                 </div>
                                 <p className={styles.id}>ID: {media.id}</p>
-                            </div>
+                            </section>
 
                             {/* Display credits (actors) related to the media */}
-                            <div className={styles.actorContainer}>
+                            <section className={styles.actorContainer}>
                                 {creditsLoading && <Loading />}
                                 {/* Display error message if credits data fails to load */}
                                 {creditsError && (
@@ -127,15 +140,19 @@ const DetailedCard = ({ id, mediaType, onClose }) => {
                                         >
                                             {/* Display actor's profile image, name, and character */}
                                             <div className={styles.profile}>
-                                                <img
-                                                    className={styles.actorImg}
-                                                    src={
-                                                        actor.profile_path
-                                                            ? `https://image.tmdb.org/t/p/w200${actor.profile_path}`
-                                                            : placeholder
-                                                    }
-                                                    alt={actor.name}
-                                                />
+                                                <figure>
+                                                    <img
+                                                        className={
+                                                            styles.actorImg
+                                                        }
+                                                        src={
+                                                            actor.profile_path
+                                                                ? `https://image.tmdb.org/t/p/w200${actor.profile_path}`
+                                                                : placeholder
+                                                        }
+                                                        alt={actor.name}
+                                                    />
+                                                </figure>
                                             </div>
                                             <div
                                                 className={styles.nameContainer}
@@ -149,10 +166,10 @@ const DetailedCard = ({ id, mediaType, onClose }) => {
                                             </div>
                                         </div>
                                     ))}
-                            </div>
+                            </section>
                         </div>
-                    </div>
-                </div>
+                    </article>
+                </aside>
             )}
         </>
     );

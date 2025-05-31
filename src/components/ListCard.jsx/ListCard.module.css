@@ -69,7 +69,8 @@
     gap: var(--spacing-small);
 }
 
-.macroData p {
+.macroData span,
+.macroData time {
     color: var(--color-text-quaternary);
     font-size: 16px;
     font-weight: 600;

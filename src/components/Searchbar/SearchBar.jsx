@@ -61,9 +61,13 @@ const SearchBar = () => {
 
     return (
         // Render the search bar with input, buttons, and filter panel
-        <div className={styles.searchContainer}>
+        <section className={styles.searchContainer}>
             {/* Search bar form with input field and buttons for search and filter */}
-            <form className={styles.searchBar} onSubmit={handleOnSubmit}>
+            <form
+                className={styles.searchBar}
+                onSubmit={handleOnSubmit}
+                aria-label="Search for movies and TV shows"
+            >
                 <input
                     type="text"
                     className={styles.searchInput}
@@ -115,7 +119,7 @@ const SearchBar = () => {
                     TV
                 </Button>
             </div>
-        </div>
+        </section>
     );
 };
 

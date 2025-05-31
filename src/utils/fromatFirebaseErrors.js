@@ -3,7 +3,7 @@ const errorMessages = {
     "auth/missing-password": "Please enter a password",
     "auth/invalid-credential": "Wrong username or password",
     "auth/too-many-requests":
-        "You have tried to many times, please try agian later",
+        "You have tried to many times, please try again later",
     "auth/operation-not-allowed":
         "Please verify the new email before changing email",
 };

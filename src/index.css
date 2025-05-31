@@ -16,7 +16,7 @@
     --color-bg-alt: #16162e;
     --color-bg-warning: #b54143;
 
-    --color-bg-overlay: rgba(0, 0, 0, 0.6);
+    --color-bg-overlay: rgba(0, 0, 0, 0.8);
     --color-bg-overlay-light: rgba(0, 0, 0, 0.5);
 
     --color-text: #ffffff;
@@ -28,7 +28,7 @@
 
     --color-border: #2d2d34;
     --color-border-light: #39394d;
-    --color-border-accent: #8a2be2;
+    --color-border-accent: #c294eb;
 
     --gradient-primary: linear-gradient(
         90deg,

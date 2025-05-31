@@ -64,7 +64,9 @@
     gap: var(--spacing-small);
 }
 
-.macroData p {
+.macroData p,
+li,
+time {
     color: #a3a1a1;
     font-size: 16px;
     font-weight: 700;
@@ -77,6 +79,12 @@
     gap: var(--spacing-small);
 }
 
+.genreList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-xsmall);
+    list-style: none;
+}
 .title {
     color: #ffc107;
     font-size: 32px;

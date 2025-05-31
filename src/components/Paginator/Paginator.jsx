@@ -82,7 +82,7 @@ const Paginator = ({ pages }) => {
     }
 
     // Render the paginator with the generated buttons
-    return <div className={styles.paginator}>{buttons}</div>;
+    return <section className={styles.paginator}>{buttons}</section>;
 };
 
 export default Paginator;

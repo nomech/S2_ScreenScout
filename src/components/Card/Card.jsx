@@ -77,9 +77,10 @@ const Card = ({
     media.media_type = mediaType;
 
     return (
-        <div
+        <article
             className={styles.card}
             onClick={() => onCardClick(media.id, mediaType)}
+            tabIndex={0}
         >
             {/* If the media is not in the watchlist and the user is verified, show the watch button */}
             {!isWatched && verified && (
@@ -134,7 +135,7 @@ const Card = ({
                     {media.title || media.name}
                 </h3>
             </div>
-        </div>
+        </article>
     );
 };
 

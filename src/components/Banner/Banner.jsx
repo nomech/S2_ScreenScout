@@ -32,7 +32,7 @@ const Banner = () => {
 
     return (
         // The banner component displays the media in a slideshow format
-        <div className={styles.banner}>
+        <section className={styles.banner} aria-label="Trending media carousel">
             {/* If the data is still loading, show a loading spinner */}
             {isLoading && <Loading />}
 
@@ -40,7 +40,7 @@ const Banner = () => {
             {data &&
                 data.results.map((media, index) => (
                     // Display each media item in a container
-                    <div
+                    <article
                         key={media.id}
                         className={`${styles.mediaContainer} ${
                             index === currentIndex ? styles.activeSlide : ""
@@ -51,29 +51,34 @@ const Banner = () => {
                             <img
                                 className={styles.backdrop}
                                 src={`https://image.tmdb.org/t/p/original${media.backdrop_path}`}
-                                alt={media.title}
+                                alt=""
+                                aria-hidden="true"
                             />
                         </div>
 
                         {/* Display the media details such as poster, title, and overview */}
                         <div key={media.id} className={styles.mediaDetails}>
-                            <img
-                                className={styles.poster}
-                                src={`https://image.tmdb.org/t/p/w300${media.poster_path}`}
-                                alt={media.title}
-                            />
+                            <figure>
+                                <img
+                                    className={styles.poster}
+                                    src={`https://image.tmdb.org/t/p/w300${media.poster_path}`}
+                                    alt={media.title}
+                                />
+                            </figure>
                             <div className={styles.descriptino}>
-                                <h1 className={styles.title}>
-                                    {media.title ? media.title : media.name}
-                                </h1>
+                                <header>
+                                    <h1 className={styles.title}>
+                                        {media.title ? media.title : media.name}
+                                    </h1>
+                                </header>
                                 <p className={styles.overview}>
                                     {media.overview}
                                 </p>
                             </div>
                         </div>
-                    </div>
+                    </article>
                 ))}
-        </div>
+        </section>
     );
 };
 

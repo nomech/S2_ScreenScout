@@ -16,9 +16,7 @@ export const signInValidation = (formData, setError) => {
     const errors = {};
 
     !email ? (errors.email = errorMessages.emailValid) : "";
-    email && !emailRegex.test(email)
-        ? (errors.email = errorMessages.emailValid)
-        : "";
+    email && !emailRegex.test(email) ? (errors.email = errorMessages.emailValid) : "";
     !password ? (errors.password = errorMessages.passwordRequired) : "";
 
     setError(errors);
@@ -35,15 +33,9 @@ export const signupFormValidation = (formData, setError) => {
     !email ? (errors.email = errorMessages.email) : "";
     password.length < 6 ? (errors.password = errorMessages.passwordLength) : "";
     !password ? (errors.password = errorMessages.passwordRequired) : "";
-    password !== confirmPassword
-        ? (errors.confirmPassword = errorMessages.confirmPasswordMatch)
-        : "";
-    !confirmPassword
-        ? (errors.confirmPassword = errorMessages.confirmPasswordRequired)
-        : "";
-    email && !emailRegex.test(email)
-        ? (errors.email = errorMessages.emailValid)
-        : "";
+    password !== confirmPassword ? (errors.confirmPassword = errorMessages.confirmPasswordMatch) : "";
+    !confirmPassword ? (errors.confirmPassword = errorMessages.confirmPasswordRequired) : "";
+    email && !emailRegex.test(email) ? (errors.email = errorMessages.emailValid) : "";
 
     setError(errors);
     return Object.keys(errors).length === 0;
@@ -54,9 +46,7 @@ export const forgotPasswordFormValidation = (formData, setError) => {
     const errors = {};
 
     !email ? (errors.email = errorMessages.email) : "";
-    email && !emailRegex.test(email)
-        ? (errors.email = errorMessages.emailValid)
-        : "";
+    email && !emailRegex.test(email) ? (errors.email = errorMessages.emailValid) : "";
 
     setError(errors);
     return Object.keys(errors).length === 0;
@@ -69,9 +59,7 @@ export const updateProfileValidation = (formData, setError) => {
     !firstName ? (errors.firstName = errorMessages.firstName) : "";
     !lastName ? (errors.lastName = errorMessages.lastName) : "";
     !email ? (errors.email = errorMessages.email) : "";
-    email && !emailRegex.test(email)
-        ? (errors.email = errorMessages.emailValid)
-        : "";
+    email && !emailRegex.test(email) ? (errors.email = errorMessages.emailValid) : "";
 
     setError(errors);
     

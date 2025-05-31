@@ -44,9 +44,9 @@ const FilterPanel = ({ setFilterParameters }) => {
     }, [currentYear, year]);
 
     return (
-        <div className={styles.filterPanel}>
+        <section className={styles.filterPanel}>
             <div className={styles.year}>
-                <label htmlFor="range">
+                <label htmlFor="yearRange">
                     <h3>Release Year</h3>
                 </label>
                 {/* Range input for selecting the release year */}
@@ -83,7 +83,7 @@ const FilterPanel = ({ setFilterParameters }) => {
                 <img className="icons" src={reset} alt="Reset icon" />
                 Reset
             </Button>
-        </div>
+        </section>
     );
 };
 

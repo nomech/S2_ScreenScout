@@ -157,7 +157,7 @@ const MediaGrid = ({
 
             {/* Render the media grid container with title and buttons for grid/list view */}
             <section className={styles.mediaGridContainer}>
-                <div className={styles.header}>
+                <header className={styles.header}>
                     <h1 className={styles.title}>{title}</h1>
                     <div className={styles.buttonContainer}>
                         <Button
@@ -173,10 +173,10 @@ const MediaGrid = ({
                             <img className="icons" src={listIcon} alt="List" />
                         </Button>
                     </div>
-                </div>
+                </header>
 
                 {/* Render the media items in a grid or list format based on the selected card style */}
-                <div
+                <section
                     className={`${styles.mediaGrid} ${
                         styles["container" + cardStyle]
                     }`}
@@ -214,7 +214,7 @@ const MediaGrid = ({
                                 />
                             )
                         )}
-                </div>
+                </section>
             </section>
 
             {/* Render the detailed card view if it is set to be shown */}

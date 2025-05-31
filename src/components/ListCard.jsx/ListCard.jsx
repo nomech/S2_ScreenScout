@@ -65,34 +65,49 @@ const ListCard = ({
     };
 
     return (
-        <div
+        <article
             className={styles.cardList}
             onClick={() => onCardClick(media.id, mediaType)}
+            tabIndex={0}
+            role="button"
         >
             <img
                 className={styles.backdrop}
                 src={`https://image.tmdb.org/t/p/original${media.backdrop_path}`}
                 alt=""
+                aria-hidden="true"
+                loading="lazy"
             />
+
             <div className={styles.card}>
-                <img
-                    className={styles.poster}
-                    src={`https://image.tmdb.org/t/p/w200${media.poster_path}`}
-                    alt={media.title}
-                />
+                <figure>
+                    <img
+                        className={styles.poster}
+                        src={`https://image.tmdb.org/t/p/w200${media.poster_path}`}
+                        alt={media.title}
+                    />
+                </figure>
                 <p className={styles.id}>ID: {media.id}</p>
                 <div className={styles.mediaDetails}>
-                    <h3 className={styles.mediaTitle}>
-                        {media.title || media.name}
-                    </h3>
+                    <header>
+                        <h3 className={styles.mediaTitle}>
+                            {media.title || media.name}
+                        </h3>
+                    </header>
                     <div className={styles.macroData}>
-                        <p className={styles.release}>
+                        <time
+                            className={styles.release}
+                            dateTime={
+                                media.release_date || media.first_air_date
+                            }
+                            aria-label="Release date"
+                        >
                             {media.release_date || media.first_air_date}
-                        </p>
+                        </time>
                         {media.genres?.map((genre) => (
-                            <p key={genre.id} className={styles.genre}>
+                            <span key={genre.id} className={styles.genre}>
                                 {genre?.name || genre}
-                            </p>
+                            </span>
                         ))}
                     </div>
                     <p className={styles.overview}>{media.overview}</p>
@@ -119,6 +134,7 @@ const ListCard = ({
                                     onClick={(e) =>
                                         handleRemoveAsWatched(e, media.id)
                                     }
+                                    ariaLabel={"Mark as not watched"}
                                 >
                                     Mark as not watched
                                 </Button>
@@ -133,6 +149,7 @@ const ListCard = ({
                                             ? "activeReview"
                                             : "inactiveReview"
                                     }`}
+                                    ariaLabel={"Review media"}
                                 >
                                     Review
                                 </Button>
@@ -144,6 +161,7 @@ const ListCard = ({
                                     onClick={(e) =>
                                         handleAddToWatchlist(e, media)
                                     }
+                                    ariaLabel={"Add to watchlist"}
                                 >
                                     Add to Watchlist
                                 </Button>
@@ -155,6 +173,7 @@ const ListCard = ({
                                     onClick={(e) =>
                                         handleRemoveFromWatchlist(e, media)
                                     }
+                                    ariaLabel={"Remove from watchlist"}
                                 >
                                     Remove from Watchlist
                                 </Button>
@@ -163,7 +182,7 @@ const ListCard = ({
                     </div>
                 </div>
             </div>
-        </div>
+        </article>
     );
 };
 
