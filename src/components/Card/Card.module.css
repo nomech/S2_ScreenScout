@@ -1,4 +1,6 @@
 .card {
+    display: flex;
+    flex-direction: column;
     position: relative;
     width: 200px;
     border-radius: 0 0 8px 8px;
@@ -11,18 +13,58 @@
     transform: scale(1.02);
 }
 
+.card:hover .buttonContainer {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.buttonContainer::before {
+    content: "";
+    position: absolute;
+    top: -226px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        180deg,
+        transparent 0%,
+        rgba(0, 0, 0, 0.9) 100%
+    );
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 8rem 0;
+    z-index: 10;
+    opacity: 0;
+    transition: opacity 0.1s ease;
+}
+
+.card:hover .buttonContainer::before {
+    opacity: 1;
+}
+
 .poster {
     width: 100%;
     border-radius: 8px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
 }
 
 .mediaDetails {
-    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-grow: 1;
+    padding: var(--spacing-small) var(--spacing-xsmall);
 }
 
+.mediaRating {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xsmall);
+}
 .mediaTitle {
-    text-align: center;
-    margin: 25px 0;
+    margin: var(--spacing-xsmall) 0;
     font-size: 16px;
 }
 
@@ -31,6 +73,20 @@
     top: 10px;
     right: 10px;
     z-index: 50;
+}
+
+.buttonContainer {
+    display: flex;
+    position: absolute;
+    top: 220px;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    justify-content: space-around;
+    width: 100%;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
 }
 
 @media (max-width: 768px) {

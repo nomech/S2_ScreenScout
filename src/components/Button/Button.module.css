@@ -142,18 +142,14 @@
 
 .addButton,
 .watchButton {
-    position: absolute;
     width: fit-content;
     height: fit-content;
     padding: 3px 5px;
-    right: 5px;
-    top: 5px;
+    width: 90%;
     background-color: var(--color-bg-secondary);
     border: 1px solid var(--color-border-light);
-}
-
-.watchButton {
-    left: 5px;
+    font-size: 12px;
+    z-index: 20;
 }
 
 .resetPassword {
