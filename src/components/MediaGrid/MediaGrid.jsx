@@ -68,7 +68,9 @@ const MediaGrid = ({
 
     // Effect to initialize the default watchlist when the user is authenticated
     useEffect(() => {
-        if (!user) return;
+        if (!user) {
+            return;
+        }
         const initDefaultWatchlist = async () => {
             try {
                 await setDefaultWatchList(user.uid);
@@ -76,6 +78,8 @@ const MediaGrid = ({
                 console.error("Error initializing default watchlist:", error);
             }
         };
+        console.log(user);
+
         initDefaultWatchlist();
     }, [setDefaultWatchList, user]);
 

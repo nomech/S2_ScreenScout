@@ -48,7 +48,7 @@ const Watchlist = () => {
             // Create a list of URLs for fetching media details
             const urlList = { tv: [], movie: [] };
             for (const key in list) {
-                if (key !== "watched") {
+                if (key !== "watched" && key !== "sessionId") {
                     list[key].forEach((item) => {
                         const url = `https://api.themoviedb.org/3/${key}/${item}?language=en-US`;
                         urlList[key].push(url);
