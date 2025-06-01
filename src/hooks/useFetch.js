@@ -29,7 +29,8 @@ export const useFetch = (url) => {
                 const response = await fetch(url, options);
                 // Check if the response is ok (status in the range 200-299)
                 if (!response.ok) {
-                    throw new Error("Network response was not ok");
+                    setError("Failed to fetch data from the API");
+                    throw new Error("Network response was not ok, please contact support if the issue persists.");
                 }
                 // Parse the response data as JSON
                 const data = await response.json();
@@ -38,6 +39,7 @@ export const useFetch = (url) => {
                 setError(null);
             } catch (error) {
                 // If the fetch is aborted, ignore the error
+                setError(error.message);
                 throw new Error(error);
             } finally {
                 // Set loading state to false after fetch completes

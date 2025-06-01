@@ -31,7 +31,7 @@ const MediaGrid = ({
     const [watchedMedia, setWatchedMedia] = useState(null);
 
     // Custom hook to fetch data from the provided URL
-    const { data, isLoading } = useFetch(url);
+    const { data, isLoading, error } = useFetch(url);
 
     // Importing functions from the useWatchList hook to manage watchlist actions
     const { setDefaultWatchList, getWatchList } = useWatchList();
@@ -129,7 +129,6 @@ const MediaGrid = ({
         .filter((media) => media.media_type !== "person")
         .map((media) => {
             media.watched = setWatchedStatus(media);
-
             // Map genre IDs to genre names based on the media type
             if (media.media_type === "movie" && movieGenres) {
                 media.genres = media.genre_ids.map((id) => {
@@ -154,6 +153,12 @@ const MediaGrid = ({
         <>
             {/* Render loading state while data is being fetched */}
             {isLoading && <Loading />}
+            {/* Render error message if there is an error fetching data */}
+            {error && (
+                <div className={styles.error}>
+                    <p>Error: {error}</p>
+                </div>
+            )}
 
             {/* Render the media grid container with title and buttons for grid/list view */}
             <section className={styles.mediaGridContainer}>

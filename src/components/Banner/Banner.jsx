@@ -7,7 +7,7 @@ import Loading from "../Loading/Loading";
 
 const Banner = () => {
     // Fetches trending media data from TMDB API
-    const { data, isLoading } = useFetch(
+    const { data, isLoading, error } = useFetch(
         "https://api.themoviedb.org/3/trending/all/week?language=en-US"
     );
 
@@ -35,6 +35,12 @@ const Banner = () => {
         <section className={styles.banner} aria-label="Trending media carousel">
             {/* If the data is still loading, show a loading spinner */}
             {isLoading && <Loading />}
+            {/* If there is an error fetching data, display the error message */}
+            {error && (
+                <div className={styles.error}>
+                    <p>Error: {error}</p>
+                </div>
+            )}
 
             {/* Map through the media results and display each one */}
             {data &&
