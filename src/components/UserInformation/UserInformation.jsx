@@ -8,7 +8,7 @@ import Input from "../Input/Input";
 import Button from "../Button/Button";
 import styles from "./UserInformation.module.css";
 import AuthContext from "../../context/AuthContext";
-import { formatFireBaseFeedback } from "../../utils/fromatFirebaseErrors";
+import { formatFireBaseFeedback } from "../../utils/formatFirebaseErrors";
 import { updateProfileValidation } from "../../utils/formValidation";
 import InfoCard from "../InfoCard/InfoCard";
 import { auth } from "../../firebaseConfig";

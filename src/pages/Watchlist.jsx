@@ -1,5 +1,5 @@
 import React from "react";
-import WatchlistPage from "../components/WatclistPage/WatchlistPage";
+import WatchlistPage from "../components/WatchlistPage/WatchlistPage";
 
 const Watchlist = () => {
     return <WatchlistPage />;

@@ -10,7 +10,6 @@ const errorMessages = {
 
 export const formatFireBaseFeedback = (data, setError) => {
     const formattedFeedback = { firebase: errorMessages[data] };
-    console.log(formattedFeedback);
 
     return setError(formattedFeedback);
 };

@@ -5,7 +5,7 @@ import Button from "../Button/Button";
 import { NavLink, useNavigate } from "react-router-dom";
 import { auth } from "../../firebaseConfig";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { formatFireBaseFeedback } from "../../utils/fromatFirebaseErrors";
+import { formatFireBaseFeedback } from "../../utils/formatFirebaseErrors";
 import { signInValidation } from "../../utils/formValidation";
 import InfoCard from "../InfoCard/InfoCard";
 

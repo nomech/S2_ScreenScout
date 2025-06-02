@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styles from "./SearchBar.module.css";
 import Button from "../Button/Button";
-import FilterPanel from "../FIlterPanel/FilterPanel";
+import FilterPanel from "../FilterPanel/FilterPanel";
 import { useNavigate } from "react-router-dom";
 import filterIcon from "../../assets/icons/filter.svg";
 import search from "../../assets/icons/search.svg";
