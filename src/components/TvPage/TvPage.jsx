@@ -23,7 +23,7 @@ const TvPage = () => {
             <hr className="divider" />
             <MediaGrid title="On The Air" url={onTheAir} limit={10} tv={true} />
             <hr className="divider" />
-            <MediaGrid title="Popular" url={popular} limit={10} movie={true} />
+            <MediaGrid title="Popular" url={popular} limit={10} tv={true} />
         </>
     );
 };
