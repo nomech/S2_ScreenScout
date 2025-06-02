@@ -33,6 +33,7 @@ const Input = ({
                 className={`${styles.input} ${styles[className]}`}
                 id={id}
                 onKeyDown={onKeyDown}
+                onClick={(e) => e.stopPropagation()}
                 name={name}
                 readOnly={readonly}
             />

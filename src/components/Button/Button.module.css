@@ -179,6 +179,12 @@
     top: 12px;
 }
 
+.voteButton {
+    width: fit-content;
+    height: fit-content;
+    padding: 0.3rem var(--spacing-xsmall);
+}
+
 @media (max-width: 768px) {
     .login,
     .signup,

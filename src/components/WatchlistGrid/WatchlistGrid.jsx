@@ -11,6 +11,7 @@ import gridIcon from "../../assets/icons/gridIcon.svg";
 import ListCard from "../ListCard.jsx/ListCard";
 import tv from "../../assets/icons/tv.svg";
 import film from "../../assets/icons/film.svg";
+import { checkSessionId } from "../../utils/linkAccountwithTmdb";
 
 // This component renders a watchlist of movies and TV shows, allowing users to view details, mark items as watched, and toggle their watchlist status.
 const Watchlist = () => {
@@ -21,6 +22,7 @@ const Watchlist = () => {
     const [cardStyle, setCardStyle] = useState("Grid");
     const [watchlist, setWatchlist] = useState(null);
     const [watchedMedia, setWatchedMedia] = useState(null);
+    const [hasLinkedAccount, setHasLinkedAccount] = useState(false);
 
     // Context to access user authentication
     const { user } = useContext(AuthContext);
@@ -108,6 +110,30 @@ const Watchlist = () => {
 
         constructUrlList();
     }, [user, getWatchList, getWatchedMedia, watchedMedia]);
+
+    // Effect to check if the user's account is linked with TMDB
+    useEffect(() => {
+        // Function to check if the user's account is linked
+        const checkIfAccountIsLinked = async () => {
+            console.log("Checking if account is linked for user:", user);
+            const sessionId = await checkSessionId(user.uid);
+            console.log("Session ID for user:", user, "is", sessionId);
+            if (!sessionId) {
+                // If no session ID is found, set hasLinkedAccount to false
+                // This indicates that the user has not linked their account with TMDB
+                console.error("No session ID found for user:", user);
+                setHasLinkedAccount(false);
+            } else {
+                // If a session ID is found, set hasLinkedAccount to true
+                setHasLinkedAccount(true);
+            }
+            console.log("Has linked account:", hasLinkedAccount);
+        };
+
+        if (user) {
+            checkIfAccountIsLinked();
+        }
+    }, [hasLinkedAccount, user]);
 
     // Function to handle card click events, setting the detailed card ID and media type, and showing the detailed card
     const handleCardClick = (id, media) => {
@@ -240,6 +266,7 @@ const Watchlist = () => {
                                             media.id
                                         )}
                                         toggleWatchStatus={toggleWatchStatus}
+                                        hasLinkedAccount={hasLinkedAccount}
                                     />
                                 ) : (
                                     <ListCard
@@ -254,6 +281,7 @@ const Watchlist = () => {
                                         onCardClick={handleCardClick}
                                         setWatchlist={setWatchlist}
                                         toggleWatchStatus={toggleWatchStatus}
+                                        hasLinkedAccount={hasLinkedAccount}
                                     />
                                 )
                             )}

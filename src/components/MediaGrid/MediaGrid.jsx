@@ -11,6 +11,7 @@ import { useWatchList } from "../../hooks/useWatchList";
 import Card from "../Card/Card";
 import ListCard from "../ListCard.jsx/ListCard";
 import GenreContext from "../../context/GenreContext";
+import { checkSessionId } from "../../utils/linkAccountwithTmdb";
 
 // This component renders a grid of media items (movies or TV shows) with options to view details and manage watchlists.
 const MediaGrid = ({
@@ -29,6 +30,7 @@ const MediaGrid = ({
     const [mediaType, setMediaType] = useState("movie");
     const [watchlist, setWatchlist] = useState(null);
     const [watchedMedia, setWatchedMedia] = useState(null);
+    const [hasLinkedAccount, setHasLinkedAccount] = useState(false);
 
     // Custom hook to fetch data from the provided URL
     const { data, isLoading, error } = useFetch(url);
@@ -98,6 +100,30 @@ const MediaGrid = ({
             setMediaType("tv");
         }
     }, [setMatches, getTotalPages, data, isLoading, setMediaType, movie, tv]);
+
+    // Effect to check if the user's account is linked with TMDB
+    useEffect(() => {
+        // Function to check if the user's account is linked
+        const checkIfAccountIsLinked = async () => {
+            console.log("Checking if account is linked for user:", user);
+            const sessionId = await checkSessionId(user.uid);
+            console.log("Session ID for user:", user, "is", sessionId);
+            if (!sessionId) {
+                // If no session ID is found, set hasLinkedAccount to false
+                // This indicates that the user has not linked their account with TMDB
+                console.error("No session ID found for user:", user);
+                setHasLinkedAccount(false);
+            } else {
+                // If a session ID is found, set hasLinkedAccount to true
+                setHasLinkedAccount(true);
+            }
+            console.log("Has linked account:", hasLinkedAccount);
+        };
+
+        if (user) {
+            checkIfAccountIsLinked();
+        }
+    }, [hasLinkedAccount, user]);
 
     // Function to check if a media item is watched based on its ID
     const setWatchedStatus = (item) => {
@@ -206,6 +232,7 @@ const MediaGrid = ({
                                     onCardClick={handleCardClick}
                                     setWatchlist={setWatchlist}
                                     toggleWatchStatus={toggleWatchStatus}
+                                    hasLinkedAccount={hasLinkedAccount}
                                 />
                             ) : (
                                 <ListCard
@@ -220,6 +247,7 @@ const MediaGrid = ({
                                     onCardClick={handleCardClick}
                                     setWatchlist={setWatchlist}
                                     toggleWatchStatus={toggleWatchStatus}
+                                    hasLinkedAccount={hasLinkedAccount}
                                 />
                             )
                         )}

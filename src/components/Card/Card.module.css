@@ -61,6 +61,7 @@
 .mediaRating {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: var(--spacing-xsmall);
 }
 .mediaTitle {
@@ -87,6 +88,13 @@
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s ease;
+}
+
+.ratingContainer {
+    display: flex;
+    align-items: center;
+
+    gap: var(--spacing-xsmall);
 }
 
 @media (max-width: 768px) {
