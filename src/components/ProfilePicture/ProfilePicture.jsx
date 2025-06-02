@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Input from "../Input/Input";
 import styles from "./ProfilePicture.module.css";
+import placeholderImage from "../../assets/images/placeholder.png";
 
 // This component allows users to upload a profile picture, preview it, and handle the upload process to Cloudinary.
 const ProfilePicture = ({
@@ -79,7 +80,10 @@ const ProfilePicture = ({
         <div className={styles.profileContainer}>
             <div className={styles.profilePicture}>
                 <div className={styles.frame}>
-                    <img src={previewUrl} alt="Profile preview" />
+                    <img
+                        src={previewUrl || placeholderImage}
+                        alt="Profile preview"
+                    />
                 </div>
             </div>
 

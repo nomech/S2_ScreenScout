@@ -3,6 +3,7 @@ import styles from "./Navbar.module.css";
 import { NavLink } from "react-router-dom";
 import AuthContext from "../../context/AuthContext";
 import Menu from "../Menu/Menu";
+import placeholder from "../../assets/images/placeholder.png";
 
 // This component renders a navigation bar with links to different sections of the application, including Home, Movies, TV Shows, and Watchlist if the user is verified. It also includes a profile menu that can be toggled open or closed.
 const Navbar = () => {
@@ -10,7 +11,7 @@ const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     // Context to access user information and verification status
-    const { user, verified } = useContext(AuthContext);
+    const { user, verified, profilePicture } = useContext(AuthContext);
     const toggleMenu = () => {
         setIsOpen(!isOpen);
     };
@@ -93,7 +94,7 @@ const Navbar = () => {
                                 <li className={styles.navItem}>
                                     <div className={styles.frame}>
                                         <img
-                                            src={user.photoURL}
+                                            src={profilePicture || placeholder}
                                             alt="Profile"
                                             className={styles.profilePicture}
                                         />
@@ -101,6 +102,7 @@ const Navbar = () => {
                                 </li>
                             </ul>
                         )}
+
                         {/* Render the profile menu if it is open */}
                         {isOpen && <Menu setIsOpen={setIsOpen} ref={menuRef} />}
                     </div>

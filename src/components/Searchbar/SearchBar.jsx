@@ -20,7 +20,7 @@ const SearchBar = () => {
     });
 
     // State to manage the visibility of the filter panel
-    const [openFIlterPanel, setOpenFilterPanel] = useState(false);
+    const [openFilterPanel, setOpenFilterPanel] = useState(false);
 
     // Hook to navigate programmatically
     const navigate = useNavigate();
@@ -94,8 +94,8 @@ const SearchBar = () => {
                 </Button>
             </form>
 
-            {/* Conditionally render the filter panel if openFIlterPanel is true */}
-            {openFIlterPanel && (
+            {/* Conditionally render the filter panel if openFilterPanel is true */}
+            {openFilterPanel && (
                 <FilterPanel
                     mediaFilter={mediaType}
                     setFilterParameters={setFilterParameters}

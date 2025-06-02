@@ -1,5 +1,5 @@
 import VerificationStatus from "../VerificationStatus/VerificationStatus";
-import UserInofrmation from "../UserInofrmation/UserInofrmation";
+import UserInformation from "../UserInformation/UserInformation";
 import Button from "../Button/Button";
 import { useContext, useEffect, useState } from "react";
 import AuthContext from "../../context/AuthContext";
@@ -56,7 +56,7 @@ const SettingsPage = () => {
         <>
             {/* The VerificationStatus component displays the user's verification status */}
             <VerificationStatus />
-            <UserInofrmation />
+            <UserInformation />
             {linked && (
                 <Button onClick={removeSessionId}>
                     Unlink Account from TMDB

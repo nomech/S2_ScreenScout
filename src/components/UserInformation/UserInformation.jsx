@@ -117,7 +117,7 @@ const UserInformation = () => {
     return (
         <>
             {user && (
-                <div className={styles.userInofrmation}>
+                <div className={styles.UserInformation}>
                     <form
                         onSubmit={toggleReadOnly}
                         className={styles.userInformationForm}

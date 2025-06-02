@@ -12,6 +12,7 @@ export const AuthProvider = ({ children }) => {
     const [isLoading, setIsLoading] = useState(true);
     const [verified, setVerified] = useState(null);
     const [error, setError] = useState(null);
+    const [profilePicture, setProfilePicture] = useState(null);
 
     // Effect to listen for authentication state changes and update user state accordingly
     useEffect(() => {
@@ -21,6 +22,7 @@ export const AuthProvider = ({ children }) => {
             if (user) {
                 setUser(user);
                 setVerified(user.emailVerified);
+                setProfilePicture(user.photoURL || null);
             } else {
                 // If no user is signed in, reset user state and verification status
                 setUser(null);
@@ -46,7 +48,14 @@ export const AuthProvider = ({ children }) => {
     // authContext provides user information, loading state, sign-out function, email verification status, and any errors encountered
     return (
         <AuthContext.Provider
-            value={{ user, isLoading, signOutUser, verified, error }}
+            value={{
+                user,
+                isLoading,
+                signOutUser,
+                verified,
+                error,
+                profilePicture,
+            }}
         >
             {children}
         </AuthContext.Provider>

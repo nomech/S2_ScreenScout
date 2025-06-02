@@ -71,7 +71,7 @@ const Banner = () => {
                                     alt={media.title}
                                 />
                             </figure>
-                            <div className={styles.descriptino}>
+                            <div className={styles.description}>
                                 <header>
                                     <h1 className={styles.title}>
                                         {media.title ? media.title : media.name}

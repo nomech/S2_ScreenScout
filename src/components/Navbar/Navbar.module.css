@@ -51,8 +51,8 @@
     width: auto;
     height: auto;
     border-radius: var(--radius-round);
-    max-width: 128px;
-    max-height: 128px;
+    max-width: 64px;
+    max-height: 64px;
 }
 
 .frame {
