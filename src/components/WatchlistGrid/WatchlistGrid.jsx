@@ -144,7 +144,7 @@ const Watchlist = () => {
 
     // Function to handle media type
     const handleOnClickMediaButton = (e) => {
-        setMediaType(e.target.innerText.toLowerCase());
+        setMediaType(e.currentTarget.innerText.toLowerCase());
     };
 
     // Function to handle closing the detailed card
