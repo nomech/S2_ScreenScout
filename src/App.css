@@ -45,6 +45,6 @@
 
 @media (max-width: 1180px) {
     .wrapper {
-        padding: 0;
+        padding: 100px 0;
     }
 }

@@ -32,3 +32,18 @@
     gap: var(--spacing-small);
     align-items: center;
 }
+
+@media (max-width: 768px) {
+    .UserInformation {
+        width: 90%;
+        padding: var(--spacing-small);
+    }
+
+    .inputContainer {
+        flex-direction: column;
+    }
+
+    .passwordReset {
+        flex-direction: column;
+    }
+}

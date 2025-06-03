@@ -47,4 +47,8 @@
     .buttonContainer {
         display: none;
     }
+    .header {
+        display: flex;
+        justify-content: center;
+    }
 }

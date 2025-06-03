@@ -176,8 +176,8 @@ const UserInformation = () => {
                         </div>
                         <div className={styles.passwordReset}>
                             <p>
-                                If you want to change your password, please
-                                click the button:
+                                If you want to reset your password, please click
+                                the button:
                             </p>
                             <Button
                                 onClick={handlePasswordReset}

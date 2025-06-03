@@ -185,6 +185,16 @@
     padding: 0.3rem var(--spacing-xsmall);
 }
 
+@media (max-width: 1280px) {
+    .filter {
+        right: 40px;
+    }
+
+    .search {
+        right: 120px;
+    }
+}
+
 @media (max-width: 768px) {
     .login,
     .signup,
@@ -202,8 +212,14 @@
 
     .search {
         width: 150px;
-        right: 10px;
+        right: 90px;
         top: 8px;
+        position: unset;
+        margin:var(--spacing-medium) auto
+    }
+
+    .filter {
+        right: -10px;
     }
 
     .searchMediatype,
@@ -216,7 +232,7 @@
     .genreButton,
     .ratingButton,
     .durationButton {
-        padding: 0 0.75rem;
+        padding: 0.5rem 0.75rem;
         height: auto;
     }
 }
@@ -225,10 +241,6 @@
     .menuButton {
         font-size: 16px;
         padding-left: var(--spacing-xsmall);
-    }
-
-    .search {
-        position: unset;
     }
 
     .searchMediatype,
@@ -241,5 +253,8 @@
     .ratingButton,
     .durationButton {
         width: 100%;
+    }
+    .filter {
+        right: -30px;
     }
 }

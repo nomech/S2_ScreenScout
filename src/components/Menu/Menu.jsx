@@ -49,7 +49,10 @@ const Menu = ({ setIsOpen, isOpen, ref }) => {
                     </Button>
                 </li>
                 <li className={`${styles.listItem} ${styles.mobileOnly}`}>
-                    <Button to="/watchlist" className="menuButton">
+                    <Button
+                        onClick={() => navigate("/watchlist")}
+                        className="menuButton"
+                    >
                         Watchlist
                     </Button>
                 </li>
