@@ -1,72 +1,72 @@
 .button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--spacing-xsmall);
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-    border: none;
-    background-color: var(--color-primary);
-    font-weight: 700;
-    width: 360px;
-    height: 47px;
-    border-radius: var(--radius);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: var(--spacing-xsmall);
+	cursor: pointer;
+	transition: background-color 0.2s ease;
+	border: none;
+	background-color: var(--color-primary);
+	font-weight: 700;
+	width: 360px;
+	height: 47px;
+	border-radius: var(--radius);
 }
 
 .button:hover {
-    background: var(--color-primary-hover);
+	background: var(--color-primary-hover);
 }
 
 .button:disabled {
-    color: var(--color-text-mute);
-    border: 1px solid var(--color-border);
-    background-color: var(--color-bg-dark);
-    cursor: default;
+	color: var(--color-text-mute);
+	border: 1px solid var(--color-border);
+	background-color: var(--color-bg-dark);
+	cursor: default;
 }
 
 .login,
 .signup {
-    width: 360px;
-    height: 47px;
-    border-radius: var(--radius);
-    background: var(--color-primary);
-    color: var(--color-text);
-    font-size: var(--spacing-small);
+	width: 360px;
+	height: 47px;
+	border-radius: var(--radius);
+	background: var(--color-primary);
+	color: var(--color-text);
+	font-size: var(--spacing-small);
 }
 
 .signup:disabled {
-    background: var(--disabled);
-    cursor: default;
+	background: var(--disabled);
+	cursor: default;
 }
 
 .menuButton {
-    display: flex;
-    align-items: center;
-    padding-left: var(--spacing-small);
-    background-color: var(--color-secondary);
-    height: 100%;
-    width: 100%;
-    color: var(--color-text-secondary);
-    font-size: 20px;
-    text-decoration: none;
-    border: none;
-    transition: background-color 0.1s ease-in;
-    color: var(--color-text-secondary);
-    text-decoration: none;
-    border-radius: 0px;
+	display: flex;
+	align-items: center;
+	padding-left: var(--spacing-small);
+	background-color: var(--color-secondary);
+	height: 100%;
+	width: 100%;
+	color: var(--color-text-secondary);
+	font-size: 20px;
+	text-decoration: none;
+	border: none;
+	transition: background-color 0.1s ease-in;
+	color: var(--color-text-secondary);
+	text-decoration: none;
+	border-radius: 0px;
 }
 
 .menuButton:hover {
-    color: var(--color-text);
-    background-color: var(--color-primary);
+	color: var(--color-text);
+	background-color: var(--color-primary);
 }
 
 .search {
-    width: 190px;
-    height: 38px;
-    position: absolute;
-    right: var(--spacing-small);
-    top: 10px;
+	width: 190px;
+	height: 38px;
+	position: absolute;
+	right: var(--spacing-small);
+	top: 10px;
 }
 
 .inactive,
@@ -75,186 +75,187 @@
 .active,
 .addWatchlistButton,
 .activeReview {
-    height: 34px;
-    width: fit-content;
-    padding: 0 var(--spacing-small);
-    background-color: var(--color-bg-secondary);
-    border: 1px solid var(--color-border-light);
+	height: 34px;
+	width: fit-content;
+	padding: 0 var(--spacing-small);
+	background-color: var(--color-bg-secondary);
+	border: 1px solid var(--color-border-light);
 }
 
 .active,
 .addWatchlistButton,
 .activeReview {
-    background-color: var(--color-primary);
+	background-color: var(--color-primary);
 }
 
 .inactiveReview:disabled {
-    background-color: var(--color-bg-secondary);
-    color: var(--disabled);
-    cursor: default;
+	background-color: var(--color-bg-secondary);
+	color: var(--disabled);
+	cursor: default;
 }
 
 .listButton,
 .gridButton,
 .filter {
-    background-color: var(--color-bg-secondary);
-    border: 1px solid var(--color-border-light);
-    margin: 0;
-    width: fit-content;
-    height: fit-content;
-    padding: var(--spacing-xsmall);
+	background-color: var(--color-bg-secondary);
+	border: 1px solid var(--color-border-light);
+	margin: 0;
+	width: fit-content;
+	height: fit-content;
+	padding: var(--spacing-xsmall);
 }
 
 .addWatchlistButton {
-    position: absolute;
-    right: -100px;
+	position: absolute;
+	right: -100px;
 }
 
 .removeWatchlistButton {
-    position: absolute;
-    right: -100px;
-    background-color: var(--color-bg-secondary);
-    border: 1px solid var(--color-border-light);
+	position: absolute;
+	right: -100px;
+	background-color: var(--color-bg-secondary);
+	border: 1px solid var(--color-border-light);
 }
 
 .removeWatchlistButton:hover {
-    background-color: var(--color-bg-warning);
+	background-color: var(--color-bg-warning);
 }
 
 .removeWatchlistButton,
 .watched {
-    width: fit-content;
-    padding: 0 var(--spacing-small);
-    height: 35px;
-    min-width: 180px;
+	width: fit-content;
+	padding: 0 var(--spacing-small);
+	height: 35px;
+	min-width: 180px;
 }
 
 .closeButton {
-    position: absolute;
-    z-index: 10;
-    top: 0;
-    right: 0;
-    width: unset;
-    height: unset;
-    padding: 4px var(--spacing-medium);
-    border-radius: 0;
+	position: absolute;
+	z-index: 10;
+	top: 0;
+	right: 0;
+	width: unset;
+	height: unset;
+	padding: 4px var(--spacing-medium);
+	border-radius: 0;
 }
 
 .addButton,
 .watchButton {
-    width: fit-content;
-    height: fit-content;
-    padding: 3px 5px;
-    width: 90%;
-    background-color: var(--color-bg-secondary);
-    border: 1px solid var(--color-border-light);
-    font-size: 12px;
-    z-index: 20;
+	width: fit-content;
+	height: fit-content;
+	padding: 3px 5px;
+	width: 90%;
+	background-color: var(--color-bg-secondary);
+	border: 1px solid var(--color-border-light);
+	font-size: 12px;
+	z-index: 20;
 }
 
 .resetPassword {
-    padding: var(--spacing-xsmall);
-    width: fit-content;
-    height: fit-content;
+	padding: var(--spacing-xsmall);
+	width: 100%;
+	height: fit-content;
 }
 
 .saveButton {
-    margin-top: var(--spacing-large);
-    align-self: center;
+	margin-top: var(--spacing-large);
+	align-self: center;
+	width: 100%;
 }
 
 .verify {
-    padding: 0.3rem var(--spacing-xsmall);
-    width: fit-content;
-    height: fit-content;
+	padding: 0.3rem var(--spacing-xsmall);
+	width: fit-content;
+	height: fit-content;
 }
 
 .clearButton {
-    align-self: center;
+	align-self: center;
 }
 
 .filter {
-    position: absolute;
-    right: -50px;
-    top: 12px;
+	position: absolute;
+	right: -50px;
+	top: 12px;
 }
 
 .voteButton {
-    width: fit-content;
-    height: fit-content;
-    padding: 0.3rem var(--spacing-xsmall);
+	width: fit-content;
+	height: fit-content;
+	padding: 0.3rem var(--spacing-xsmall);
 }
 
 @media (max-width: 1280px) {
-    .filter {
-        right: 40px;
-    }
+	.filter {
+		right: 40px;
+	}
 
-    .search {
-        right: 120px;
-    }
+	.search {
+		right: 120px;
+	}
 }
 
 @media (max-width: 768px) {
-    .login,
-    .signup,
-    .clearButton {
-        width: 100%;
-        max-width: 360px;
-        height: 42px;
-        font-size: 14px;
-    }
+	.login,
+	.signup,
+	.clearButton {
+		width: 100%;
+		max-width: 360px;
+		height: 42px;
+		font-size: 14px;
+	}
 
-    .menuButton {
-        font-size: 18px;
-        padding-left: 0.75rem;
-    }
+	.menuButton {
+		font-size: 18px;
+		padding-left: 0.75rem;
+	}
 
-    .search {
-        width: 150px;
-        right: 90px;
-        top: 8px;
-        position: unset;
-        margin:var(--spacing-medium) auto
-    }
+	.search {
+		width: 150px;
+		right: 90px;
+		top: 8px;
+		position: unset;
+		margin: var(--spacing-medium) auto;
+	}
 
-    .filter {
-        right: -10px;
-    }
+	.filter {
+		right: -10px;
+	}
 
-    .searchMediatype,
-    .inactive,
-    .active,
-    .listButton,
-    .gridButton,
-    .filter,
-    .verify,
-    .genreButton,
-    .ratingButton,
-    .durationButton {
-        padding: 0.5rem 0.75rem;
-        height: auto;
-    }
+	.searchMediatype,
+	.inactive,
+	.active,
+	.listButton,
+	.gridButton,
+	.filter,
+	.verify,
+	.genreButton,
+	.ratingButton,
+	.durationButton {
+		padding: 0.5rem 0.75rem;
+		height: auto;
+	}
 }
 
 @media (max-width: 480px) {
-    .menuButton {
-        font-size: 16px;
-        padding-left: var(--spacing-xsmall);
-    }
+	.menuButton {
+		font-size: 16px;
+		padding-left: var(--spacing-xsmall);
+	}
 
-    .searchMediatype,
-    .inactive,
-    .active,
-    .listButton,
-    .gridButton,
-    .filter .verify,
-    .genreButton,
-    .ratingButton,
-    .durationButton {
-        width: 100%;
-    }
-    .filter {
-        right: -30px;
-    }
+	.searchMediatype,
+	.inactive,
+	.active,
+	.listButton,
+	.gridButton,
+	.filter .verify,
+	.genreButton,
+	.ratingButton,
+	.durationButton {
+		width: 100%;
+	}
+	.filter {
+		right: -30px;
+	}
 }
