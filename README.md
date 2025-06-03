@@ -40,7 +40,7 @@ ScreenScout allows users to:
 
 ## Resources
 
--   **[TMDB API Docs](https://www.themoviedb.org/documentation/api)**
+-   **[TMDB API Docs](https://developer.themoviedb.org/)**
 -   **[Firebase Docs](https://firebase.google.com/docs/)**
 -   **[Cloudinary Docs](https://cloudinary.com/documentation)**
 -   **[React Docs](https://react.dev/)**
