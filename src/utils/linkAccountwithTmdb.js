@@ -77,22 +77,47 @@ export const getAndSetSessionToken = async (requestToken, uid) => {
 
             // Use setDoc to merge the sessionId into the existing document
             await setDoc(docRef, { sessionId }, { merge: true });
+
+            // If the session ID was successfully set, return a success message
+            return {
+                success: true,
+                message: "Account linked successfully.",
+            };
         } catch (error) {
-            console.error("Error setting session id:", error);
+            console.error("Error setting linkin account:", error);
+            // If there was an error setting the session ID in Firestore, return a failure message
+            return {
+                success: true,
+                message: "Failed to link account.",
+            };
         }
     } catch (error) {
         console.error(error);
+
+        // If there was an error fetching the session token, return a failure message
+        return {
+            success: true,
+            message: "Failed to link account.",
+        };
     }
 };
 
+// Function to check if a session ID exists for the user
 export const checkSessionId = async (uid) => {
+    // Fetch the user's watchlist document from Firestore
     try {
         const docRef = doc(db, "watchlists", uid);
         const docSnap = await getDoc(docRef);
-
-        if (docSnap.exists() && docSnap.data().sessionId) {
+        // Check if the document exists and has a sessionId field
+        // If the sessionId field exists and is not null, return it
+        if (
+            docSnap.exists() &&
+            docSnap.data().sessionId &&
+            docSnap.data().sessionId !== null
+        ) {
             return docSnap.data().sessionId;
         } else {
+            // No session ID found for the user
             console.log("No session ID found for user:", uid);
             return null;
         }
@@ -105,6 +130,7 @@ export const deleteSessionId = async (uid) => {
     const sessionUrl = "https://api.themoviedb.org/3/authentication/session";
     const sessionId = await checkSessionId(uid);
 
+    // If no session ID exists, return early
     const deleteOptions = {
         ...options,
         method: "DELETE",
@@ -112,6 +138,7 @@ export const deleteSessionId = async (uid) => {
             session_id: sessionId,
         }),
     };
+
     try {
         // Fetch the session token from TMDB API
         const response = await fetch(sessionUrl, deleteOptions);
@@ -127,14 +154,39 @@ export const deleteSessionId = async (uid) => {
                 if (docSnap.exists() && docSnap.data().sessionId) {
                     await setDoc(docRef, { sessionId: null }, { merge: true });
                 } else {
-                    console.log("No session ID found for user:", uid);
+                    // No session ID found in Firestore
+                    return {
+                        success: false,
+                        message: "No session ID found for user.",
+                    };
                 }
             } catch (error) {
-                console.error("Error deleting session ID:", error);
+                // Error updating Firestore
+                return {
+                    success: false,
+                    message: "Failed to unlink account.",
+                    error,
+                };
             }
-            console.log("Session ID deleted successfully:", data);
+            // Session ID deleted successfully
+            return {
+                success: true,
+                message: "Account has been unlinked successfully.",
+            };
+        } else {
+            // TMDB API did not return success
+            return {
+                success: false,
+                message: "Failed to unlink account from TMDB.",
+                data,
+            };
         }
     } catch (error) {
-        console.error("Error deleting session ID:", error);
+        // Error with TMDB API call
+        return {
+            success: false,
+            message: "Failed to unlink account from TMDB.",
+            error,
+        };
     }
 };

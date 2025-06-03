@@ -17,6 +17,8 @@ import Movies from "../pages/Movies";
 import Tv from "../pages/Tv";
 
 export const routes = createBrowserRouter(
+    //TODO: add route guards to protect routes
+
     createRoutesFromElements(
         <>
             <Route path="/" element={<App />}>
