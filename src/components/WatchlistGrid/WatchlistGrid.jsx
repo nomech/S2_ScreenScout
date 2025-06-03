@@ -166,7 +166,7 @@ const Watchlist = () => {
 
     return (
         <>
-            <div className="wrapper">
+            <div>
                 {/* Conditional rendering for loading state and empty watchlist message */}
                 {!watchlist && <Loading />}
 
