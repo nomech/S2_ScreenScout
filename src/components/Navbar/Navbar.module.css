@@ -73,7 +73,7 @@
 
 @media (max-width: 968px) {
     .navbar {
-        position: sticky;
+        position: fixed;
         top: 10px;
         z-index: 1000;
         height: 60px;
