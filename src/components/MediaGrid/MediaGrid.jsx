@@ -105,9 +105,7 @@ const MediaGrid = ({
     useEffect(() => {
         // Function to check if the user's account is linked
         const checkIfAccountIsLinked = async () => {
-            console.log("Checking if account is linked for user:", user);
             const sessionId = await checkSessionId(user.uid);
-            console.log("Session ID for user:", user, "is", sessionId);
             if (!sessionId) {
                 // If no session ID is found, set hasLinkedAccount to false
                 // This indicates that the user has not linked their account with TMDB
