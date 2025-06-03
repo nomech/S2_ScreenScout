@@ -43,6 +43,11 @@
     text-shadow: 0px 0px 100px var(--color-text);
 }
 
+.menu {
+    width: 32px;
+    height: 32px;
+}
+
 .profile:hover {
     cursor: pointer;
 }
@@ -66,7 +71,7 @@
     justify-content: center;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 968px) {
     .navbar {
         height: 60px;
         padding: 0 var(--spacing-small);
@@ -78,14 +83,18 @@
         justify-content: space-between;
     }
 
-    .navList {
+    .navItem {
         display: none;
     }
 
-    /* You can add a hamburger menu icon here */
+    .menu {
+        display: block;
+        width: 32px;
+        height: 32px;
+    }
 }
 
-@media (max-width: 480px) {
+/* @media (max-width: 480px) {
     .navbar {
         flex-direction: column;
         align-items: flex-start;
@@ -117,3 +126,4 @@
         width: 40px;
     }
 }
+ */

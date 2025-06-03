@@ -3,7 +3,6 @@
     top: 75px;
     right: 0;
     width: 252px;
-    height: 184px;
     background-color: var(--color-primary);
     z-index: 100;
 }
@@ -20,6 +19,27 @@
     height: 60px;
     width: 100%;
 }
- 
 
-/*TODO -- Make mobile friendly */
+.inactive {
+    position: fixed;
+    right: -400px;
+}
+
+.active {
+    right: -20px;
+}
+
+.mobileOnly {
+    display: none;
+}
+
+@media (max-width: 968px) {
+    .menu {
+        top: 60px;
+        transition: right 0.3s;
+    }
+    .mobileOnly {
+        display: block;
+    }
+}
+
