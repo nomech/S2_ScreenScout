@@ -1,8 +1,8 @@
-import { createContext, useEffect, useState } from "react";
+import { useContext, createContext, useEffect, useState } from "react";
 import { useFetch } from "../hooks/useFetch";
 
 // This context provides movie and TV genre data fetched from an external API, allowing components to access genre information easily.
-const GenreContext = createContext();
+const genreContext = createContext();
 
 export const GenreProvider = ({ children }) => {
     // State variables to hold movie and TV genres
@@ -28,12 +28,12 @@ export const GenreProvider = ({ children }) => {
         }
     }, [movieData, tvData]);
 
-    //GenreContext.Provider provides the fetched genres to its children components
+    //Provides the fetched genres to its children components
     return (
-        <GenreContext.Provider value={{ movieGenres, tvGenres }}>
+        <genreContext.Provider value={{ movieGenres, tvGenres }}>
             {children}
-        </GenreContext.Provider>
+        </genreContext.Provider>
     );
 };
 
-export default GenreContext;
+export const getGenreContext = () => useContext(genreContext);

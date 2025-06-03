@@ -1,7 +1,7 @@
-import React, { useState, useContext, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import styles from "./Navbar.module.css";
 import { NavLink } from "react-router-dom";
-import AuthContext from "../../context/AuthContext";
+import { getAuthContext } from "../../context/authContext";
 import Menu from "../Menu/Menu";
 import placeholder from "../../assets/images/placeholder.png";
 import menu from "../../assets/icons/menu.svg";
@@ -12,7 +12,7 @@ const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     // Context to access user information and verification status
-    const { user, verified, profilePicture } = useContext(AuthContext);
+    const { user, verified, profilePicture } = getAuthContext();
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);

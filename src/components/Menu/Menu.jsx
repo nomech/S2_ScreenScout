@@ -1,5 +1,4 @@
-import React, { useContext } from "react";
-import AuthContext from "../../context/AuthContext";
+import { getAuthContext } from "../../context/authContext";
 import Button from "../Button/Button";
 import styles from "./Menu.module.css";
 import { useNavigate } from "react-router-dom";
@@ -7,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 // This component renders a menu for user actions such as settings, stats, and sign out.
 const Menu = ({ setIsOpen, isOpen, ref }) => {
     // Importing the auth context to access authentication functions
-    const { signOutUser } = useContext(AuthContext);
+    const { signOutUser } = getAuthContext();
 
     // Using the useNavigate hook from react-router-dom to programmatically navigate
     const navigate = useNavigate();

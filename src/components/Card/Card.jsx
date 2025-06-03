@@ -1,8 +1,8 @@
 import styles from "./Card.module.css";
 import Button from "../Button/Button";
 import { useWatchList } from "../../hooks/useWatchList";
-import AuthContext from "../../context/AuthContext";
-import { useContext, useState } from "react";
+import { getAuthContext } from "../../context/authContext";
+import { useState } from "react";
 import minus from "../../assets/icons/minus.svg";
 import plus from "../../assets/icons/plus.svg";
 import eye from "../../assets/icons/eye.svg";
@@ -33,7 +33,7 @@ const Card = ({
     } = useWatchList();
 
     // Context to access user authentication
-    const { user, verified } = useContext(AuthContext);
+    const { user, verified } = getAuthContext();
 
     // Check if the media is in the user's watchlist
     const handleAddToWatchlist = async (e, media) => {

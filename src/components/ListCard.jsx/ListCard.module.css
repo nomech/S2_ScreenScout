@@ -50,7 +50,6 @@
     grid-column: 3;
     justify-self: end;
     color: var(--color-text-faded);
-    font-family: Inter;
     font-size: 14px;
     font-weight: bold;
 }

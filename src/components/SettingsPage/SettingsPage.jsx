@@ -2,8 +2,8 @@ import styles from "./SettingsPage.module.css";
 import VerificationStatus from "../VerificationStatus/VerificationStatus";
 import UserInformation from "../UserInformation/UserInformation";
 import Button from "../Button/Button";
-import { useContext, useEffect, useState } from "react";
-import AuthContext from "../../context/AuthContext";
+import { useEffect, useState } from "react";
+import { getAuthContext } from "../../context/authContext";
 import {
     authenticateWithTmdb,
     getAndSetSessionToken,
@@ -19,7 +19,7 @@ const SettingsPage = () => {
     const [feedbackSuccess, setFeedbackSuccess] = useState(null);
 
     // Context to access user authentication
-    const { user } = useContext(AuthContext);
+    const { user } = getAuthContext();
 
     useEffect(() => {
         const checkSession = async () => {

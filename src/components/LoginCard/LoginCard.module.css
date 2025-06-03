@@ -22,7 +22,6 @@
 
 .title {
     color: var(--color-text);
-    font-family: Inter;
     font-size: 24px;
     font-weight: 700;
 }
@@ -30,7 +29,6 @@
 .link {
     place-self: flex-end;
     color: var(--color-border-accent);
-    font-family: Inter;
     font-size: 14px;
     font-weight: 400;
 }

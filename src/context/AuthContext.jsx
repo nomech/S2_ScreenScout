@@ -1,9 +1,9 @@
 import { onAuthStateChanged, signOut } from "firebase/auth";
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { auth } from "../firebaseConfig";
 
 //This context provides authentication state and methods for user sign-out in the application.
-const AuthContext = createContext();
+const authContext = createContext();
 
 // This component wraps the application and provides authentication state and methods to its children.
 export const AuthProvider = ({ children }) => {
@@ -31,7 +31,7 @@ export const AuthProvider = ({ children }) => {
             setIsLoading(false);
         });
         // Cleanup function to unsubscribe from the authentication state listener
-        return unsubscribe;
+        return () => unsubscribe();
     }, []);
 
     // Function to sign out the user and reset user state
@@ -46,20 +46,7 @@ export const AuthProvider = ({ children }) => {
     };
 
     // authContext provides user information, loading state, sign-out function, email verification status, and any errors encountered
-    return (
-        <AuthContext.Provider
-            value={{
-                user,
-                isLoading,
-                signOutUser,
-                verified,
-                error,
-                profilePicture,
-            }}
-        >
-            {children}
-        </AuthContext.Provider>
-    );
+    return <authContext.Provider value={{ user, isLoading, signOutUser, verified, error, profilePicture }}>{children}</authContext.Provider>;
 };
 
-export default AuthContext;
+export const getAuthContext = () => useContext(authContext);

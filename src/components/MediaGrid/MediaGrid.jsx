@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "./MediaGrid.module.css";
 import { useFetch } from "../../hooks/useFetch";
 import Loading from "../Loading/Loading";
@@ -6,11 +6,11 @@ import Button from "../Button/Button";
 import listIcon from "../../assets/icons/listIcon.svg";
 import gridIcon from "../../assets/icons/gridIcon.svg";
 import DetailedCard from "../DetailedCard/DetailedCard";
-import AuthContext from "../../context/AuthContext";
+import { getAuthContext } from "../../context/authContext";
 import { useWatchList } from "../../hooks/useWatchList";
 import Card from "../Card/Card";
 import ListCard from "../ListCard.jsx/ListCard";
-import GenreContext from "../../context/GenreContext";
+import { getGenreContext } from "../../context/genreContext";
 import { checkSessionId } from "../../utils/linkAccountwithTmdb";
 
 // This component renders a grid of media items (movies or TV shows) with options to view details and manage watchlists.
@@ -39,8 +39,8 @@ const MediaGrid = ({
     const { setDefaultWatchList, getWatchList } = useWatchList();
 
     // Contexts to access user authentication and genre data
-    const { user } = useContext(AuthContext);
-    const { movieGenres, tvGenres } = useContext(GenreContext);
+    const { user } = getAuthContext();
+    const { movieGenres, tvGenres } = getGenreContext();
 
     // Ref to track if the watchlist has been fetched to avoid multiple fetches
     const hasFetched = useRef(false);

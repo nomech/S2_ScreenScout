@@ -1,77 +1,76 @@
 :root {
-    /* ─────────── Colors ─────────── */
-    --color-primary: #7e22ce;
-    --color-primary-hover: #9c27b0;
-    --color-secondary: #6415c0;
-    --color-secondary-hover: #7928d1;
-    --color-accent: #ffc107;
-    --color-accent-alt: #9c4fff;
-    --color-error: #ff75ff;
+	/* ─────────── Colors ─────────── */
+	--color-primary: #7e22ce;
+	--color-primary-hover: #9c27b0;
+	--color-secondary: #6415c0;
+	--color-secondary-hover: #7928d1;
+	--color-accent: #ffc107;
+	--color-accent-alt: #9c4fff;
+	--color-error: #ff75ff;
 
-    --color-bg-primary: #0a0a23;
-    --color-bg-secondary: #232339;
-    --color-bg-tertiary: #1a1a24;
-    --disabled: #8d8d8d;
-    --color-bg-dark: #15151d;
-    --color-bg-alt: #16162e;
-    --color-bg-warning: #b54143;
+	--color-bg-primary: #0a0a23;
+	--color-bg-secondary: #232339;
+	--color-bg-tertiary: #1a1a24;
+	--disabled: #8d8d8d;
+	--color-bg-dark: #15151d;
+	--color-bg-alt: #16162e;
+	--color-bg-warning: #b54143;
 
-    --color-bg-overlay: rgba(0, 0, 0, 0.8);
-    --color-bg-overlay-light: rgba(0, 0, 0, 0.5);
+	--color-bg-overlay: rgba(0, 0, 0, 0.8);
+	--color-bg-overlay-light: rgba(0, 0, 0, 0.5);
 
-    --color-text: #ffffff;
-    --color-text-muted: #949497;
-    --color-text-secondary: #d5d5d5;
-    --color-text-tertiary: #a3a1a1;
-    --color-text-quaternary: #8b96a2;
-    --color-text-faded: #565656;
+	--color-text: #ffffff;
+	--color-text-muted: #949497;
+	--color-text-secondary: #d5d5d5;
+	--color-text-tertiary: #a3a1a1;
+	--color-text-quaternary: #8b96a2;
+	--color-text-faded: #565656;
 
-    --color-border: #2d2d34;
-    --color-border-light: #39394d;
-    --color-border-accent: #c294eb;
+	--color-border: #2d2d34;
+	--color-border-light: #39394d;
+	--color-border-accent: #c294eb;
 
-    --gradient-primary: linear-gradient(
-        90deg,
-        #6200e9 0%,
-        #9c27af 50%,
-        #6200e9 100%
-    );
+	--gradient-primary: linear-gradient(90deg, #6200e9 0%, #9c27af 50%, #6200e9 100%);
 
-    /* ─────────── Typography ─────────── */
-    --font-family: "Montserrat", sans-serif;
+	/* ─────────── Typography ─────────── */
+	--font-family: 'Montserrat', sans-serif;
 
-    /* ─────────── Spacing ─────────── */
-    --spacing-xsmall: 0.5rem;
-    --spacing-small: 1rem;
-    --spacing-medium: 2rem;
-    --spacing-large: 3rem;
+	/* ─────────── Spacing ─────────── */
+	--spacing-xsmall: 0.5rem;
+	--spacing-small: 1rem;
+	--spacing-medium: 2rem;
+	--spacing-large: 3rem;
 
-    /* ─────────── Radii ─────────── */
-    --radius-small: 4px;
-    --radius: 8px;
-    --radius-round: 50%;
+	/* ─────────── Radii ─────────── */
+	--radius-small: 4px;
+	--radius: 8px;
+	--radius-round: 50%;
 }
 
 * {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    font-family: "Montserrat", sans-serif;
-    color: var(--color-text);
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+	font-family: 'Montserrat', sans-serif;
+	color: var(--color-text);
+}
+html,
+body {
+	height: 100%;
+	margin: 0;
 }
 
 body {
-    background-color: var(--color-bg-primary);
+	background-color: var(--color-bg-primary);
 }
 
 header {
-    width: 100%;
+	width: 100%;
 }
 
 @font-face {
-    font-family: "Montserrat";
-    src: url("./assets/fonts/Montserrat-VariableFont_wght.ttf")
-        format("truetype-variations");
-    font-weight: 100 900;
-    font-style: normal;
+	font-family: 'Montserrat';
+	src: url('./assets/fonts/Montserrat-VariableFont_wght.ttf') format('truetype-variations');
+	font-weight: 100 900;
+	font-style: normal;
 }

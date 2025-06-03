@@ -2,8 +2,8 @@ import styles from "./WatchlistGrid.module.css";
 import Card from "../Card/Card";
 import { useWatchList } from "../../hooks/useWatchList";
 import Loading from "../Loading/Loading";
-import { useContext, useEffect, useRef, useState } from "react";
-import AuthContext from "../../context/AuthContext";
+import { useEffect, useRef, useState } from "react";
+import { getAuthContext } from "../../context/authContext";
 import Button from "../Button/Button";
 import DetailedCard from "../DetailedCard/DetailedCard";
 import listIcon from "../../assets/icons/listIcon.svg";
@@ -25,7 +25,7 @@ const Watchlist = () => {
     const [hasLinkedAccount, setHasLinkedAccount] = useState(false);
 
     // Context to access user authentication
-    const { user } = useContext(AuthContext);
+    const { user } = getAuthContext();
 
     // Custom hook to fetch the watchlist and watched media
     const { getWatchList, getWatchedMedia } = useWatchList();

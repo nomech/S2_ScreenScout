@@ -1,36 +1,34 @@
 .signupCard {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: var(--spacing-small);
-    width: 420px;
-    padding: var(--spacing-medium);
-    margin: var(--spacing-medium);
-    border-radius: var(--radius);
-    background-color: var(--color-bg-tertiary);
-    color: var(--color-text);
-    box-shadow: 0px 4px 4px 3px rgba(0, 0, 0, 0.25);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: var(--spacing-small);
+	width: 420px;
+	padding: var(--spacing-medium);
+	margin: var(--spacing-medium);
+	border-radius: var(--radius);
+	background-color: var(--color-bg-tertiary);
+	color: var(--color-text);
+	box-shadow: 0px 4px 4px 3px rgba(0, 0, 0, 0.25);
 }
 
 .inputContainer {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-small);
-    width: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-small);
+	width: 100%;
 }
 
 .title {
-    color: var(--color-text);
-    font-family: Inter;
-    font-size: 24px;
-    font-weight: 700;
+	color: var(--color-text);
+	font-size: 24px;
+	font-weight: 700;
 }
 
 .link {
-    place-self: flex-end;
-    color: var(--color-border-accent);
-    font-family: Inter;
-    font-size: 14px;
-    font-weight: 400;
+	place-self: flex-end;
+	color: var(--color-border-accent);
+	font-size: 14px;
+	font-weight: 400;
 }

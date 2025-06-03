@@ -1,5 +1,4 @@
-import { useContext } from "react";
-import AuthContext from "../../context/AuthContext";
+import { getAuthContext } from "../../context/authContext";
 import { Navigate } from "react-router-dom";
 import Loading from "../Loading/Loading";
 
@@ -8,11 +7,11 @@ import Loading from "../Loading/Loading";
 
 const AuthenticatedUsers = ({ children }) => {
     // Gets the user and isLoading state from the authContext
-    const { user, isLoading } = useContext(AuthContext);
+    const { user, isLoading } = getAuthContext();
 
     // If the user is loading, it shows a loading spinner
     if (isLoading) {
-        <Loading />;
+        return <Loading />;
     }
 
     // If the user is not authenticated and not loading, it redirects to the login page

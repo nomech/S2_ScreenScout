@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
     updateProfile,
     updateEmail,
@@ -7,7 +7,7 @@ import {
 import Input from "../Input/Input";
 import Button from "../Button/Button";
 import styles from "./UserInformation.module.css";
-import AuthContext from "../../context/AuthContext";
+import { getAuthContext } from "../../context/authContext";
 import { formatFireBaseFeedback } from "../../utils/formatFirebaseErrors";
 import { updateProfileValidation } from "../../utils/formValidation";
 import InfoCard from "../InfoCard/InfoCard";
@@ -30,7 +30,7 @@ const UserInformation = () => {
     const [success, setSuccess] = useState(false);
 
     // Context to access user authentication information
-    const { user } = useContext(AuthContext);
+    const { user } = getAuthContext();
 
     // Cloudinary configuration for profile picture upload
     const cloudinaryName = import.meta.env.VITE_CLOUDINARY_NAME;

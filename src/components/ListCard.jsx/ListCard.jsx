@@ -1,8 +1,8 @@
 import styles from "./ListCard.module.css";
 import Button from "../Button/Button";
 import { useWatchList } from "../../hooks/useWatchList";
-import AuthContext from "../../context/AuthContext";
-import { useContext, useState } from "react";
+import { getAuthContext } from "../../context/authContext";
+import { useState } from "react";
 import VotePopUp from "../VotePopUp/VotePopUp";
 
 // This component renders a card for displaying media details such as movies or TV shows in a list format.
@@ -25,7 +25,7 @@ const ListCard = ({
         markAsWatched,
         removeWatchedMedia,
     } = useWatchList();
-    const { user, verified } = useContext(AuthContext);
+    const { user, verified } = getAuthContext();
 
     // Adds a media item to the user's watchlist
     const handleAddToWatchlist = async (e, media) => {

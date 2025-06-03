@@ -1,5 +1,5 @@
-import { useState, useContext } from "react";
-import AuthContext from "../../context/AuthContext";
+import { useState } from "react";
+import { getAuthContext } from "../../context/authContext";
 import { sendEmailVerification } from "firebase/auth";
 import Button from "../Button/Button";
 import styles from "./VerificationStatus.module.css";
@@ -11,7 +11,7 @@ const VerificationStatus = () => {
     const [hasSent, setHasSent] = useState(false);
 
     // Context to access user authentication information
-    const { user, verified } = useContext(AuthContext);
+    const { user, verified } = getAuthContext();
 
     // Function to handle sending the verification email
     const onHandleVerification = async () => {
