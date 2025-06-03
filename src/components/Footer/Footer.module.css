@@ -1,0 +1,12 @@
+footer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background-color: #032541;
+}
+
+.footerLogo {
+    width: 120px;
+    height: 120px;
+    place-self: end;
+}

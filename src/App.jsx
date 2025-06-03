@@ -4,7 +4,7 @@ import { Outlet } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import AuthContext from "./context/AuthContext";
 import InfoCard from "./components/InfoCard/InfoCard";
-// import Button from "./components/Button/Button";
+import Footer from "./components/Footer/Footer";
 
 function App() {
     const { verified, user } = useContext(AuthContext);
@@ -38,6 +38,7 @@ function App() {
             <main className="wrapper">
                 <Outlet />
             </main>
+            <Footer />
         </>
     );
 }
