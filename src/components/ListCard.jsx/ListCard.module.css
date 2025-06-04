@@ -1,101 +1,107 @@
 .cardList {
-    position: relative;
-    width: 100%;
-    border-radius: var(--radius);
-    background: var(--color-bg-alt);
-    height: 336px;
-    overflow: hidden;
+	position: relative;
+	width: 100%;
+	border-radius: var(--radius);
+	background: var(--color-bg-alt);
+	height: 336px;
+	cursor: pointer;
+	overflow: hidden;
+	transition: transform 0.2s ease;
+}
+
+.cardList:hover {
+	transform: scale(1.02);
 }
 
 .cardList::before {
-    position: absolute;
-    content: "";
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    background-color: var(--color-bg-overlay);
-    z-index: 10;
+	position: absolute;
+	content: '';
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	background-color: var(--color-bg-overlay);
+	z-index: 10;
 }
 
 .card {
-    display: grid;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 100%;
-    background-color: transparent;
-    padding: var(--spacing-small);
-    z-index: 10;
+	display: grid;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	width: 100%;
+	background-color: transparent;
+	padding: var(--spacing-small);
+	z-index: 10;
 }
 
 .backdrop {
-    width: 100%;
+	width: 100%;
 }
 
 .poster {
-    width: 200px;
-    border-radius: var(--radius);
+	width: 200px;
+	border-radius: var(--radius);
 }
 
 .mediaDetails {
-    display: flex;
-    flex-direction: column;
-    grid-column: 2;
-    grid-row: 1;
-    padding: 0 var(--spacing-medium);
+	display: flex;
+	flex-direction: column;
+	grid-column: 2;
+	grid-row: 1;
+	padding: 0 var(--spacing-medium);
 }
 
 .id {
-    grid-column: 3;
-    justify-self: end;
-    color: var(--color-text-faded);
-    font-size: 14px;
-    font-weight: bold;
+	grid-column: 3;
+	justify-self: end;
+	color: var(--color-text-faded);
+	font-size: 14px;
+	font-weight: bold;
 }
 
 .mediaTitle {
-    color: var(--color-accent);
-    font-size: 32px;
-    font-weight: bold;
-    margin: 0;
+	color: var(--color-accent);
+	font-size: 32px;
+	font-weight: bold;
+	margin: 0;
 }
 
 .macroData {
-    display: flex;
-    align-items: center;
-    padding: var(--spacing-xsmall) 0;
-    gap: var(--spacing-small);
+	display: flex;
+	align-items: center;
+	padding: var(--spacing-xsmall) 0;
+	gap: var(--spacing-small);
 }
 
 .macroData span,
 .macroData time {
-    color: var(--color-text-quaternary);
-    font-size: 16px;
-    font-weight: 600;
+	color: var(--color-text-quaternary);
+	font-size: 16px;
+	font-weight: 600;
 }
 
 .overview {
-    color: #eaeaea;
-    font-size: 18px;
-    font-weight: 400;
+	color: #eaeaea;
+	font-size: 18px;
+	font-weight: 400;
 }
 
 .votes {
-    display: flex;
-    gap: 0.5rem;
-    margin: auto 0 20px;
+	display: flex;
+	gap: 0.5rem;
+	margin: auto 0 20px;
 }
 
 .buttonContainer {
-    display: flex;
-    justify-content: space-between;
-    position: relative;
+	display: flex;
+	justify-content: space-between;
+	position: relative;
 }
 
 .watchedReview {
-    display: flex;
-    gap: var(--spacing-small);
-    justify-content: space-between;
-    width: 30%;
+	display: flex;
+	gap: var(--spacing-small);
+	justify-content: space-between;
+	width: 30%;
 }

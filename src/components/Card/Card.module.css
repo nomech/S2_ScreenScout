@@ -4,13 +4,14 @@
 	position: relative;
 	width: 200px;
 	border-radius: 0 0 8px 8px;
+	border: solid 1px var(--color-border);
 	background: #16162e;
 	cursor: pointer;
 	transition: transform 0.2s ease;
 }
 
 .card:hover {
-	transform: scale(1.02);
+	transform: scale(1.01);
 }
 
 .card:hover .buttonContainer {
@@ -93,6 +94,17 @@
 	gap: var(--spacing-xsmall);
 }
 
+@media (max-width: 968px) {
+	.buttonContainer {
+		top: unset;
+		bottom: 80px;
+		flex-direction: column;
+		opacity: 1;
+		background-color: var(--color-bg-overlay);
+		padding: 1rem;
+	}
+}
+
 @media (max-width: 768px) {
 	.buttonContainer::before {
 		display: none;
@@ -129,12 +141,12 @@
 	}
 
 	.mediaDetails {
-		padding: 0.25rem;
+		padding: 1rem;
 	}
 
 	.mediaTitle {
-		font-size: 12px;
-		margin: 15px 0;
+		font-size: 16px;
+		margin: 8px 0;
 	}
 
 	.addButton {

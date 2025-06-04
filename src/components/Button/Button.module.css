@@ -223,6 +223,11 @@
 		right: -10px;
 	}
 
+	.addButton,
+	.watchButton {
+		font-size: 7px;
+	}
+
 	.searchMediatype,
 	.inactive,
 	.active,
@@ -257,5 +262,10 @@
 	}
 	.filter {
 		right: -30px;
+	}
+
+	.addButton,
+	.watchButton {
+		font-size: 12px;
 	}
 }
