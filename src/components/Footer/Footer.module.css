@@ -1,12 +1,13 @@
 footer {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    background-color: #032541;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	background-color: #032541;
 }
 
 .footerLogo {
-    width: 120px;
-    height: 120px;
-    place-self: end;
+	width: 120px;
+	height: 120px;
+	place-self: end;
 }
