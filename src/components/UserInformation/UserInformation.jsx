@@ -168,7 +168,7 @@ const UserInformation = () => {
                                 label="Email"
                                 type="email"
                                 value={formData.email}
-                                readonly={readonly}
+                                readonly={true}
                                 onChange={handleOnChange}
                                 disabled={isLoading}
                                 error={error}
