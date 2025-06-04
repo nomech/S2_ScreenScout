@@ -2,7 +2,6 @@
 	display: flex;
 	flex-direction: column;
 	position: relative;
-	width: 200px;
 	border-radius: 0 0 8px 8px;
 	border: solid 1px var(--color-border);
 	background: #16162e;
@@ -15,28 +14,7 @@
 }
 
 .card:hover .buttonContainer {
-	opacity: 1;
-	pointer-events: auto;
-}
-
-.buttonContainer::before {
-	content: '';
-	position: absolute;
-	top: -226px;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.9) 100%);
-	display: flex;
 	flex-direction: column;
-	justify-content: flex-end;
-	padding: 8rem 0;
-	z-index: 10;
-	opacity: 0;
-	transition: opacity 0.1s ease;
-}
-
-.card:hover .buttonContainer::before {
 	opacity: 1;
 }
 
@@ -76,7 +54,6 @@
 .buttonContainer {
 	display: flex;
 	position: absolute;
-	top: 220px;
 	flex-direction: column;
 	align-items: center;
 	gap: 5px;
@@ -85,6 +62,9 @@
 	opacity: 0;
 	pointer-events: none;
 	transition: opacity 0.3s ease;
+	background-color: var(--color-bg-overlay);
+	padding: 1rem;
+	bottom: 80px;
 }
 
 .ratingContainer {
