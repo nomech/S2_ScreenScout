@@ -4,6 +4,7 @@ footer {
 	align-items: center;
 	justify-content: space-around;
 	background-color: #032541;
+	margin-top: var(--spacing-large);
 }
 
 .footerLogo {
