@@ -4,6 +4,7 @@ const errorMessages = {
 	'auth/invalid-credential': 'Wrong username or password',
 	'auth/too-many-requests': 'You have tried to many times, please try again later',
 	'auth/operation-not-allowed': 'Please verify the new email before changing email',
+	'auth/email-already-in-use': 'This email is already in use',
 };
 
 export const formatFireBaseFeedback = (data, setError) => {
