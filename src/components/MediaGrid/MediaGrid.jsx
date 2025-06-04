@@ -80,8 +80,6 @@ const MediaGrid = ({
 				console.error('Error initializing default watchlist:', error);
 			}
 		};
-		console.log(user);
-
 		initDefaultWatchlist();
 	}, [setDefaultWatchList, user]);
 
@@ -115,7 +113,6 @@ const MediaGrid = ({
 				// If a session ID is found, set hasLinkedAccount to true
 				setHasLinkedAccount(true);
 			}
-			console.log('Has linked account:', hasLinkedAccount);
 		};
 
 		if (user) {

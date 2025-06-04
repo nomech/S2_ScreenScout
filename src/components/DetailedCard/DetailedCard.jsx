@@ -11,8 +11,6 @@ const DetailedCard = ({ id, mediaType, onClose }) => {
 	// Use the custom hook useFetch to get media data and handle loading and error states
 	// An alias for the mediaType is used to determine if it's a media or credit
 
-	console.log(mediaType);
-
 	const movieUrl = `https://api.themoviedb.org/3/${mediaType}/${id}`;
 	const { data: media, error: mediaError, isLoading: mediaIsLoading } = useFetch(movieUrl);
 

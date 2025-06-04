@@ -1,22 +1,27 @@
 .infoTextBox {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--color-bg-dark);
-    border: 1px solid var(--color-border-accent);
-    border-radius: 4px;
-    padding: var(--spacing-small);
-    width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: var(--color-bg-dark);
+	border: 1px solid var(--color-border-accent);
+	border-radius: 4px;
+	padding: var(--spacing-small);
+	width: 100%;
 }
 
 .error p {
-    font-size: 12px;
-    color: var(--color-error);
+	font-size: 12px;
+	color: var(--color-error);
 }
 
 .verify {
-    border: none;
-    border-bottom: 1px solid var(--color-border-accent);
-    opacity: 1;
-    padding: var(--spacing-small);
+	border: none;
+	border-bottom: 1px solid var(--color-border-accent);
+	opacity: 1;
+	padding: var(--spacing-small);
+}
+
+.success {
+	font-size: 12px;
+	color: var(--color-success);
 }

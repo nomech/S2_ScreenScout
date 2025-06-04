@@ -77,7 +77,6 @@ const SettingsPage = () => {
         // Function to link the account with TMDB
         if (user) {
             const result = await authenticateWithTmdb();
-            console.log(result);
 
             setFeedback(result.message || "Failed to link account.");
             setFeedbackSuccess(result.success);

@@ -123,7 +123,8 @@ export const useWatchList = () => {
                 const docRef = doc(db, "watchlists", uid);
                 await setDoc(docRef, currentData);
             } catch (error) {
-                console.log(error);
+                console.error("Error removing watched media:", error);
+                
             }
         }
     };

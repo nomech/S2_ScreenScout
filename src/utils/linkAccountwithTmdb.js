@@ -113,7 +113,6 @@ export const checkSessionId = async (uid) => {
 			return docSnap.data().sessionId;
 		} else {
 			// No session ID found for the user
-			console.log('No session ID found for user:', uid);
 			return null;
 		}
 	} catch (error) {
