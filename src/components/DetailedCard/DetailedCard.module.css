@@ -236,8 +236,7 @@ time {
 
 @media (max-width: 480px) {
 	.backlay {
-		top: 20px;
-		z-index: 20;
+        z-index: 1000;
 	}
 	.detailedCardContainer {
 		padding: var(--spacing-xsmall);
