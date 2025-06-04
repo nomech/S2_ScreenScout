@@ -9,8 +9,8 @@ ScreenScout is a responsive web application for discovering, searching, and mana
 
 ## GitHub Repository
 
--   [![GitHub Repository](https://img.shields.io/badge/GitHub-Repo-blue)](https://github.com/nomech/s2_final)
--   https://github.com/nomech/s2_final
+-   [![GitHub Repository](https://img.shields.io/badge/GitHub-Repo-blue)](https://github.com/nomech/S2_ScreenScout)
+-   https://github.com/nomech/S2_ScreenScout
 
 ## Figma design
 
@@ -30,12 +30,12 @@ ScreenScout allows users to:
 
 ## Technologies
 
--   **React**
--   **Vite**
--   **Netlify**
--   **Firebase**
--   **TMDB API**
--   **Cloudinary**
+-   **React** Assignment requirement
+-   **Vite** Chosen as the build tool and development server for its fast hot module replacement and minimal configuration.
+-   **Netlify** Due to its simple integration with static sites, continuous deployment from GitHub, and free hosting tier.
+-   **Firebase** Firestore Easy to use and covers the requirements for this app
+-   **TMDB API** Contains the data needed for this app such as movies and tv-shows
+-   **Cloudinary** Hosts the images for the user profiles
 -   **CSS Modules**
 
 ## Resources
