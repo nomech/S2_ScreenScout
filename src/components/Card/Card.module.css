@@ -31,6 +31,7 @@
 	justify-content: space-between;
 	flex-grow: 1;
 	padding: var(--spacing-small) var(--spacing-xsmall);
+	max-width: 200px;
 }
 
 .mediaRating {
@@ -51,6 +52,10 @@
 	z-index: 50;
 }
 
+.posterContainer {
+	position: relative;
+}
+
 .buttonContainer {
 	display: flex;
 	position: absolute;
@@ -64,8 +69,8 @@
 	transition: opacity 0.3s ease;
 	background-color: var(--color-bg-overlay);
 	padding: 1rem;
-	bottom: 80px;
 	pointer-events: auto;
+	bottom: 0;
 }
 
 .ratingContainer {

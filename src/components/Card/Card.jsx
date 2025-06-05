@@ -97,18 +97,19 @@ const Card = ({
 				}}
 				tabIndex={0}
 			>
-				<div className={styles.buttonContainer}>
-					{/* If the media is not in the watchlist and the user is verified, show the watch button */}
-					{!isWatched && verified && (
-						<Button
-							className="watchButton"
-							onClick={(e) => handleMarkAsWatched(e, media.id)}
-						>
-							<img className="icons" src={eye} alt="Mark media as watched" />
-							Marks as watched
-						</Button>
-					)}
-
+				<div className={styles.posterContainer}>
+					<div className={styles.buttonContainer}>
+						{/* If the media is not in the watchlist and the user is verified, show the watch button */}
+						{!isWatched && verified && (
+							<Button
+								className="watchButton"
+								onClick={(e) => handleMarkAsWatched(e, media.id)}
+							>
+								<img className="icons" src={eye} alt="Mark media as watched" />
+								Marks as watched
+							</Button>
+						)}
+					
 					{/* If the media is in the watchlist and the user is verified, show the remove watched button */}
 
 					{isWatched && verified && (
@@ -148,6 +149,7 @@ const Card = ({
 				</div>
 
 				{/* Display the media poster image */}
+
 				<img
 					className={styles.poster}
 					src={`https://image.tmdb.org/t/p/w200${media.poster_path}`}
@@ -157,6 +159,7 @@ const Card = ({
 						e.target.src = film;
 					}}
 				/>
+				</div>
 
 				{/* Display the media title */}
 				<div className={styles.mediaDetails}>
