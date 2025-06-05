@@ -83,7 +83,6 @@
 @media (max-width: 968px) {
 	.buttonContainer {
 		top: unset;
-		bottom: 80px;
 		flex-direction: column;
 		opacity: 1;
 		background-color: var(--color-bg-overlay);
